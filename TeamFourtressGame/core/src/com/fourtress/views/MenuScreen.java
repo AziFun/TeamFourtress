@@ -40,7 +40,6 @@ public class MenuScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		Table table = new Table();
 		table.setFillParent(true);
-		table.setDebug(true);
 		stage.addActor(table);
 		table.add(newGame).fillX().uniformX();
 		table.row().pad(10, 0, 10, 0);

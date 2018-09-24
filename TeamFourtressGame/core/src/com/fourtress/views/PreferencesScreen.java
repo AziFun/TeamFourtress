@@ -61,7 +61,6 @@ public class PreferencesScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		Table table = new Table();
 		table.setFillParent(true);
-		table.setDebug(true);
 		stage.addActor(table);
 		table.add(titleLabel);
 		table.row();
