@@ -1,4 +1,4 @@
-Initial setup
+Initial setup -- this will only work until we add more files to the project
 
 Install gitbash
 cygwin would probably also work
