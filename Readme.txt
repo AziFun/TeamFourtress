@@ -21,6 +21,8 @@ Its on the group Gdrive
 Place that in the topmost folder of your workspace
 inline with core and desktop
 Double click to run it
+(if you see anything other than git commands in the pop up it hasnt worked properly)
+make sure it has renamed the core and desktop folders to TeamFourtress-core TeamFourtress-desktop
 
 Open eclipse
 Right click in the project explorer
