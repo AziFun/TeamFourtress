@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.fourtress.model.interfaces.Lock;
 
-public class CombinationLock implements Lock {
+public class CombinationLock extends Lock {
 
 	private char[] combinationCode;
 

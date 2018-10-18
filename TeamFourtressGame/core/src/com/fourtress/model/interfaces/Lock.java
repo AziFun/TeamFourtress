@@ -1,19 +1,19 @@
 package com.fourtress.model.interfaces;
 
-public interface Lock {
+public abstract class Lock {
 	
 	private boolean locked;
 	
 	
-	public default boolean isLocked() {
+	public boolean isLocked() {
 		return locked;
 	}
 	
-	default void lock() {
+	protected void lock() {
 		this.locked = false;
 	}
 	
-	default void unlock() {
+	protected void unlock() {
 		this.locked = true;
 	}
 	
