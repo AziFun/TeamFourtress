@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -96,5 +97,12 @@ public class BodyFactory {
 		poly.dispose();
 
 		return boxBody;
+	}
+	
+	public void makeBodySensor(Body body) {
+		for (Fixture f : body.getFixtureList()) {
+			f.setSensor(true);
+			body.setUserData("sensor");
+		}
 	}
 }
