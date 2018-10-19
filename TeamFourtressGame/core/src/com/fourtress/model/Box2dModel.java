@@ -14,6 +14,7 @@ public class Box2dModel {
 
 	public Box2dModel() {
 		this.world = new World(new Vector2(), true);
+		this.world.setContactListener(new Box2dContactListener(this));
 	}
 
 	public void logicStep(float delta) {
