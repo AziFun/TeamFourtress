@@ -38,7 +38,7 @@ public class PreferencesScreen implements Screen {
 		parent = tfg;
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
-		skin = new Skin(Gdx.files.internal("vhs/skin/vhs-ui.json"));
+		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
 		musicSlider = new Slider(0f, 1f, 0.1f, false, skin);
 		musicSlider.setValue(parent.getPreferences().getMusicVolume());
 		musicCheckBox = new CheckBox(null, skin);

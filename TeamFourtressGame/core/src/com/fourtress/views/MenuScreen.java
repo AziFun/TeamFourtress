@@ -26,7 +26,7 @@ public class MenuScreen implements Screen {
 	public MenuScreen(TeamFourtressGame tfg) {
 		parent = tfg;
 		stage = new Stage(new ScreenViewport());
-		skin = new Skin(Gdx.files.internal("vhs/skin/vhs-ui.json"));
+		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
 		newGame = new TextButton("New Game", skin);
 		preferences = new TextButton("Preferences", skin);
 		exit = new TextButton("Exit", skin);

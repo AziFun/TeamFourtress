@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -14,6 +13,7 @@ public class Box2dModel {
 
 	public Box2dModel() {
 		this.world = new World(new Vector2(), true);
+		this.world.setContactListener(new Box2dContactListener(this));
 	}
 
 	public void logicStep(float delta) {

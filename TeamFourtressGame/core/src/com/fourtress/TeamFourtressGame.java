@@ -1,12 +1,6 @@
 package com.fourtress;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.fourtress.model.Room;
 import com.fourtress.views.LoadingScreen;
 import com.fourtress.views.MenuScreen;
 import com.fourtress.views.PreferencesScreen;
