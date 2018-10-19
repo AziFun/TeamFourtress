@@ -2,8 +2,6 @@ package com.fourtress.model;
 
 import java.util.HashSet;
 
-import com.fourtress.model.interfaces.Lock;
-
 public class PadLock extends Lock {
 
 	private HashSet<Key> validKeys;

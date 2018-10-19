@@ -1,4 +1,4 @@
-package com.fourtress.model.interfaces;
+package com.fourtress.model;
 
 public abstract class Lock {
 	
