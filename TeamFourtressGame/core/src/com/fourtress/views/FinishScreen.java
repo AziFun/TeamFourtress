@@ -2,50 +2,49 @@ package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.controller.KeyboardController;
-import com.fourtress.model.Box2dModel;
 
-public class GameScreen implements Screen{
+
+public class FinishScreen implements Screen {
 	
-	private Box2dModel model;
-	private OrthographicCamera cam;
-	private Box2DDebugRenderer debugRenderer;
-	public TeamFourtressGame parent;
-	private KeyboardController controller;
+	private TeamFourtressGame parent;
+	private Stage stage;
+	private Skin skin;
+	private Label label;
 	
-	
-	public GameScreen(TeamFourtressGame parent) {
+	public FinishScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		cam = new OrthographicCamera(32,24);
-		controller = new KeyboardController();
-		model = new Box2dModel(cam, controller, this);
-		debugRenderer = new Box2DDebugRenderer(true,true,true,true,true,true);
+		stage = new Stage(new ScreenViewport());
+		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
+		label = new Label("You Escaped!", skin);
 	}
 
 	@Override
 	public void show() {
-		Gdx.input.setInputProcessor(controller);
+		Table table = new Table();
+		table.setFillParent(true);
+		stage.addActor(table);
+		table.add(label).fillX().uniform();
 	}
 
 	@Override
 	public void render(float delta) {
-		model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		debugRenderer.render(model.world, cam.combined);
+		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+		stage.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
+		stage.getViewport().update(width, height, true);		
 	}
 
 	@Override

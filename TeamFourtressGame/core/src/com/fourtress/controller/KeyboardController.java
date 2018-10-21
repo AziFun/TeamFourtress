@@ -24,12 +24,6 @@ public class KeyboardController implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		boolean keyProcessed = false;
 		switch (keycode) {
-		case Keys.ENTER:
-			if (switchAvailable) {
-				enter = true;
-			}
-			keyProcessed = true;
-			break;
 		case Keys.LEFT:
 			left = true;
 			keyProcessed = true;
@@ -53,10 +47,6 @@ public class KeyboardController implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		boolean keyProcessed = false;
 		switch (keycode) {
-		case Keys.ENTER:
-			enter = false;
-			keyProcessed = true;
-			break;
 		case Keys.LEFT:
 			left = false;
 			keyProcessed = true;

@@ -1,18 +1,24 @@
 package com.fourtress.model;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.fourtress.controller.KeyboardController;
+import com.fourtress.views.GameScreen;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 
 public class Box2dModel {
 
 	public World world;
+	public GameScreen gameScreen;
 	private OrthographicCamera cam;
 	public Body player;
 	private BodyFactory bodyFactory;
@@ -20,14 +26,20 @@ public class Box2dModel {
 	private Body eWall;
 	private Body sWall;
 	private Body wWall;
-	private Body door;
-	private Body sensorSwitch;
+	private Body finishLine;
+	public Body door;
+	public Body keyIndicator;
+	public Body doorSensor;
+	private Body key;
 	private Room room;
 	public KeyboardController controller;
 	private ContactListener listener;
+	private boolean doorToOpen = false;
+	private boolean grabKey = false;
 
-	public Box2dModel(OrthographicCamera cam, KeyboardController controller) {
+	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
+		this.gameScreen = gameScreen;
 		this.controller = controller;
 		this.bodyFactory = bodyFactory;
 		this.world = new World(new Vector2(), true);
@@ -37,11 +49,25 @@ public class Box2dModel {
 		createPlayer();
 		createRoom();
 		createSwitch();
+		createKey();
+		createFinishLine();
+	}
+	
+	private void createFinishLine() {
+		finishLine = bodyFactory.makeBoxPolyBody(0, 11, 20, 1, Material.Rubber, BodyType.StaticBody);
+		bodyFactory.makeBodySensor(finishLine);
+		finishLine.setUserData("finish");
+	}
+	
+	private void createKey() {
+		key = bodyFactory.makeCirclePolyBody(-5, -5, 2, Material.Rubber, BodyType.StaticBody);
+		bodyFactory.makeBodySensor(key);
+		key.setUserData("key");
 	}
 
 	private void createSwitch() {
-		sensorSwitch = bodyFactory.makeCirclePolyBody(5, 5, 2, Material.Stone, BodyType.StaticBody);
-		bodyFactory.makeBodySensor(sensorSwitch);
+		doorSensor = bodyFactory.makeCirclePolyBody(9, 9, 2, Material.Stone, BodyType.StaticBody);
+		bodyFactory.makeBodySensor(doorSensor);
 	}
 
 	private void createRoom() {
@@ -55,11 +81,32 @@ public class Box2dModel {
 	private void createPlayer() {
 		player = bodyFactory.makeBoxPolyBody(1, 1, 1, 1, Material.Rubber, BodyType.DynamicBody, false);
 	}
+	
+	public void openDoor() {
+		doorToOpen = true;
+	}
+	
+	public void pickupKey() {
+		grabKey = true;
+	}
+	
+	public void useKey() {
+		openDoor();
+	}
 
 	public void logicStep(float delta) {
 		
-		if (controller.enter) {
+		if (doorToOpen) {
 			world.destroyBody(door);
+			world.destroyBody(doorSensor);
+			world.destroyBody(keyIndicator);
+			doorToOpen = false;
+		}
+		if (grabKey) {
+			keyIndicator = bodyFactory.makeBoxPolyBody(-12, 10, 1, 1, Material.Rubber, BodyType.StaticBody);
+			world.destroyBody(key);
+			controller.enableSwitch();
+			grabKey = false;
 		}
 		if (controller.left) {
 			player.applyForceToCenter(-10, 0, true);
