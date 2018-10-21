@@ -59,10 +59,10 @@ public class Room implements Screen {
 	
 	@Override
 	public void show() {
-		map = new TmxMapLoader().load("maps/map.tmx");	
+		map = new TmxMapLoader().load("TeamFourtressMap/Maps/desert.tmx");	
 		renderer = new OrthogonalTiledMapRenderer(map);
 		camera = new OrthographicCamera();		
-		player = new Player(new Sprite(new Texture("img/playerFrames/still1.png")));
+		//player = new Player(new Sprite(new Texture("img/playerFrames/still1.png")));
 	}
 	
 	@Override
