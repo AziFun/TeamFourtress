@@ -22,15 +22,16 @@ public class Box2dModel {
 	private OrthographicCamera cam;
 	public Body player;
 	private BodyFactory bodyFactory;
-	private Body nWall;
-	private Body eWall;
-	private Body sWall;
-	private Body wWall;
+	public Body nWall1;
+	public Body nWall2;
+	public Body eWall;
+	public Body sWall;
+	public Body wWall;
 	private Body finishLine;
 	public Body door;
 	public Body keyIndicator;
 	public Body doorSensor;
-	private Body key;
+	public Body key;
 	private Room room;
 	public KeyboardController controller;
 	private ContactListener listener;
@@ -66,16 +67,17 @@ public class Box2dModel {
 	}
 
 	private void createSwitch() {
-		doorSensor = bodyFactory.makeCirclePolyBody(9, 9, 2, Material.Stone, BodyType.StaticBody);
+		doorSensor = bodyFactory.makeCirclePolyBody(0, 9, 2, Material.Stone, BodyType.StaticBody);
 		bodyFactory.makeBodySensor(doorSensor);
 	}
 
 	private void createRoom() {
-		nWall = bodyFactory.makeBoxPolyBody(-2, 10, 18, 1, Material.Stone, BodyType.StaticBody);
+		nWall1 = bodyFactory.makeBoxPolyBody(-6, 10, 8, 1, Material.Stone, BodyType.StaticBody);
+		nWall2 = bodyFactory.makeBoxPolyBody(6, 10, 8, 1, Material.Stone, BodyType.StaticBody);
 		eWall = bodyFactory.makeBoxPolyBody(10, 0, 1, 20, Material.Stone, BodyType.StaticBody);
 		sWall = bodyFactory.makeBoxPolyBody(0, -10, 20, 1, Material.Stone, BodyType.StaticBody);
 		wWall = bodyFactory.makeBoxPolyBody(-10, 0, 1, 20, Material.Stone, BodyType.StaticBody);
-		door = bodyFactory.makeBoxPolyBody(9, 10, 2, 1, Material.Stone, BodyType.StaticBody);
+		door = bodyFactory.makeBoxPolyBody(0, 10, 4, 1, Material.Stone, BodyType.StaticBody);
 	}
 
 	private void createPlayer() {
@@ -109,16 +111,19 @@ public class Box2dModel {
 			grabKey = false;
 		}
 		if (controller.left) {
-			player.applyForceToCenter(-10, 0, true);
+			player.setLinearVelocity(-5, player.getLinearVelocity().y);
 		}
 		if (controller.right) {
-			player.applyForceToCenter(10, 0, true);
+			player.setLinearVelocity(5, player.getLinearVelocity().y);
 		}
 		if (controller.up) {
-			player.applyForceToCenter(0, 10, true);
+			player.setLinearVelocity(player.getLinearVelocity().x, 5);
 		}
 		if (controller.down) {
-			player.applyForceToCenter(0, -10, true);
+			player.setLinearVelocity(player.getLinearVelocity().x, -5);
+		}
+		if (!controller.left && !controller.right && !controller.up && !controller.down) {
+			player.setLinearVelocity(0, 0);
 		}
 		
 		world.step(delta, 3, 3);
