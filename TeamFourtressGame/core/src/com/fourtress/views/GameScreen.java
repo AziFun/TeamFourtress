@@ -19,7 +19,7 @@ public class GameScreen implements Screen{
 	private Box2dModel model;
 	private OrthographicCamera cam;
 	private Box2DDebugRenderer debugRenderer;
-	private TeamFourtressGame parent;
+	public TeamFourtressGame parent;
 	private KeyboardController controller;
 	private SpriteBatch sb;
 	
@@ -28,7 +28,7 @@ public class GameScreen implements Screen{
 		this.parent = parent;
 		cam = new OrthographicCamera(32,24);
 		controller = new KeyboardController();
-		model = new Box2dModel(cam, controller);
+		model = new Box2dModel(cam, controller, this);
 		debugRenderer = new Box2DDebugRenderer(true,true,true,true,true,true);
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
