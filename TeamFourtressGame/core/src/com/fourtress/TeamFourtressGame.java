@@ -1,12 +1,14 @@
 package com.fourtress;
 
 import com.badlogic.gdx.Game;
+import com.fourtress.views.GameScreen;
 import com.fourtress.views.LoadingScreen;
 import com.fourtress.views.MenuScreen;
 import com.fourtress.views.PreferencesScreen;
 
 public class TeamFourtressGame extends Game {
 
+	private GameScreen gameScreen;
 	private LoadingScreen loadingScreen;
 	private MenuScreen menuScreen;
 	private PreferencesScreen preferencesScreen;
@@ -31,6 +33,11 @@ public class TeamFourtressGame extends Game {
 	
 	public void changeScreen(ScreenType s) {
 		switch (s) {
+		case GAME:
+			if (gameScreen == null) gameScreen = new GameScreen(this);
+			this.setScreen(gameScreen);
+			menuScreen.dispose();
+			break;
 		case LOADING: 
 			if (loadingScreen == null) loadingScreen = new LoadingScreen(this);
 			this.setScreen(loadingScreen);
