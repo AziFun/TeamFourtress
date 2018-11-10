@@ -1,5 +1,7 @@
 package com.fourtress.views;
 
+import java.util.logging.Level;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
@@ -13,6 +15,9 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -21,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.Box2dModel;
+import com.fourtress.model.LevelFactory;
 
 public class GameScreen implements Screen {
 
@@ -30,15 +36,22 @@ public class GameScreen implements Screen {
 	public TeamFourtressGame parent;
 	private KeyboardController controller;
 	private SpriteBatch sb;
+	private OrthogonalTiledMapRenderer mapRenderer;
+	private TiledMap map;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
 		cam = new OrthographicCamera(32, 24);
+		cam.setToOrtho(false,32,24);
+        cam.update();
 		controller = new KeyboardController();
 		model = new Box2dModel(cam, controller, this);
 		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
+		LevelFactory levelGen = LevelFactory.getInstance();
+		map = levelGen.makeLevel(1);
+		mapRenderer = new OrthogonalTiledMapRenderer(map);
 	}
 
 	@Override
@@ -51,8 +64,10 @@ public class GameScreen implements Screen {
 		model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		mapRenderer.setView(cam);
+		mapRenderer.render();
 		//debugRenderer.render(model.world, cam.combined);
-		sb.begin();
+		/*sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
 		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
 		Texture background = new Texture(Gdx.files.internal("background.png"));
@@ -74,7 +89,7 @@ public class GameScreen implements Screen {
 		if (model.keyIndicator != null) {
 			sb.draw(keySprite, model.keyIndicator.getPosition().x, model.keyIndicator.getPosition().y, 2, 2);
 		}
-		sb.end();
+		sb.end();*/
 	}
 
 	@Override
