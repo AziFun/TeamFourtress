@@ -41,55 +41,62 @@ public class GameScreen implements Screen {
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		cam = new OrthographicCamera(32, 24);
-		cam.setToOrtho(false,32,24);
-        cam.update();
-		controller = new KeyboardController();
-		model = new Box2dModel(cam, controller, this);
-		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
-		sb = new SpriteBatch();
-		sb.setProjectionMatrix(cam.combined);
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getHeight();
+		cam = new OrthographicCamera(w, h);
+		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
+		cam.update();
+		// controller = new KeyboardController();
+		// model = new Box2dModel(cam, controller, this);
+		// cdebugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		// sb = new SpriteBatch();
+		// sb.setProjectionMatrix(cam.combined);
 		LevelFactory levelGen = LevelFactory.getInstance();
 		map = levelGen.makeLevel(1);
-		mapRenderer = new OrthogonalTiledMapRenderer(map);
+		mapRenderer = new OrthogonalTiledMapRenderer(map, 1 / 3.5f);
 	}
 
 	@Override
 	public void show() {
-		Gdx.input.setInputProcessor(controller);
+		// Gdx.input.setInputProcessor(controller);
 	}
 
 	@Override
 	public void render(float delta) {
-		model.logicStep(delta);
+		// model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		cam.update();
 		mapRenderer.setView(cam);
 		mapRenderer.render();
-		//debugRenderer.render(model.world, cam.combined);
-		/*sb.begin();
-		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-		Texture background = new Texture(Gdx.files.internal("background.png"));
-		Texture wallSprite = new Texture(Gdx.files.internal("wall.png"));
-		Texture doorSprite = new Texture(Gdx.files.internal("door.png"));
-		sb.draw(background, -10, -10, 20, 20);
-		sb.draw(wallSprite, -10, -11, 20, 2);
-		sb.draw(wallSprite, -10, 9, 8, 2);
-		sb.draw(wallSprite, 2, 9, 8, 2);
-		sb.draw(wallSprite, -11, -11, 2, 20);
-		sb.draw(wallSprite, 9, -11, 2, 20);
-		if (model.door.isActive()) {
-			sb.draw(doorSprite, model.door.getPosition().x - 2, model.door.getPosition().y - 1, 4, 4);
-		}
-		sb.draw(playerSprite, model.player.getPosition().x - 1, model.player.getPosition().y - 1, 2, 2);
-		if (!controller.switchAvailable) {
-			sb.draw(keySprite, model.key.getPosition().x - 1, model.key.getPosition().y - 1, 2, 2);
-		}
-		if (model.keyIndicator != null) {
-			sb.draw(keySprite, model.keyIndicator.getPosition().x, model.keyIndicator.getPosition().y, 2, 2);
-		}
-		sb.end();*/
+		// debugRenderer.render(model.world, cam.combined);
+		// sb.begin();
+		// Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
+		// Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
+		// Texture background = new Texture(Gdx.files.internal("background.png"));
+		// Texture wallSprite = new Texture(Gdx.files.internal("wall.png"));
+		// Texture doorSprite = new Texture(Gdx.files.internal("door.png"));
+		// sb.draw(background, -10, -10, 20, 20);
+		// sb.draw(wallSprite, -10, -11, 20, 2);
+		// sb.draw(wallSprite, -10, 9, 8, 2);
+		// sb.draw(wallSprite, 2, 9, 8, 2);
+		// sb.draw(wallSprite, -11, -11, 2, 20);
+		// sb.draw(wallSprite, 9, -11, 2, 20);
+		// if (model.door.isActive()) {
+		// sb.draw(doorSprite, model.door.getPosition().x - 2,
+		// model.door.getPosition().y - 1, 4, 4);
+		// }
+		// sb.draw(playerSprite, model.player.getPosition().x - 1,
+		// model.player.getPosition().y - 1, 2, 2);
+		// if (!controller.switchAvailable) {
+		// sb.draw(keySprite, model.key.getPosition().x - 1, model.key.getPosition().y -
+		// 1, 2, 2);
+		// }
+		// if (model.keyIndicator != null) {
+		// sb.draw(keySprite, model.keyIndicator.getPosition().x,
+		// model.keyIndicator.getPosition().y, 2, 2);
+		// }
+		// sb.end();
 	}
 
 	@Override

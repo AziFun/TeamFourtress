@@ -28,7 +28,6 @@ public class LevelFactory {
 	}
 
 	private TiledMap createLevel1() {
-		TiledMap map = new TmxMapLoader().load("Maps/HistoryMap.tmx");
-		return map;
+		return new TmxMapLoader().load("Maps/HistoryMap.tmx");
 	}
 }
