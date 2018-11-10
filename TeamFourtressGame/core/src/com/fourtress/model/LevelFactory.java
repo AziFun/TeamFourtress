@@ -19,15 +19,11 @@ public class LevelFactory {
 		return thisInstance;
 	}
 	
-	public TiledMap makeLevel(int levelNum) {
+	public Level makeLevel(int levelNum, Box2dModel model) {
 		switch (levelNum) {
 		case 1:
-			return createLevel1();
+			return new Level(new TmxMapLoader().load("Maps/HistoryMap.tmx"), model);
 		}
 		return null;
-	}
-
-	private TiledMap createLevel1() {
-		return new TmxMapLoader().load("Maps/HistoryMap.tmx");
 	}
 }

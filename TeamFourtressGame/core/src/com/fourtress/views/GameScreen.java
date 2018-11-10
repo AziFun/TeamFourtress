@@ -1,6 +1,5 @@
 package com.fourtress.views;
 
-import java.util.logging.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -26,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.Box2dModel;
+import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
 
 public class GameScreen implements Screen {
@@ -37,7 +37,7 @@ public class GameScreen implements Screen {
 	private KeyboardController controller;
 	private SpriteBatch sb;
 	private OrthogonalTiledMapRenderer mapRenderer;
-	private TiledMap map;
+	private Level level;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
@@ -46,19 +46,19 @@ public class GameScreen implements Screen {
 		cam = new OrthographicCamera(w, h);
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
-		// controller = new KeyboardController();
-		// model = new Box2dModel(cam, controller, this);
-		// cdebugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
-		// sb = new SpriteBatch();
-		// sb.setProjectionMatrix(cam.combined);
+		controller = new KeyboardController();
+		model = new Box2dModel(cam, controller, this);
+		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		sb = new SpriteBatch();
+		sb.setProjectionMatrix(cam.combined);
 		LevelFactory levelGen = LevelFactory.getInstance();
-		map = levelGen.makeLevel(1);
-		mapRenderer = new OrthogonalTiledMapRenderer(map, 1 / 3.5f);
+		level = levelGen.makeLevel(1, model);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 3.5f);
 	}
 
 	@Override
 	public void show() {
-		// Gdx.input.setInputProcessor(controller);
+		Gdx.input.setInputProcessor(controller);
 	}
 
 	@Override
@@ -69,34 +69,23 @@ public class GameScreen implements Screen {
 		cam.update();
 		mapRenderer.setView(cam);
 		mapRenderer.render();
-		// debugRenderer.render(model.world, cam.combined);
-		// sb.begin();
-		// Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		// Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-		// Texture background = new Texture(Gdx.files.internal("background.png"));
-		// Texture wallSprite = new Texture(Gdx.files.internal("wall.png"));
-		// Texture doorSprite = new Texture(Gdx.files.internal("door.png"));
-		// sb.draw(background, -10, -10, 20, 20);
-		// sb.draw(wallSprite, -10, -11, 20, 2);
-		// sb.draw(wallSprite, -10, 9, 8, 2);
-		// sb.draw(wallSprite, 2, 9, 8, 2);
-		// sb.draw(wallSprite, -11, -11, 2, 20);
-		// sb.draw(wallSprite, 9, -11, 2, 20);
-		// if (model.door.isActive()) {
-		// sb.draw(doorSprite, model.door.getPosition().x - 2,
-		// model.door.getPosition().y - 1, 4, 4);
-		// }
-		// sb.draw(playerSprite, model.player.getPosition().x - 1,
-		// model.player.getPosition().y - 1, 2, 2);
-		// if (!controller.switchAvailable) {
-		// sb.draw(keySprite, model.key.getPosition().x - 1, model.key.getPosition().y -
-		// 1, 2, 2);
-		// }
-		// if (model.keyIndicator != null) {
-		// sb.draw(keySprite, model.keyIndicator.getPosition().x,
-		// model.keyIndicator.getPosition().y, 2, 2);
-		// }
-		// sb.end();
+		debugRenderer.render(model.world, cam.combined);
+		sb.begin();
+		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
+		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
+		
+		
+		sb.draw(playerSprite, model.player.getPosition().x - 1,
+		model.player.getPosition().y - 1, 2, 2);
+		if (!controller.switchAvailable) {
+		sb.draw(keySprite, model.key.getPosition().x - 1, model.key.getPosition().y -
+		1, 2, 2);
+		}
+		if (model.keyIndicator != null) {
+		sb.draw(keySprite, model.keyIndicator.getPosition().x,
+		model.keyIndicator.getPosition().y, 2, 2);
+		}
+		sb.end();
 	}
 
 	@Override

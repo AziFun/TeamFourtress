@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="26" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="15">
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
  </tileset>
@@ -23,6 +23,21 @@
    eJzt17sJgDAUQNGIu9g7gq7rEvZZShsLEeKHxB/nwe0CIYfXJARzZZqqXEO9LfcdPHjw+KdH5GE/TnhEHvaDx65H5GE/ePDgkc0jPuzRhjAu9Ym6+eyX6xO163jw4MGDBw8ePHjweI3H0Sn5f7mj3PP0e3jwuPpOHvaDBw8ePHi8Ix48ePAo7TEByycQSw==
   </data>
  </layer>
+ <objectgroup id="26" name="Object Layer">
+  <object id="2" x="320" y="23" width="1543" height="10"/>
+  <object id="3" x="1855" y="24" width="8" height="488"/>
+  <object id="4" x="1440" y="506" width="414" height="7"/>
+  <object id="5" x="672" y="506" width="641" height="7"/>
+  <object id="6" x="1217" y="32" width="6" height="474"/>
+  <object id="7" x="1049" y="31" width="8" height="476"/>
+  <object id="8" x="311" y="505" width="232" height="8"/>
+  <object id="9" x="312" y="24" width="9" height="479"/>
+  <object id="10" x="311" y="864" width="11" height="481"/>
+  <object id="11" x="322" y="862" width="704" height="8"/>
+  <object id="12" x="319" y="1334" width="1545" height="10"/>
+  <object id="13" x="1856" y="863" width="8" height="470"/>
+  <object id="14" x="1215" y="861" width="642" height="10"/>
+ </objectgroup>
  <layer id="24" name="Furniture" width="68" height="42">
   <data encoding="base64" compression="zlib">
    eJzt2c0OwUAQB/B1Km4+LsRrCG5eQvAYvAkHL8LdQ3CRSDyDj4vEwTS60p20Mex2o/x/yURnItPtWE2TKgWfOAVKTYPHZxhnikt0vKRYsZo+nlAcY7nEupjttbhQpTXOg8dnGDWKenS8ofo2MGv6eEb1SiyXOCR8r1NWqkvRK7u9rrwa0hxGFGPMAwAAAAAAAAAAAAAAfkS9YOb7ots8zbt9dp7e7YXz0DNZlJS6xc5rm6f5pM81ytsZv7eKzyPE12Gbp3m3j57HwMM8tDzsj6zx+8e374+s5WV/NKjWLL3ubYvfP1rsnLZ5Gld9XOP/l3/H50G/S99lLq1J+viQ8PzxXIdtLq1J+viS8PxhrMM2l9YkfXzA/jBhf5gSnj/6rnJp7Zv2B7dn67DNpTVJHxt3kDW24g==
