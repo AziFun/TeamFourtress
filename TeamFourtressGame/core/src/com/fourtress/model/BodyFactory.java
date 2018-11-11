@@ -1,5 +1,8 @@
 package com.fourtress.model;
 
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -14,6 +17,7 @@ public class BodyFactory {
 
 	private World world;
 	private static BodyFactory thisInstance;
+	private static float ppt = 32f;
 	
 	private BodyFactory(World world) {
 		this.world = world;
@@ -98,6 +102,18 @@ public class BodyFactory {
 
 		return boxBody;
 	}
+	
+    public PolygonShape getRectangle(RectangleMapObject rectangleObject) {
+        Rectangle rectangle = rectangleObject.getRectangle();
+        PolygonShape polygon = new PolygonShape();
+        Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt,
+                                   (rectangle.y + rectangle.height * 0.5f ) / ppt);
+        polygon.setAsBox(rectangle.width * 0.5f / ppt,
+                         rectangle.height * 0.5f / ppt,
+                         size,
+                         0.0f);
+        return polygon;
+    }
 	
 	public void makeBodySensor(Body body) {
 		for (Fixture f : body.getFixtureList()) {
