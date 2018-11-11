@@ -1,0 +1,14 @@
+{ "columns":16,
+ "image":"images\/LPC_house_interior\/interior.png",
+ "imageheight":512,
+ "imagewidth":512,
+ "margin":0,
+ "name":"LPC_House_Interior",
+ "spacing":0,
+ "tilecount":256,
+ "tiledversion":"1.2.0",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":1.2
+}
