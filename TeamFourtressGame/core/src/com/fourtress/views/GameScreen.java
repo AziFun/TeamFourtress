@@ -16,13 +16,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-<<<<<<< HEAD
 import com.badlogic.gdx.math.Interpolation;
-=======
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
->>>>>>> 31a8d50f619ce206ba30dd01ead21064cb232bed
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -37,14 +34,11 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.Box2dModel;
-<<<<<<< HEAD
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-=======
 import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
->>>>>>> 31a8d50f619ce206ba30dd01ead21064cb232bed
 
 
 public class GameScreen extends ScreenAdapter {
@@ -67,7 +61,10 @@ public class GameScreen extends ScreenAdapter {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		cam = new OrthographicCamera(w, h);
+		System.out.println(w);
+		System.out.println(h);
+
+		cam = new OrthographicCamera(w/10, h/10);
 		                stage = new Stage(new ScreenViewport());
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
@@ -79,7 +76,8 @@ public class GameScreen extends ScreenAdapter {
 		
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 3.5f);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+	}
 
 	@Override
 	public void show() {
@@ -88,50 +86,24 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	
-	
-	@Override
-	public void render(float delta) {
-		// model.logicStep(delta);
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		cam.update();
-		mapRenderer.setView(cam);
-		mapRenderer.render();
-		debugRenderer.render(model.world, cam.combined);
-		sb.begin();
-		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-		
-		Dialog welcome = new Dialog("Welcome to Team Fourtress!",skin);
-		welcome.show(stage);
-		welcome.setPosition(220,50);
-		Timer.schedule(new Task(){
-			@Override
-			public void run() {
-				welcome.hide();
-			}
-		},5);
-		
-				
-
-		
-		
-		sb.draw(playerSprite, model.player.getPosition().x - 1,
-		model.player.getPosition().y - 1, 2, 2);
-		if (!controller.switchAvailable) {
-		sb.draw(keySprite, model.key.getPosition().x - 1, model.key.getPosition().y -
-		1, 2, 2);
-		}
-		if (model.keyIndicator != null) {
-		sb.draw(keySprite, model.keyIndicator.getPosition().x,
-		model.keyIndicator.getPosition().y, 2, 2);
-		}
-		sb.end();
-		stage.draw();
-
-
-	}
-	
+    @Override
+    public void render(float delta) {
+         model.logicStep(delta);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        cam.update();
+        mapRenderer.setView(cam);
+        mapRenderer.render();
+        debugRenderer.render(model.world, cam.combined);
+        sb.begin();
+        Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
+        Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
+        
+        
+        sb.draw(playerSprite, model.player.getPosition().x - 1,
+        model.player.getPosition().y - 1, 2, 2);
+        sb.end();
+    }
 
 	
 

@@ -28,22 +28,7 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 		if (fb.getBody().getType() == BodyType.DynamicBody) {
 			// apply small force opposite to angle of contact
 		}
-		if (fa.getBody().getUserData() == "sensor") {
-			if (parent.controller.switchAvailable) {
-				parent.useKey();
-			}
-		}
-		if (fb.getBody().getUserData() == "sensor") {
-			if (parent.controller.switchAvailable) {
-				parent.useKey();
-			}
-		}
-		if (fa.getBody().getUserData() == "key") {
-			parent.pickupKey();
-		}
-		if (fb.getBody().getUserData() == "key") {
-			parent.pickupKey();
-		}
+		
 		if (fa.getBody().getUserData() == "finish" || fb.getBody().getUserData() == "finish") {
 			parent.gameScreen.parent.changeScreen(ScreenType.FINISH);
 		}
