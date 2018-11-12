@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		cam = new OrthographicCamera(w, h);
+		cam = new OrthographicCamera(w/10, h/10);
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
 		controller = new KeyboardController();
@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
 		sb.setProjectionMatrix(cam.combined);
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 3.5f);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// model.logicStep(delta);
+		model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		cam.update();
@@ -77,14 +77,6 @@ public class GameScreen implements Screen {
 		
 		sb.draw(playerSprite, model.player.getPosition().x - 1,
 		model.player.getPosition().y - 1, 2, 2);
-		if (!controller.switchAvailable) {
-		sb.draw(keySprite, model.key.getPosition().x - 1, model.key.getPosition().y -
-		1, 2, 2);
-		}
-		if (model.keyIndicator != null) {
-		sb.draw(keySprite, model.keyIndicator.getPosition().x,
-		model.keyIndicator.getPosition().y, 2, 2);
-		}
 		sb.end();
 	}
 
