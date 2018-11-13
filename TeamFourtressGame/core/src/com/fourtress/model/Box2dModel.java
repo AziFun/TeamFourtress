@@ -1,7 +1,12 @@
 package com.fourtress.model;
 
+import java.util.List;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -24,6 +29,7 @@ public class Box2dModel {
 	private BodyFactory bodyFactory;
 	private Room room;
 	public KeyboardController controller;
+	private List<InteractableEntity> interactables;
 	private ContactListener listener;
 	private boolean doorToOpen = false;
 	private boolean grabKey = false;
@@ -37,12 +43,8 @@ public class Box2dModel {
 		listener = new ContactListener(this);
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
-		createPlayer();
 	}
 	
-	private void createPlayer() {
-		player = bodyFactory.makeBoxPolyBody(1, 1, 1, 1, Material.Rubber, BodyType.DynamicBody, false);
-	}
 	
 	public void logicStep(float delta) {
 		
@@ -63,6 +65,10 @@ public class Box2dModel {
 		}
 		
 		world.step(delta, 3, 3);
+	}
+
+	public void setSpawn(Ellipse spawn) {
+		player = bodyFactory.makeCirclePolyBody(spawn.x/32, spawn.y/32, 1, Material.Rubber, BodyType.DynamicBody, false);
 	}
 
 }

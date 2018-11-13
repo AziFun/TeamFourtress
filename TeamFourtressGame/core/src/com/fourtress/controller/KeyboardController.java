@@ -11,6 +11,7 @@ public class KeyboardController implements InputProcessor {
 	public boolean down;
 	public boolean switchAvailable = false;
 	public boolean enter;
+	
 
 	public void enableSwitch() {
 		switchAvailable = true;
