@@ -1,6 +1,5 @@
 package com.fourtress.model;
 
-import com.fourtress.model.Sensor;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -30,11 +29,19 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 			// apply small force opposite to angle of contact
 		}
 
-		if (fa.getBody().getUserData() != null && fa.getBody().getUserData().getClass() == Sensor.class) {
+		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Sensor) {
 			System.out.println(((Sensor) fa.getBody().getUserData()).getMessage());
+			if (fa.getBody().getUserData() instanceof ItemSensor) {
+				parent.inventory.addItem(((ItemSensor) fa.getBody().getUserData()).getItem());
+				System.out.println(parent.inventory.items.values());
+			}
 		}
-		if (fb.getBody().getUserData() != null && fa.getBody().getUserData().getClass() == Sensor.class) {
+		if (fb.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Sensor) {
 			System.out.println(((Sensor) fb.getBody().getUserData()).getMessage());
+			if (fb.getBody().getUserData() instanceof ItemSensor) {
+				parent.inventory.addItem(((ItemSensor) fb.getBody().getUserData()).getItem());
+				System.out.println(parent.inventory.items.values());
+			}
 		}
 
 		if (fa.getBody().getUserData() == "finish" || fb.getBody().getUserData() == "finish") {

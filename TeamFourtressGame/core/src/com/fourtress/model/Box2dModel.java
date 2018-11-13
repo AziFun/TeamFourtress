@@ -26,6 +26,7 @@ public class Box2dModel {
 	public GameScreen gameScreen;
 	private OrthographicCamera cam;
 	public Body player;
+	public Inventory inventory;
 	private BodyFactory bodyFactory;
 	private Room room;
 	public KeyboardController controller;
@@ -39,6 +40,7 @@ public class Box2dModel {
 		this.gameScreen = gameScreen;
 		this.controller = controller;
 		this.bodyFactory = bodyFactory;
+		this.inventory = new Inventory();
 		this.world = new World(new Vector2(), true);
 		listener = new ContactListener(this);
 		world.setContactListener(listener);
