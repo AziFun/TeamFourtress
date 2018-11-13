@@ -21,8 +21,8 @@ public class Player extends Sprite {
 	
 	public void update(float delta) {
 		// Set player position
-		setX(50);
-		setY(50);
+		setX(150);
+		setY(150);
 
 	}	
 	
