@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="151">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="29" nextobjectid="155">
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
  </tileset>
@@ -24,208 +24,426 @@
   </data>
  </layer>
  <objectgroup id="27" name="Interaction Layer">
-  <object id="15" name="Plant" x="1230" y="798" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="16" name="Books3" x="830" y="50" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="17" name="Crown" x="943" y="70" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="18" name="Books1" x="453" y="42" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="19" name="Books2" x="609" y="45" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="20" name="Books5" x="701" y="180" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="21" name="Books4" x="436" y="176" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="22" name="Books6" x="608" y="313" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="23" name="Books7" x="356" y="431" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="24" name="Chest" x="1152" y="34" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="25" name="StatueBig" x="1664" y="112" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="26" name="Statue3" x="1486" y="516" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="27" name="Statue4" x="1676" y="527" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="28" name="Statue2" x="718" y="517" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="29" name="Statue1" x="432" y="522" width="70" height="70">
+  <object id="15" name="Plant" type="Item" x="1230" y="798" width="70" height="70">
    <properties>
-    <property name="Message" value="It is a statue"/>
+    <property name="Item" value="Office Key"/>
+    <property name="Message" value="You found a key"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="30" x="412" y="1009" width="70" height="70">
+  <object id="16" name="Books3" type="MultiLock" x="830" y="50" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="31" x="412" y="869" width="70" height="70">
+  <object id="17" name="Crown" type="Information" x="943" y="70" width="70" height="70">
    <ellipse/>
   </object>
-  <object id="32" x="411" y="934" width="70" height="70">
+  <object id="18" name="Books1" type="MultiLock" x="449" y="42" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here. This looks like the A section"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="33" x="408" y="1123" width="70" height="70">
+  <object id="19" name="Books2" type="MultiLock" x="609" y="45" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="34" x="410" y="1196" width="70" height="70">
+  <object id="20" name="Books5" type="MultiLock" x="701" y="180" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="35" x="405" y="1261" width="70" height="70">
+  <object id="21" name="Books4" type="MultiLock" x="436" y="176" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="40" x="538.5" y="1010" width="70" height="70">
+  <object id="22" name="Books6" type="MultiLock" x="608" y="313" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="41" x="538.5" y="870" width="70" height="70">
+  <object id="23" name="Books7" type="MultiLock" x="356" y="431" width="70" height="70">
+   <properties>
+    <property name="Message" value="There is a space for a book here. This looks like the Z section"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="42" x="537.5" y="935" width="70" height="70">
+  <object id="24" name="Chest" type="Item" x="1152" y="34" width="70" height="70">
+   <properties>
+    <property name="Item" value="Floor Key"/>
+    <property name="Message" value="You found the key for the floor"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="43" x="667.5" y="1017" width="70" height="70">
+  <object id="25" name="StatueBig" type="Information" x="1660.33" y="111.667" width="70" height="70">
+   <properties>
+    <property name="Message" value="Its huge!"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="44" x="667.5" y="877" width="70" height="70">
+  <object id="26" name="Statue3" type="Information" x="1486" y="516" width="70" height="70">
+   <properties>
+    <property name="Message" value="Another statue"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="45" x="666.5" y="942" width="70" height="70">
+  <object id="27" name="Statue4" type="Information" x="1676" y="527" width="70" height="70">
+   <properties>
+    <property name="Message" value="Wow how did we pay for all of these..."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="46" x="786.5" y="1013" width="70" height="70">
+  <object id="28" name="Statue2" type="Information" x="722" y="517" width="70" height="70">
+   <properties>
+    <property name="Message" value="A statue of a dragon. Not exactly history..."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="47" x="786.5" y="873" width="70" height="70">
+  <object id="29" name="Statue1" type="Information" x="430.333" y="523.333" width="70" height="70">
+   <properties>
+    <property name="Message" value="It is a statue of a woman"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="48" x="785.5" y="938" width="70" height="70">
+  <object id="30" type="Information" x="412" y="1009" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Jenny sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="49" x="923.5" y="1015" width="70" height="70">
+  <object id="31" type="Information" x="412" y="869" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Andrew Sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="50" x="923.5" y="875" width="70" height="70">
+  <object id="32" type="Information" x="411" y="934" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Mark sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="51" x="922.5" y="940" width="70" height="70">
+  <object id="33" type="Item" x="408" y="1123" width="70" height="70">
+   <properties>
+    <property name="Item" value="Jim Note"/>
+    <property name="Message" value="This is where Jim sits. There is a note here"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="52" x="532.5" y="1264" width="70" height="70">
+  <object id="34" type="Information" x="410" y="1196" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Marie sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="53" x="532.5" y="1124" width="70" height="70">
+  <object id="35" type="Information" x="405" y="1261" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Susan sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="54" x="531.5" y="1189" width="70" height="70">
+  <object id="40" type="Information" x="538.5" y="1010" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Emily sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="55" x="662.5" y="1270" width="70" height="70">
+  <object id="41" type="Information" x="538.5" y="870" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Ben sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="56" x="662.5" y="1130" width="70" height="70">
+  <object id="42" type="Information" x="537.5" y="935" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Molly sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="57" x="661.5" y="1195" width="70" height="70">
+  <object id="43" type="Information" x="667.5" y="1017" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Witek sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="58" x="786.5" y="1265" width="70" height="70">
+  <object id="44" type="Information" x="667.5" y="877" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Azi sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="59" x="786.5" y="1125" width="70" height="70">
+  <object id="45" type="Information" x="666.5" y="942" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Rosie sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="60" x="785.5" y="1190" width="70" height="70">
+  <object id="46" type="Information" x="786.5" y="1013" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Kiera sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="61" x="921.5" y="1258" width="70" height="70">
+  <object id="47" type="Information" x="786.5" y="873" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Callum sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="62" x="921.5" y="1118" width="70" height="70">
+  <object id="48" type="Information" x="785.5" y="938" width="70" height="70">
+   <properties>
+    <property name="Item" value="Rob Note"/>
+    <property name="Message" value="This is where Rob sits. There is a note here..."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="63" x="920.5" y="1183" width="70" height="70">
+  <object id="49" type="Information" x="923.5" y="1015" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Poppy sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="64" x="1078.5" y="1263" width="70" height="70">
+  <object id="50" type="Information" x="923.5" y="875" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Joe sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="65" x="1078.5" y="1123" width="70" height="70">
+  <object id="51" type="Information" x="922.5" y="940" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Claire sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="66" x="1077.5" y="1188" width="70" height="70">
+  <object id="52" type="Information" x="532.5" y="1264" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Josh sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="67" x="1238.5" y="1262" width="70" height="70">
+  <object id="53" type="Information" x="532.5" y="1124" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Tristam sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="68" x="1238.5" y="1122" width="70" height="70">
+  <object id="54" type="Information" x="531.5" y="1189" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Alice sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="69" x="1237.5" y="1187" width="70" height="70">
+  <object id="55" type="Information" x="662.5" y="1270" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Sarah sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="70" x="1367.5" y="1265" width="70" height="70">
+  <object id="56" type="Information" x="662.5" y="1130" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Kieran sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="71" x="1367.5" y="1125" width="70" height="70">
+  <object id="57" type="Information" x="661.5" y="1195" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Dave sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="72" x="1366.5" y="1190" width="70" height="70">
+  <object id="58" type="Information" x="786.5" y="1265" width="70" height="70">
+   <properties>
+    <property name="Message" value="This seat is empty"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="76" x="1491.5" y="1267" width="70" height="70">
+  <object id="59" type="Information" x="786.5" y="1125" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Immi sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="77" x="1491.5" y="1127" width="70" height="70">
+  <object id="60" type="Information" x="785.5" y="1190" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Finn sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="78" x="1490.5" y="1192" width="70" height="70">
+  <object id="61" type="Information" x="921.5" y="1258" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Tom sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="79" x="1494.5" y="1018" width="70" height="70">
+  <object id="62" type="Information" x="921.5" y="1118" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Jordan sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="80" x="1494.5" y="878" width="70" height="70">
+  <object id="63" type="Information" x="920.5" y="1183" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Adam sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="81" x="1493.5" y="943" width="70" height="70">
+  <object id="64" type="Information" x="1078.5" y="1263" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Natasha sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="85" x="1368.5" y="1009" width="70" height="70">
+  <object id="65" type="Information" x="1081.5" y="1123" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Jake sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="86" x="1368.5" y="869" width="70" height="70">
+  <object id="66" type="Information" x="1077.5" y="1188" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Daniel sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="87" x="1367.5" y="934" width="70" height="70">
+  <object id="67" type="Information" x="1238.5" y="1262" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Jeremy sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="68" type="Information" x="1238.5" y="1122" width="70" height="70">
+   <properties>
+    <property name="Message" value="This seat is empty"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="69" type="Information" x="1237.5" y="1187" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Stanley sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="70" type="Information" x="1367.5" y="1265" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Marley sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="71" type="Information" x="1367.5" y="1125" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Charles sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="72" type="Information" x="1366.5" y="1190" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Rory sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="76" type="Information" x="1490.5" y="1267" width="70" height="70">
+   <properties>
+    <property name="Message" value="This seat is empty"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="77" type="Information" x="1491.5" y="1127" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Helen sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="78" type="Information" x="1490.5" y="1192" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Abdul sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="79" type="Information" x="1494.5" y="1018" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Mario sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="80" type="Information" x="1494.5" y="878" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Daz sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="81" type="Information" x="1493.5" y="943" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Sally sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="85" type="Information" x="1368.5" y="1009" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Mel sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="86" type="Information" x="1368.5" y="869" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Harley sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="87" type="Information" x="1367.5" y="934" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Gemma sits"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="91" name="Board" x="1729.5" y="1177" width="70" height="70">
+   <properties>
+    <property name="Message" value="A whiteboard. There is something written on it..."/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="92" x="1240.5" y="874" width="70" height="70">
+  <object id="92" type="Information" x="1240.5" y="874" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Bethan sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="93" x="1239.5" y="939" width="70" height="70">
+  <object id="93" type="Information" x="1239.5" y="939" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Edward sits"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="94" x="1234" y="1010" width="70" height="70">
+  <object id="94" type="Information" x="1234" y="1010" width="70" height="70">
+   <properties>
+    <property name="Message" value="This is where Harry sits"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="151" type="Information" x="1668.33" y="913.667" width="70" height="70">
+   <properties>
+    <property name="Message" value="The teacher made some notes. She thinks Jim was passing rob some notes..."/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="152" name="To Do List" type="Information" x="1306.33" y="118.333" width="70" height="70">
+   <properties>
+    <property name="Message" value="Todo: Organise books in alphabetical order before leaving."/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="154" name="Pile of books" type="Item" x="877" y="399" width="70" height="70">
+   <properties>
+    <property name="Item" value="Books"/>
+    <property name="Message" value="Its a pile of unsorted books"/>
+   </properties>
    <ellipse/>
   </object>
  </objectgroup>
@@ -253,7 +471,7 @@
   <object id="105" x="1697" y="543" width="30.5" height="29"/>
   <object id="106" x="449.5" y="542" width="31" height="32"/>
   <object id="107" x="738" y="544.5" width="32" height="31"/>
-  <object id="108" x="1255" y="844" width="19" height="18.5"/>
+  <object id="108" x="1251.67" y="840" width="26.3333" height="22.5"/>
   <object id="109" x="1550.5" y="870.5" width="18" height="196"/>
   <object id="110" x="1549.5" y="1140.5" width="18" height="192.5"/>
   <object id="111" x="1419.5" y="1139.5" width="19.5" height="193.5"/>
@@ -295,6 +513,7 @@
   <object id="148" x="1" y="502" width="309" height="10"/>
   <object id="149" x="0.5" y="513.5" width="14" height="349.5"/>
   <object id="150" x="-0.5" y="863.5" width="313" height="13"/>
+  <object id="153" x="898" y="416.667" width="28.6667" height="30.6667"/>
  </objectgroup>
  <objectgroup id="28" name="Spawn Layer">
   <object id="147" name="Player Spawn" x="96" y="672" width="35" height="35">
@@ -303,7 +522,7 @@
  </objectgroup>
  <layer id="24" name="Furniture" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJzt2c0OwUAQB/B1Km4+LsRrCG5eQvAYvAkHL8LdQ3CRSDyDj4vEwTS60p20Mex2o/x/yURnItPtWE2TKgWfOAVKTYPHZxhnikt0vKRYsZo+nlAcY7nEupjttbhQpTXOg8dnGDWKenS8ofo2MGv6eEb1SiyXOCR8r1NWqkvRK7u9rrwa0hxGFGPMAwAAAAAAAAAAAAAAfkS9YOb7ots8zbt9dp7e7YXz0DNZlJS6xc5rm6f5pM81ytsZv7eKzyPE12Gbp3m3j57HwMM8tDzsj6zx+8e374+s5WV/NKjWLL3ubYvfP1rsnLZ5Gld9XOP/l3/H50G/S99lLq1J+viQ8PzxXIdtLq1J+viS8PxhrMM2l9YkfXzA/jBhf5gSnj/6rnJp7Zv2B7dn67DNpTVJHxt3kDW24g==
+   eJzt2c1qwkAQB/DtKR83ay4tvoZob76EVB/Dvkl78OJj6L0PoRdB8BlsvQg9OCHZkh0SOnE/MPT/gyE7g0w26xoiUQpu8RUp9RYVxzy+Kc7leE2xYTU9XlCcKrnEZ+z3Wlx4pDl+RMUxjz5FVo63VN9FZk2P36neq+QSx5rPjVKlxhQvqdvr6qpXWocZxRzrAQAAAAAOrYT/YQAAAAAAAAB8yB7M/BC7zZu07bMP9G4vXw+9JstEqZ/KeW3zJrf0uZT50PN7q+p65Pg8bPMmbfvo9ZgGWA+tC/vDN37/uPf94VtX9scT1Z6Tv3vb4vePATunbd7EVR/X+O/lv+PrQd/LxGUurUn6hFDz/PE7D9tcWpP0CaXm+cOYh20urUn6hID9YcL+MNU8f0xc5dLaPe0P7sDmYZtLa5I+Nq7KC7eE
   </data>
  </layer>
  <layer id="25" name="Walls" width="68" height="42">
