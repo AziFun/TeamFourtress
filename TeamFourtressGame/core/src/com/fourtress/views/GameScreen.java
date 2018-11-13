@@ -61,11 +61,8 @@ public class GameScreen extends ScreenAdapter {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		System.out.println(w);
-		System.out.println(h);
-
 		cam = new OrthographicCamera(w/10, h/10);
-		                stage = new Stage(new ScreenViewport());
+    stage = new Stage(new ScreenViewport());
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
 		controller = new KeyboardController();
@@ -85,27 +82,24 @@ public class GameScreen extends ScreenAdapter {
 		//Gdx.input.setInputProcessor(stage);
 	}
 
-	
-    @Override
-    public void render(float delta) {
-         model.logicStep(delta);
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        cam.update();
-        mapRenderer.setView(cam);
-        mapRenderer.render();
-        debugRenderer.render(model.world, cam.combined);
-        sb.begin();
-        Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-        Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-        
-        
-        sb.draw(playerSprite, model.player.getPosition().x - 1,
-        model.player.getPosition().y - 1, 2, 2);
-        sb.end();
-    }
-
-	
+	@Override
+	public void render(float delta) {
+		model.logicStep(delta);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		cam.update();
+		mapRenderer.setView(cam);
+		mapRenderer.render();
+		debugRenderer.render(model.world, cam.combined);
+		sb.begin();
+		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
+		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
+		
+		
+		sb.draw(playerSprite, model.player.getPosition().x - 1,
+		model.player.getPosition().y - 1, 2, 2);
+		sb.end();
+	}
 
 	@Override
 	public void resize(int width, int height) {

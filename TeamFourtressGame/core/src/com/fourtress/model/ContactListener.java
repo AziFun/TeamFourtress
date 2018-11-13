@@ -1,5 +1,6 @@
 package com.fourtress.model;
 
+import com.fourtress.model.Sensor;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -28,7 +29,14 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 		if (fb.getBody().getType() == BodyType.DynamicBody) {
 			// apply small force opposite to angle of contact
 		}
-		
+
+		if (fa.getBody().getUserData() != null && fa.getBody().getUserData().getClass() == Sensor.class) {
+			System.out.println(((Sensor) fa.getBody().getUserData()).getMessage());
+		}
+		if (fb.getBody().getUserData() != null && fa.getBody().getUserData().getClass() == Sensor.class) {
+			System.out.println(((Sensor) fb.getBody().getUserData()).getMessage());
+		}
+
 		if (fa.getBody().getUserData() == "finish" || fb.getBody().getUserData() == "finish") {
 			parent.gameScreen.parent.changeScreen(ScreenType.FINISH);
 		}
