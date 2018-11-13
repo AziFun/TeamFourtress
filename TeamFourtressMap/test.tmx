@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="scorpio_internal_furniture.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2VGKwzAMRVFvodn/Ymd+CqlqyZJszQhyDwQKTVrwq23JHQMAAAAAAAAAAAAAAAAAAAAAAKDe6/e6ghdqvLPIPENe50Xy8N4r84JfJo/IGGeeebLoepX97TNn/KJz5H3dxzc7z8hmbmdfv4/vznzDp/vvPvLMJV7vfg4+RcdzlkkmF+aKLTKe8r5ZRpHvJROdNxd5H5nUkrWVfO8S92l7faavhO01vvORY6ft9dk6Dn7WvJFZ0OfXk7WunDuzeZQZW+aKjzVOs4xYv2plz1ysGuHU9z1RZH231rNsv4Nvnkxm/bvcW7zzhkxsu2fxWgba+pZZ557E6kU8z8qa2DPe5LKWHR+t5rI+b+dM5kmyPZ9VB8/mAhn4zfo/eZZ1zyzSv7NGnSFz0Hr2VSbZOhl5s0xWewm51NnpFcmlhqyhvc/M9iz4zfYVqx5YXYix9nGt1mWsz7J6d+9ZFXmc4Tn3WI01mZxz6pyWuumc1d4Q+RwyOWf3DIr+osbs/DD6ny+ZnKf9T6id845BHv9B6xErLnKN2enVdy7orDMUfvc9aBnJ98no72j1s7bmkFGt1X/unj2BjM6x8tDuZU+vFckE9cijF/Loh0x6IY9+qFX7IZNeyKMf8uiFOdILefRDHr2QRy+sWf2QRy/kAQAAAACo8AOEAyvu
+  </data>
+ </layer>
+</map>
