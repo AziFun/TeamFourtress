@@ -1,6 +1,10 @@
 package com.fourtress.model;
 
+import com.badlogic.gdx.maps.objects.CircleMapObject;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -115,10 +119,18 @@ public class BodyFactory {
         return polygon;
     }
 	
-	public void makeBodySensor(Body body) {
+	public void makeBodySensor(Body body, String message) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
-			body.setUserData("sensor");
+			body.setUserData(new Sensor(message));
 		}
 	}
+
+    public CircleShape getCircle(EllipseMapObject ellipseObject) {
+    	Ellipse ellipse = ellipseObject.getEllipse();
+        CircleShape circleShape = new CircleShape();
+        circleShape.setRadius(ellipse.width / (2 * ppt));
+        circleShape.setPosition(new Vector2((ellipse.x + ellipse.width * 0.5f) / ppt, (ellipse.y + ellipse.height * 0.5f) / ppt));
+        return circleShape;
+    }
 }
