@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -122,6 +123,8 @@ public class Level {
 				Shape hingeShape;
 				if (hinge instanceof EllipseMapObject && hinge.getName().equals(doorName)) {
 					hingeShape = BodyFactory.getInstance(model.world).getCircle((EllipseMapObject) hinge);
+				} else if (hinge instanceof RectangleMapObject && hinge.getName().equals(doorName)) {
+					hingeShape = BodyFactory.getInstance(model.world).getRectangle((RectangleMapObject) hinge);
 				} else {
 					continue;
 				}
@@ -133,14 +136,9 @@ public class Level {
 
 				hingeShape.dispose();
 
-				DistanceJointDef dDef = new DistanceJointDef();
-				dDef.bodyA = hingeBody;
-				dDef.bodyB = doorBody;
+				RevoluteJointDef dDef = new RevoluteJointDef();
+				dDef.initialize(doorBody, hingeBody, new Vector2(10, 10));
 				dDef.collideConnected = true;
-				dDef.localAnchorA.set(0, 0);
-				dDef.localAnchorB.set(0, 0);
-				// rDef.localAnchorB.set(1.5f,0);
-				// rDef.motorSpeed = 5f;
 				model.world.createJoint(dDef);
 				break;
 			}
