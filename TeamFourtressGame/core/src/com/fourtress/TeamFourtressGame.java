@@ -1,6 +1,7 @@
 package com.fourtress;
 
 import com.badlogic.gdx.Game;
+import com.fourtress.model.SoundManager;
 import com.fourtress.views.FinishScreen;
 import com.fourtress.views.GameScreen;
 import com.fourtress.views.LoadingScreen;
@@ -20,6 +21,20 @@ public class TeamFourtressGame extends Game {
 	public void create () {
 		preferences = new ApplicationPreferences();
 		menuScreen = new MenuScreen(this);
+		if(preferences.isMusicEnabled() == true) {
+			SoundManager.toggleMusic(true);
+			SoundManager.setMusicVolume(preferences.getMusicVolume());
+		} else {
+			SoundManager.toggleMusic(false);
+			SoundManager.setMusicVolume(preferences.getMusicVolume());
+		}		
+		if(preferences.isSoundEffectsEnabled() == true) {
+			SoundManager.toggleSFX(true);
+			SoundManager.setSFXVolume(preferences.getSoundVolume());
+		} else {
+			SoundManager.toggleSFX(false);
+			SoundManager.setSFXVolume(preferences.getSoundVolume());
+		}		
 		this.setScreen(menuScreen);
 	}
 

@@ -73,8 +73,7 @@ public class SoundManager {
 		sfxStatus = status;
 		
 		if(sfx != null) {			
-			if(sfxStatus == true) {
-				
+			if(sfxStatus == true) {			
 				sfx.setVolume(0, sfxVolume);
 				sfx.play();
 			} else {
