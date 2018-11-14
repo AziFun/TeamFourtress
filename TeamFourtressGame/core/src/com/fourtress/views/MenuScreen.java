@@ -37,7 +37,7 @@ public class MenuScreen implements Screen {
 		addListeners();
 		
 		// Music setup
-		SoundManager.playMusic("audio/music/CatMouse.mp3", 0.1f);
+		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -86,7 +86,6 @@ public class MenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		//SoundManager.dispose();
 		stage.dispose();
 	}
 	

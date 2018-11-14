@@ -58,7 +58,6 @@ public class GameScreen extends ScreenAdapter {
 	Dialog welcome;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private Level level;
-	private Music music;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
@@ -81,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
 		sb.setProjectionMatrix(cam.combined);
 		
 		// Music setup
-		SoundManager.playMusic("audio/music/musicbox.mp3", 0.1f);
+		SoundManager.playMusic("audio/music/musicbox.mp3");
 		
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
