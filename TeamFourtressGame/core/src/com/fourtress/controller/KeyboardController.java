@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 
 public class KeyboardController implements InputProcessor {
 	
+	private static final boolean KeyProcessed = false;
 	public boolean left;
 	public boolean right;
 	public boolean up;
@@ -21,28 +22,40 @@ public class KeyboardController implements InputProcessor {
 		switchAvailable = false;
 	}
 	
+	public void KeyPressedCheck() {
+			right = false;
+			left = false;
+			up = false;
+			down = false;
+	}
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		boolean keyProcessed = false;
 		switch (keycode) {
 		case Keys.LEFT:
+			KeyPressedCheck();
 			left = true;
 			keyProcessed = true;
 			break;
 		case Keys.RIGHT:
+			KeyPressedCheck();
 			right = true;
 			keyProcessed = true;
 			break;
 		case Keys.UP:
+			KeyPressedCheck();
 			up = true;
 			keyProcessed = true;
 			break;
 		case Keys.DOWN:
+			KeyPressedCheck();
 			down = true;
 			keyProcessed = true;
 		case Keys.ENTER:
 			enter = true;
 			keyProcessed = true;
+			break;
 		}
 		return keyProcessed;
 	}
@@ -52,24 +65,30 @@ public class KeyboardController implements InputProcessor {
 		boolean keyProcessed = false;
 		switch (keycode) {
 		case Keys.LEFT:
+			KeyPressedCheck();
 			left = false;
 			keyProcessed = true;
 			break;
 		case Keys.RIGHT:
+			KeyPressedCheck();
 			right = false;
 			keyProcessed = true;
 			break;
 		case Keys.UP:
+			KeyPressedCheck();
 			up = false;
 			keyProcessed = true;
 			break;
 		case Keys.DOWN:
+			KeyPressedCheck();
 			down = false;
 			keyProcessed = true;
 		case Keys.ENTER:
 			enter = false;
 			keyProcessed = true;
+			break;
 		}
+		
 		return keyProcessed;
 	}
 
