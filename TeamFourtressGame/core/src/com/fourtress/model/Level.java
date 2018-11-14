@@ -1,6 +1,8 @@
 package com.fourtress.model;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.utils.Array;
 
 public class Level {
@@ -29,6 +32,7 @@ public class Level {
 		createWalls();
 		createInteractionPoints();
 		setPlayerSpawn();
+		createDoors();
 	}
 
 	private void createWalls() {
@@ -91,6 +95,62 @@ public class Level {
 			shape.dispose();
 		}
 	}
+	
+	private void createDoors() {
+		List<Body> doors = new LinkedList<Body>();
+		List<Body> hinges = new LinkedList<Body>();
+        MapObjects doorObjects = tiledMap.getLayers().get("Door Layer").getObjects();
+        for (MapObject door : doorObjects) {
+            Shape doorShape;
+            if (door instanceof RectangleMapObject) {
+                doorShape = BodyFactory.getInstance(model.world).getRectangle((RectangleMapObject) door);
+            } else {
+                continue;
+            }
+
+            BodyDef bdoorBd = new BodyDef();
+            bdoorBd.type = BodyType.DynamicBody;
+            Body doorBody = model.world.createBody(bdoorBd);
+            doors.add(doorBody);
+            doorBody.createFixture(doorShape, 1);
+
+            doorShape.dispose();
+
+            String doorName = door.getName();
+
+            MapObjects hingeObjects = tiledMap.getLayers().get("Hinge Layer").getObjects();
+            for (MapObject hinge : hingeObjects) {
+                Shape hingeShape;
+                if (hinge instanceof EllipseMapObject && hinge.getName().equals(doorName)) {
+                    hingeShape = BodyFactory.getInstance(model.world).getCircle((EllipseMapObject) hinge);
+                } else {
+                    continue;
+                }
+
+                BodyDef hingeBd = new BodyDef();
+                hingeBd.type = BodyType.StaticBody;
+                Body hingeBody = model.world.createBody(hingeBd);
+                hinges.add(hingeBody);
+                hingeBody.createFixture(hingeShape, 1);
+
+                hingeShape.dispose();
+
+                RevoluteJointDef rDef = new RevoluteJointDef();
+                rDef.bodyA = hingeBody;
+                rDef.bodyB = doorBody;
+                rDef.collideConnected = true;
+                rDef.localAnchorA.set(0, 0);
+                rDef.localAnchorA.set(0, 0);
+                // rDef.localAnchorB.set(1.5f,0);
+                // rDef.motorSpeed = 5f;
+                rDef.enableLimit = false;
+                model.world.createJoint(rDef);
+
+            }
+
+        }
+        System.out.println("done");
+    }
 
 	private void setPlayerSpawn() {
 		MapObjects objects = tiledMap.getLayers().get("Spawn Layer").getObjects();

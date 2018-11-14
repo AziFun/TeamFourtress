@@ -29,10 +29,10 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 			// apply small force opposite to angle of contact
 		}
 
-		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof InteractableEntity) {
+		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof InteractableEntity && fb.getBody().getUserData().equals("Player")) {
 			parent.setPlayerAction((InteractableEntity) fa.getBody().getUserData());
 		}
-		if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof InteractableEntity) {
+		if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof InteractableEntity && fa.getBody().getUserData().equals("Player")) {
 			parent.setPlayerAction((InteractableEntity) fa.getBody().getUserData());
 		}
 

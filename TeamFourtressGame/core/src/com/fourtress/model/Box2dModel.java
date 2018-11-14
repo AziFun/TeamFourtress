@@ -78,6 +78,7 @@ public class Box2dModel {
 	public void setSpawn(Ellipse spawn) {
 		player = bodyFactory.makeCirclePolyBody(spawn.x / 32, spawn.y / 32, 1, Material.Rubber, BodyType.DynamicBody,
 				false);
+		player.setUserData("Player");
 	}
 
 	public void setPlayerAction(InteractableEntity iEntity) {
