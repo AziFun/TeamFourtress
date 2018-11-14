@@ -112,7 +112,7 @@ public class Level {
 			BodyDef bdoorBd = new BodyDef();
 			bdoorBd.type = BodyType.DynamicBody;
 			Body doorBody = model.world.createBody(bdoorBd);
-			doorBody.createFixture(doorShape, 1);
+			doorBody.createFixture(doorShape, 100);
 
 			doorShape.dispose();
 
@@ -136,9 +136,9 @@ public class Level {
 
 				hingeShape.dispose();
 
-				RevoluteJointDef dDef = new RevoluteJointDef();
-				dDef.initialize(doorBody, hingeBody, new Vector2(10, 10));
-				dDef.collideConnected = true;
+				DistanceJointDef dDef = new DistanceJointDef();
+				dDef.initialize(doorBody, hingeBody, doorBody.getWorldCenter(), new Vector2 (((EllipseMapObject) hinge).getEllipse().x/32, ((EllipseMapObject) hinge).getEllipse().y/32));
+				dDef.collideConnected = false;
 				model.world.createJoint(dDef);
 				break;
 			}
