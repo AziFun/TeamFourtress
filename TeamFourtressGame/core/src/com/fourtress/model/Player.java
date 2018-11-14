@@ -24,10 +24,5 @@ public class Player extends Sprite {
 		setX(150);
 		setY(150);
 
-	}	
-	
-	public void act() {
-		
-	}
-	
+	}		
 }	

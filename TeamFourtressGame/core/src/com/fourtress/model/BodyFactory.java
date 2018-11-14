@@ -122,14 +122,14 @@ public class BodyFactory {
 	public void makeBodySensor(Body body, String message) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
-			body.setUserData(new Sensor(message));
+			body.setUserData(new InteractableEntity(message));
 		}
 	}
 	
 	public void makeBodyItemSensor(Body body, String message, Item item) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
-			body.setUserData(new ItemSensor(message, item));
+			body.setUserData(new InteractableEntity(message, item));
 		}
 	}
 

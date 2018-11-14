@@ -29,19 +29,11 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 			// apply small force opposite to angle of contact
 		}
 
-		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Sensor) {
-			System.out.println(((Sensor) fa.getBody().getUserData()).getMessage());
-			if (fa.getBody().getUserData() instanceof ItemSensor) {
-				parent.inventory.addItem(((ItemSensor) fa.getBody().getUserData()).getItem());
-				System.out.println(parent.inventory.items.values());
-			}
+		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof InteractableEntity) {
+			parent.setPlayerAction((InteractableEntity) fa.getBody().getUserData());
 		}
-		if (fb.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Sensor) {
-			System.out.println(((Sensor) fb.getBody().getUserData()).getMessage());
-			if (fb.getBody().getUserData() instanceof ItemSensor) {
-				parent.inventory.addItem(((ItemSensor) fb.getBody().getUserData()).getItem());
-				System.out.println(parent.inventory.items.values());
-			}
+		if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof InteractableEntity) {
+			parent.setPlayerAction((InteractableEntity) fa.getBody().getUserData());
 		}
 
 		if (fa.getBody().getUserData() == "finish" || fb.getBody().getUserData() == "finish") {
@@ -51,7 +43,16 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 
 	@Override
 	public void endContact(Contact contact) {
-
+		
+		Fixture fa = contact.getFixtureA();
+		Fixture fb = contact.getFixtureB();
+		
+		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof InteractableEntity) {
+			parent.endPlayerAction();
+		}
+		if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof InteractableEntity) {
+			parent.endPlayerAction();
+		}
 	}
 
 	@Override

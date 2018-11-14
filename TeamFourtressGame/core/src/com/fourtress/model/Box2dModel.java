@@ -1,5 +1,7 @@
 package com.fourtress.model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import com.badlogic.gdx.Game;
@@ -30,10 +32,11 @@ public class Box2dModel {
 	private BodyFactory bodyFactory;
 	private Room room;
 	public KeyboardController controller;
-	private List<InteractableEntity> interactables;
 	private ContactListener listener;
 	private boolean doorToOpen = false;
 	private boolean grabKey = false;
+	private String actionText;
+	private Item actionItem;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
@@ -46,10 +49,9 @@ public class Box2dModel {
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
 	}
-	
-	
+
 	public void logicStep(float delta) {
-		
+
 		if (controller.left) {
 			player.setLinearVelocity(-5, player.getLinearVelocity().y);
 		}
@@ -65,12 +67,40 @@ public class Box2dModel {
 		if (!controller.left && !controller.right && !controller.up && !controller.down) {
 			player.setLinearVelocity(0, 0);
 		}
-		
+		if (controller.playerAction) {
+			controller.playerAction = false;
+			playerAction();
+		}
+
 		world.step(delta, 3, 3);
 	}
 
 	public void setSpawn(Ellipse spawn) {
-		player = bodyFactory.makeCirclePolyBody(spawn.x/32, spawn.y/32, 1, Material.Rubber, BodyType.DynamicBody, false);
+		player = bodyFactory.makeCirclePolyBody(spawn.x / 32, spawn.y / 32, 1, Material.Rubber, BodyType.DynamicBody,
+				false);
+	}
+
+	public void setPlayerAction(InteractableEntity iEntity) {
+		actionText = iEntity.getMessage();
+		if (iEntity.isContainer()) {
+			actionItem = iEntity.getItem();
+		} else {
+			actionItem = null;
+		}
+	}
+
+	public void playerAction() {
+		if (actionText != null) {
+			System.out.println(actionText);
+		}
+		if (actionItem != null) {
+			inventory.addItem(actionItem);
+		}
+	}
+
+	public void endPlayerAction() {
+		actionItem = null;
+		actionText = null;
 	}
 
 }
