@@ -4,8 +4,8 @@ public class StorageBoxLock extends StorageBox {
 	
 	private Item correctItem;
 
-	public StorageBoxLock(String message, Item contents, Item correctItem) {
-		super(message, contents);
+	public StorageBoxLock(String message, Item correctItem) {
+		super(message);
 		this.correctItem = correctItem;
 	}
 	

@@ -74,10 +74,19 @@ public class Level {
 			bd.type = BodyType.StaticBody;
 			Body body = model.world.createBody(bd);
 			body.createFixture(shape, 1);
-			if (object.getProperties().get("type") != null && object.getProperties().get("type").equals("Item")) {
-				BodyFactory.getInstance(model.world).makeBodyItemSensor(body, (String) object.getProperties().get("Message"), requiredItems.get(object.getProperties().get("Item")));
-			} else {
-				BodyFactory.getInstance(model.world).makeBodySensor(body, (String) object.getProperties().get("Message"));
+			if (object.getProperties().get("type") != null) {
+				if (object.getProperties().get("type").equals("Item")) {
+					BodyFactory.getInstance(model.world).makeBodyItemSensor(body,
+							(String) object.getProperties().get("Message"),
+							requiredItems.get(object.getProperties().get("Item")));
+				} else if (object.getProperties().get("type").equals("MultiLock")) {
+					BodyFactory.getInstance(model.world).makeBodyMultiLockSensor(body,
+							(String) object.getProperties().get("Message"),
+							requiredItems.get(object.getProperties().get("Required Item")));
+				} else {
+					BodyFactory.getInstance(model.world).makeBodySensor(body,
+							(String) object.getProperties().get("Message"));
+				}
 			}
 			shape.dispose();
 		}
