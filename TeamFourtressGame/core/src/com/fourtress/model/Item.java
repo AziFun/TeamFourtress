@@ -4,7 +4,7 @@ package com.fourtress.model;
  * An Item is held by an inventory slot and can be one of:
  * - key
  */
-public class Item {
+public abstract class Item {
 	
 	public String name;
 	public String type;

@@ -52,6 +52,9 @@ public class KeyboardController implements InputProcessor {
 			KeyPressedCheck();
 			down = true;
 			keyProcessed = true;
+		case Keys.ENTER:
+			enter = true;
+			keyProcessed = true;
 			break;
 		}
 		return keyProcessed;
@@ -79,6 +82,9 @@ public class KeyboardController implements InputProcessor {
 		case Keys.DOWN:
 			KeyPressedCheck();
 			down = false;
+			keyProcessed = true;
+		case Keys.ENTER:
+			enter = false;
 			keyProcessed = true;
 			break;
 		}

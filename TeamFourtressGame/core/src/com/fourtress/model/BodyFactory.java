@@ -125,6 +125,13 @@ public class BodyFactory {
 			body.setUserData(new Sensor(message));
 		}
 	}
+	
+	public void makeBodyItemSensor(Body body, String message, Item item) {
+		for (Fixture f : body.getFixtureList()) {
+			f.setSensor(true);
+			body.setUserData(new ItemSensor(message, item));
+		}
+	}
 
     public CircleShape getCircle(EllipseMapObject ellipseObject) {
     	Ellipse ellipse = ellipseObject.getEllipse();
