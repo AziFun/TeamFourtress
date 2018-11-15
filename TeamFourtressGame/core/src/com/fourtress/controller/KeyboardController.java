@@ -10,8 +10,9 @@ public class KeyboardController implements InputProcessor {
 	public boolean right;
 	public boolean up;
 	public boolean down;
+	public boolean shift;
 	public boolean switchAvailable = false;
-	public boolean enter;
+	public boolean playerAction;
 	
 
 	public void enableSwitch() {
@@ -34,26 +35,27 @@ public class KeyboardController implements InputProcessor {
 		boolean keyProcessed = false;
 		switch (keycode) {
 		case Keys.LEFT:
-			KeyPressedCheck();
 			left = true;
 			keyProcessed = true;
 			break;
 		case Keys.RIGHT:
-			KeyPressedCheck();
 			right = true;
 			keyProcessed = true;
 			break;
 		case Keys.UP:
-			KeyPressedCheck();
 			up = true;
 			keyProcessed = true;
 			break;
 		case Keys.DOWN:
-			KeyPressedCheck();
 			down = true;
 			keyProcessed = true;
-		case Keys.ENTER:
-			enter = true;
+			break;
+		case Keys.SHIFT_RIGHT:
+			playerAction = true;
+			keyProcessed = true;
+			break;
+		case Keys.SHIFT_LEFT:
+			shift = true;
 			keyProcessed = true;
 			break;
 		}
@@ -65,26 +67,27 @@ public class KeyboardController implements InputProcessor {
 		boolean keyProcessed = false;
 		switch (keycode) {
 		case Keys.LEFT:
-			KeyPressedCheck();
 			left = false;
 			keyProcessed = true;
 			break;
 		case Keys.RIGHT:
-			KeyPressedCheck();
 			right = false;
 			keyProcessed = true;
 			break;
 		case Keys.UP:
-			KeyPressedCheck();
 			up = false;
 			keyProcessed = true;
 			break;
 		case Keys.DOWN:
-			KeyPressedCheck();
 			down = false;
 			keyProcessed = true;
-		case Keys.ENTER:
-			enter = false;
+			break;
+		case Keys.SHIFT_RIGHT:
+			playerAction = false;
+			keyProcessed = true;
+			break;
+		case Keys.SHIFT_LEFT:
+			shift = false;
 			keyProcessed = true;
 			break;
 		}

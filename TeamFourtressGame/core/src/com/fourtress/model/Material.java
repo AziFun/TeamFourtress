@@ -1,5 +1,5 @@
 package com.fourtress.model;
 
 public enum Material {
-	Steel, Wood, Rubber, Stone
+	Steel, Wood, Rubber, Stone, Player
 }
