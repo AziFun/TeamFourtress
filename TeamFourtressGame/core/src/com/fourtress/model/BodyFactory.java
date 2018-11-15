@@ -58,6 +58,10 @@ public class BodyFactory {
 			fixtureDef.density = 1f;
 			fixtureDef.friction = 0.9f;
 			fixtureDef.restitution = 0.01f;
+		case Player:
+			fixtureDef.density = 0.5f;
+			fixtureDef.friction = 0.25f;
+			fixtureDef.restitution = 0.01f;
 		default:
 			fixtureDef.density = 7f;
 			fixtureDef.friction = 0.5f;

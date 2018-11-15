@@ -54,33 +54,65 @@ public class Box2dModel {
 
 		if (controller.left) {
 			if (controller.shift) {
-				player.setLinearVelocity(-10, player.getLinearVelocity().y);
+				if (player.getLinearVelocity().x >= -20) {
+					player.applyLinearImpulse(new Vector2(-10, 0), player.getWorldCenter(), true);
+				}
 			} else {
-				player.setLinearVelocity(-5, player.getLinearVelocity().y);
+				if (player.getLinearVelocity().x >= -10) {
+					player.applyLinearImpulse(new Vector2(-5, 0), player.getWorldCenter(), true);
+				}
 			}
 		}
 		if (controller.right) {
 			if (controller.shift) {
-				player.setLinearVelocity(10, player.getLinearVelocity().y);
+				// player.setLinearVelocity(10, player.getLinearVelocity().y);
+				if (player.getLinearVelocity().x <= 20) {
+					player.applyLinearImpulse(new Vector2(10, 0), player.getWorldCenter(), true);
+				}
 			} else {
-				player.setLinearVelocity(5, player.getLinearVelocity().y);
+				// player.setLinearVelocity(5, player.getLinearVelocity().y);
+				if (player.getLinearVelocity().x <= 10) {
+					player.applyLinearImpulse(new Vector2(5, 0), player.getWorldCenter(), true);
+				}
 			}
-			
+
 		}
 		if (controller.up) {
 			if (controller.shift) {
-				player.setLinearVelocity(player.getLinearVelocity().x, 10);
+				if (player.getLinearVelocity().y <= 20) {
+					player.applyLinearImpulse(new Vector2(0, 10), player.getWorldCenter(), true);
+				}
 			} else {
-				player.setLinearVelocity(player.getLinearVelocity().x, 5);
+				if (player.getLinearVelocity().y <= 10) {
+					player.applyLinearImpulse(new Vector2(0, 5), player.getWorldCenter(), true);
+				}
 			}
 		}
 		if (controller.down) {
 			if (controller.shift) {
-				player.setLinearVelocity(player.getLinearVelocity().x, -10);
+				if (player.getLinearVelocity().y >= -20) {
+					player.applyLinearImpulse(new Vector2(0, -10), player.getWorldCenter(), true);
+				}
 			} else {
-				player.setLinearVelocity(player.getLinearVelocity().x, -5);
+				if (player.getLinearVelocity().y >= -10) {
+					player.applyLinearImpulse(new Vector2(0, -5), player.getWorldCenter(), true);
+				}
 			}
-			
+
+		}
+		if (!controller.shift) {
+			if (player.getLinearVelocity().y > 10) {
+				player.applyForceToCenter(0, -50, true);
+			}
+			if (player.getLinearVelocity().y < -10) {
+				player.applyForceToCenter(0, +50, true);
+			}
+			if (player.getLinearVelocity().x > 10) {
+				player.applyForceToCenter(-50, 0, true);
+			}
+			if (player.getLinearVelocity().x < -10) {
+				player.applyForceToCenter(+50, 0, true);
+			}
 		}
 		if (!controller.left && !controller.right && !controller.up && !controller.down) {
 			player.setLinearVelocity(0, 0);
@@ -94,7 +126,7 @@ public class Box2dModel {
 	}
 
 	public void setSpawn(Ellipse spawn) {
-		player = bodyFactory.makeCirclePolyBody(spawn.x / 32, spawn.y / 32, 1, Material.Rubber, BodyType.DynamicBody,
+		player = bodyFactory.makeCirclePolyBody(spawn.x / 32, spawn.y / 32, 1, Material.Player, BodyType.DynamicBody,
 				false);
 		player.setUserData("Player");
 	}
