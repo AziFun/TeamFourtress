@@ -108,16 +108,6 @@ public class GameScreen extends ScreenAdapter {
 		model.player.getPosition().y - 1, 2, 2);
 		sb.end();
         stage.draw();
-        shapeRenderer.setAutoShapeType(true);
-        shapeRenderer.begin();
-		for (Body bod: model.doors) {
-			int vertCount = bod.getFixtureList().get(0).getShape();
-			float[] vert = new float[vertCount];
-			for (int i = 0; i<; i++) {
-				
-			}
-		}
-		shapeRenderer.end();
 	}
 
 	@Override

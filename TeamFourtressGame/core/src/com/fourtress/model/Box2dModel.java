@@ -53,7 +53,7 @@ public class Box2dModel {
 	public String inputText;
 	public List<StorageBoxLock> multiLocks;
 	public Joint jointToDestroy;
-	public List<Body> doors;
+	private Body finishLine;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
@@ -69,7 +69,6 @@ public class Box2dModel {
 		lockJoints = new HashMap<String, Joint>();
 		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 		actionDialog = new Dialog("", skin);
-		doors = new LinkedList<Body>();
 
 	}
 
@@ -160,6 +159,13 @@ public class Box2dModel {
 		player = bodyFactory.makeCirclePolyBody(spawn.x / BodyFactory.ppt, spawn.y / BodyFactory.ppt, 1,
 				Material.Player, BodyType.DynamicBody, false);
 		player.setUserData("Player");
+	}
+	
+	public void setFinish(Ellipse finish) {
+		finishLine = bodyFactory.makeCirclePolyBody((finish.x + finish.width/2)/ BodyFactory.ppt, (finish.y + finish.height/2)/ BodyFactory.ppt, finish.width / BodyFactory.ppt,
+				Material.Rubber, BodyType.StaticBody, false);
+		bodyFactory.makeBodySensor(finishLine,"finish");
+		finishLine.setUserData("finish");
 	}
 
 	public void setPlayerAction(InteractableEntity iEntity) {
