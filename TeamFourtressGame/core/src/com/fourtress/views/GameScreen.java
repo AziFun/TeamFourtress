@@ -6,6 +6,7 @@ import org.omg.CORBA.DomainManagerOperations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -44,6 +45,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
+import com.fourtress.model.SoundManager;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -67,18 +69,27 @@ public class GameScreen extends ScreenAdapter {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
+		
+		// Camera setup
 		cam = new OrthographicCamera(w/10, h/10);
-		shapeRenderer = new ShapeRenderer();
 		stage = new Stage(new ScreenViewport());
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
+		
+		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(cam, controller, this);
 		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		
+		// Sprite setup
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
         skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 		
+		// Music setup
+		SoundManager.playMusic("audio/music/musicbox.mp3");
+		
+		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
@@ -101,9 +112,7 @@ public class GameScreen extends ScreenAdapter {
 		debugRenderer.render(model.world, cam.combined);
 		sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-		
-		
+		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));		
 		sb.draw(playerSprite, model.player.getPosition().x - 1,
 		model.player.getPosition().y - 1, 2, 2);
 		sb.end();
@@ -136,7 +145,7 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		SoundManager.dispose();
 
 	}
 	

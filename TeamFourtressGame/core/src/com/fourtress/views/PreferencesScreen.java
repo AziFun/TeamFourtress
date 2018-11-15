@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.SoundManager;
 
 public class PreferencesScreen implements Screen {
 
@@ -121,6 +122,7 @@ public class PreferencesScreen implements Screen {
 			@Override
 			public boolean handle(Event event) {
 				parent.getPreferences().setMusicVolume(musicSlider.getValue());
+				SoundManager.setMusicVolume(musicSlider.getValue());
 				return false;
 			}
 		});
@@ -130,6 +132,11 @@ public class PreferencesScreen implements Screen {
 			@Override
 			public boolean handle(Event event) {
 				parent.getPreferences().setMusicEnabled(musicCheckBox.isChecked());
+				if(musicCheckBox.isChecked()) {
+					SoundManager.toggleMusic(true);
+				} else {
+					SoundManager.toggleMusic(false);
+				}
 				return false;
 			}
 		});
@@ -139,6 +146,7 @@ public class PreferencesScreen implements Screen {
 			@Override
 			public boolean handle(Event event) {
 				parent.getPreferences().setSoundVolume(effectsSlider.getValue());
+				SoundManager.setSFXVolume(effectsSlider.getValue());
 				return false;
 			}
 		});
@@ -148,6 +156,11 @@ public class PreferencesScreen implements Screen {
 			@Override
 			public boolean handle(Event event) {
 				parent.getPreferences().setSoundEffectsEnabled(effectsCheckBox.isChecked());
+				if(effectsCheckBox.isChecked()) {
+					SoundManager.toggleSFX(true);
+				} else {
+					SoundManager.toggleSFX(false);
+				}
 				return false;
 			}
 		});

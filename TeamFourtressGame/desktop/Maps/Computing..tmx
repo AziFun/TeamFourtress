@@ -99,16 +99,7 @@
   <object id="327" name="Book2" x="810.667" y="299.833" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="328" name="Book3" x="937.333" y="293.167" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="331" name="Book5" x="1545.33" y="287.833" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="332" name="Book6" x="1398.67" y="91.8333" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="333" name="Book6" x="1582.67" y="61.1667" width="72" height="72.3333">
+  <object id="328" name="Book3" type="Item" x="937.333" y="293.167" width="72" height="72.3333">
    <ellipse/>
   </object>
   <object id="334" name="Book7" x="454.667" y="166.5" width="72" height="72.3333">
@@ -117,136 +108,31 @@
   <object id="335" name="Book8" x="741.333" y="49.1667" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="336" x="921.333" y="25.1667" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="337" x="982.667" y="26.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="339" x="1489.33" y="1002.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="340" x="1560" y="998.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="341" name="Computer 2" x="1633.33" y="999.833" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="342" x="1704" y="998.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="343" x="1780" y="995.833" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="350" x="1496" y="1121.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="351" x="1566.67" y="1117.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="352" x="1640" y="1119.17" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="353" x="1710.67" y="1117.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="354" x="1786.67" y="1115.17" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="355" x="995.998" y="1128.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="356" x="1066.67" y="1124.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="357" x="1140" y="1125.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="358" x="1210.67" y="1124.5" width="72" height="72.3333">
+  <object id="341" name="Computer 2" x="1621.33" y="989.833" width="72" height="72.3333">
    <ellipse/>
   </object>
   <object id="359" name="Computer 1" x="1286.67" y="1121.83" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="360" x="991.998" y="996.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
   <object id="361" name="Computer 4" x="1062.67" y="992.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="362" x="1136" y="993.834" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="363" x="1206.67" y="992.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="364" x="1282.67" y="989.834" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="365" x="995.998" y="1263.17" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="366" x="1066.67" y="1259.17" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="367" x="1140" y="1260.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="368" x="1210.67" y="1259.17" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="369" x="1286.67" y="1256.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="370" x="1496" y="1257.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="371" x="1566.67" y="1253.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="372" x="1640" y="1255.17" width="72" height="72.3333">
    <ellipse/>
   </object>
   <object id="373" name="Computer 3" x="1710.67" y="1253.83" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="374" x="1786.67" y="1251.17" width="72" height="72.3333">
-   <ellipse/>
-  </object>
   <object id="375" name="Chest" x="797.333" y="1249.17" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="376" name="Server3" x="458.667" y="1135.83" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="377" name="Server2" x="538.667" y="1014.5" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="378" name="Server1" x="380" y="890.5" width="72" height="72.3333">
+  <object id="377" name="Server" x="538.667" y="1014.5" width="72" height="72.3333">
    <ellipse/>
   </object>
   <object id="379" name="Printer" x="1214.67" y="869.167" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="380" x="1692" y="889.167" width="72" height="72.3333">
-   <ellipse/>
-  </object>
   <object id="381" x="1101.33" y="889.167" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="382" x="1066.67" y="29.1667" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="383" x="1162.67" y="27.8334" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="384" x="1280" y="25.1667" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="385" name="Bin1" x="1166.67" y="241.167" width="72" height="72.3333">
-   <ellipse/>
-  </object>
-  <object id="386" name="Bin2" x="1176" y="363.833" width="72" height="72.3333">
+  <object id="385" name="Bin" x="1166.67" y="241.167" width="72" height="72.3333">
    <ellipse/>
   </object>
  </objectgroup>
