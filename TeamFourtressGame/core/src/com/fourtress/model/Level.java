@@ -88,14 +88,18 @@ public class Level {
 							(String) object.getProperties().get("Message"),
 							requiredItems.get(object.getProperties().get("Item")));
 				} else if (object.getProperties().get("type").equals("MultiLock")) {
-					BodyFactory.getInstance(model.world).makeBodyMultiLockSensor(body,
+					model.multiLocks.add(BodyFactory.getInstance(model.world).makeBodyMultiLockSensor(body,
 							(String) object.getProperties().get("Message"),
-							requiredItems.get(object.getProperties().get("Required Item")));
+							requiredItems.get((String) object.getProperties().get("Required Item")),
+							(String) object.getProperties().get("LockName")));
 				} else if (object.getProperties().get("type").equals("Lock")) {
 					BodyFactory.getInstance(model.world).makeBodyLockSensor(body,
 							(String) object.getProperties().get("Message"),
-							(Key) requiredItems.get(object.getProperties().get("KeyID")),
-							object.getName());
+							(Key) requiredItems.get(object.getProperties().get("KeyID")), object.getName());
+				} else if (object.getProperties().get("type").equals("ComboLock")) {
+					BodyFactory.getInstance(model.world).makeBodyComboLockSensor(body,
+							(String) object.getProperties().get("Message"),
+							(String) object.getProperties().get("Combination"), object.getName());
 				} else {
 					BodyFactory.getInstance(model.world).makeBodySensor(body,
 							(String) object.getProperties().get("Message"));
@@ -141,29 +145,30 @@ public class Level {
 				hingeShape.dispose();
 
 				RevoluteJointDef rDef = new RevoluteJointDef();
-				rDef.initialize(doorBody, hingeBody, new Vector2(((EllipseMapObject) hinge).getEllipse().x / BodyFactory.ppt,
-						((EllipseMapObject) hinge).getEllipse().y / BodyFactory.ppt));
+				rDef.initialize(doorBody, hingeBody,
+						new Vector2(((EllipseMapObject) hinge).getEllipse().x / BodyFactory.ppt,
+								((EllipseMapObject) hinge).getEllipse().y / BodyFactory.ppt));
 				rDef.collideConnected = false;
 				model.world.createJoint(rDef);
 				break;
 			}
-			
+
 			MapObjects lockObjects = tiledMap.getLayers().get("Lock Layer").getObjects();
-			for (MapObject lock: lockObjects) {
+			for (MapObject lock : lockObjects) {
 				Shape lockShape;
 				if (lock instanceof EllipseMapObject && lock.getName().equals(doorName)) {
 					lockShape = BodyFactory.getInstance(model.world).getCircle((EllipseMapObject) lock);
 				} else {
 					continue;
 				}
-				
+
 				BodyDef lockBd = new BodyDef();
 				lockBd.type = BodyType.StaticBody;
 				Body lockBody = model.world.createBody(lockBd);
 				lockBody.createFixture(lockShape, 1);
-				
+
 				lockShape.dispose();
-				
+
 				DistanceJointDef dDef = new DistanceJointDef();
 				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;

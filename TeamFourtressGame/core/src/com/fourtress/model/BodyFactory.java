@@ -137,17 +137,25 @@ public class BodyFactory {
 		body.setUserData(new InteractableEntity(message, item));
 	}
 
-	public void makeBodyMultiLockSensor(Body body, String message, Item correctItem) {
+	public StorageBoxLock makeBodyMultiLockSensor(Body body, String message, Item correctItem, String lockName) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
 		}
-		body.setUserData(new StorageBoxLock(message, correctItem));
+		StorageBoxLock sbl =  new StorageBoxLock(message, correctItem, lockName);
+		body.setUserData(sbl);
+		return sbl;
 	}
 	public void makeBodyLockSensor(Body body, String message, Key key, String lockName) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
 		}
 		body.setUserData(new Lock(message, key, lockName));
+	}
+	public void makeBodyComboLockSensor(Body body, String message, String combination, String lockName) {
+		for (Fixture f : body.getFixtureList()) {
+			f.setSensor(true);
+		}
+		body.setUserData(new CombinationLock(message, combination, lockName));
 	}
 
 	public CircleShape getCircle(EllipseMapObject ellipseObject) {

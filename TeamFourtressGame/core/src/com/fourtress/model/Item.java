@@ -30,7 +30,7 @@ public abstract class Item {
 	}
 	
 	public String toString() {
-		return("Name of Key: " + name + " | Type of Item: " + type + " | Image Name is: " + imageName);
+		return name;
 	}
 
 }

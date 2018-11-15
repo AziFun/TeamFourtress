@@ -3,7 +3,7 @@ package com.fourtress.model;
 public class Lock extends InteractableEntity{
 
 	private Key correctKey;
-	private String name;
+	public String name;
 	
 	public Lock(String message, Key key, String name) {
 		super(message);

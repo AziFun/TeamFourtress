@@ -2,11 +2,14 @@ package com.fourtress.model;
 
 public class StorageBoxLock extends StorageBox {
 	
-	private Item correctItem;
+	public Item correctItem;
+	private String lockName;
 
-	public StorageBoxLock(String message, Item correctItem) {
+	public StorageBoxLock(String message, Item correctItem, String lockName) {
 		super(message);
+		this.hasSlot = true;
 		this.correctItem = correctItem;
+		this.lockName = lockName;
 	}
 	
 	public boolean checkLock() {
@@ -15,5 +18,9 @@ public class StorageBoxLock extends StorageBox {
 		} else {
 			return false;
 		}
+	}
+	
+	public String getLockName() {
+		return lockName;
 	}
 }
