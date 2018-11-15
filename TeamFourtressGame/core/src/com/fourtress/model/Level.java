@@ -122,6 +122,7 @@ public class Level {
 			BodyDef bdoorBd = new BodyDef();
 			bdoorBd.type = BodyType.DynamicBody;
 			Body doorBody = model.world.createBody(bdoorBd);
+			model.doors.add(doorBody);
 			doorBody.createFixture(doorShape, 10);
 
 			doorShape.dispose();

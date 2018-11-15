@@ -53,6 +53,7 @@ public class Box2dModel {
 	public String inputText;
 	public List<StorageBoxLock> multiLocks;
 	public Joint jointToDestroy;
+	public List<Body> doors;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
@@ -68,6 +69,7 @@ public class Box2dModel {
 		lockJoints = new HashMap<String, Joint>();
 		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 		actionDialog = new Dialog("", skin);
+		doors = new LinkedList<Body>();
 
 	}
 
