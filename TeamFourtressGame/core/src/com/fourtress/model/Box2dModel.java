@@ -53,16 +53,34 @@ public class Box2dModel {
 	public void logicStep(float delta) {
 
 		if (controller.left) {
-			player.setLinearVelocity(-5, player.getLinearVelocity().y);
+			if (controller.shift) {
+				player.setLinearVelocity(-10, player.getLinearVelocity().y);
+			} else {
+				player.setLinearVelocity(-5, player.getLinearVelocity().y);
+			}
 		}
 		if (controller.right) {
-			player.setLinearVelocity(5, player.getLinearVelocity().y);
+			if (controller.shift) {
+				player.setLinearVelocity(10, player.getLinearVelocity().y);
+			} else {
+				player.setLinearVelocity(5, player.getLinearVelocity().y);
+			}
+			
 		}
 		if (controller.up) {
-			player.setLinearVelocity(player.getLinearVelocity().x, 5);
+			if (controller.shift) {
+				player.setLinearVelocity(player.getLinearVelocity().x, 10);
+			} else {
+				player.setLinearVelocity(player.getLinearVelocity().x, 5);
+			}
 		}
 		if (controller.down) {
-			player.setLinearVelocity(player.getLinearVelocity().x, -5);
+			if (controller.shift) {
+				player.setLinearVelocity(player.getLinearVelocity().x, -10);
+			} else {
+				player.setLinearVelocity(player.getLinearVelocity().x, -5);
+			}
+			
 		}
 		if (!controller.left && !controller.right && !controller.up && !controller.down) {
 			player.setLinearVelocity(0, 0);
