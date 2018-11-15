@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.SoundManager;
 
 
 public class FinishScreen implements Screen {
@@ -24,6 +25,9 @@ public class FinishScreen implements Screen {
 		stage = new Stage(new ScreenViewport());
 		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
 		label = new Label("You Escaped!", skin);
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
