@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Circle;
@@ -20,6 +21,9 @@ import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.views.GameScreen;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -43,6 +47,8 @@ public class Box2dModel {
 	private Item actionItem;
 	private HashMap<String, Joint> lockJoints;
 	private Lock actionUnlock;
+	private Dialog actionDialog;
+	private Skin skin;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
@@ -55,6 +61,9 @@ public class Box2dModel {
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
 		lockJoints = new HashMap<String, Joint>();
+        skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
+		actionDialog = new Dialog("",skin);
+
 	}
 
 	public void logicStep(float delta) {
@@ -163,6 +172,11 @@ public class Box2dModel {
 			}
 		}
 		if (actionText != null) {
+			Stage stage = gameScreen.getStage();
+			actionDialog.text(actionText);
+			actionDialog.setVisible(true);
+
+	        actionDialog.show(stage);
 			System.out.println(actionText);
 		}
 		if (actionItem != null) {
@@ -171,8 +185,12 @@ public class Box2dModel {
 	}
 
 	public void endPlayerAction() {
+		actionDialog.setVisible(false);
+		actionDialog.getContentTable().clear();
 		actionItem = null;
 		actionText = null;
+		com.fourtress.controller.MyTextInputListener listener = new com.fourtress.controller.MyTextInputListener();
+		Gdx.input.getTextInput(listener, "Please Enter Combo Code", "", "Combo Code");
 	}
 
 }

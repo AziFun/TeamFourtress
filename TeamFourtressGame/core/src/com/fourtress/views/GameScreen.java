@@ -62,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		cam = new OrthographicCamera(w/10, h/10);
-    stage = new Stage(new ScreenViewport());
+		stage = new Stage(new ScreenViewport());
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
 		controller = new KeyboardController();
@@ -70,6 +70,7 @@ public class GameScreen extends ScreenAdapter {
 		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
+        skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 		
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
@@ -99,6 +100,7 @@ public class GameScreen extends ScreenAdapter {
 		sb.draw(playerSprite, model.player.getPosition().x - 1,
 		model.player.getPosition().y - 1, 2, 2);
 		sb.end();
+        stage.draw();
 	}
 
 	@Override
@@ -129,6 +131,14 @@ public class GameScreen extends ScreenAdapter {
 	public void dispose() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public Stage getStage() {
+		return stage;
+	}
+	
+	public Skin getSkin() {
+		return skin;
 	}
 
 }
