@@ -57,6 +57,7 @@ public class GameScreen extends ScreenAdapter {
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private Level level;
 
+	
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
@@ -96,11 +97,12 @@ public class GameScreen extends ScreenAdapter {
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
 		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
 		
-		
 		sb.draw(playerSprite, model.player.getPosition().x - 1,
 		model.player.getPosition().y - 1, 2, 2);
 		sb.end();
         stage.draw();
+        playerSprite.dispose();
+        keySprite.dispose();
 	}
 
 	@Override
