@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
@@ -90,6 +91,11 @@ public class Level {
 					BodyFactory.getInstance(model.world).makeBodyMultiLockSensor(body,
 							(String) object.getProperties().get("Message"),
 							requiredItems.get(object.getProperties().get("Required Item")));
+				} else if (object.getProperties().get("type").equals("Lock")) {
+					BodyFactory.getInstance(model.world).makeBodyLockSensor(body,
+							(String) object.getProperties().get("Message"),
+							(Key) requiredItems.get(object.getProperties().get("KeyID")),
+							object.getName());
 				} else {
 					BodyFactory.getInstance(model.world).makeBodySensor(body,
 							(String) object.getProperties().get("Message"));
@@ -123,8 +129,6 @@ public class Level {
 				Shape hingeShape;
 				if (hinge instanceof EllipseMapObject && hinge.getName().equals(doorName)) {
 					hingeShape = BodyFactory.getInstance(model.world).getCircle((EllipseMapObject) hinge);
-				} else if (hinge instanceof RectangleMapObject && hinge.getName().equals(doorName)) {
-					hingeShape = BodyFactory.getInstance(model.world).getRectangle((RectangleMapObject) hinge);
 				} else {
 					continue;
 				}
@@ -136,14 +140,36 @@ public class Level {
 
 				hingeShape.dispose();
 
-				RevoluteJointDef dDef = new RevoluteJointDef();
-				dDef.initialize(doorBody, hingeBody, new Vector2(((EllipseMapObject) hinge).getEllipse().x / 32,
-						((EllipseMapObject) hinge).getEllipse().y / 32));
-				dDef.collideConnected = false;
-				model.world.createJoint(dDef);
+				RevoluteJointDef rDef = new RevoluteJointDef();
+				rDef.initialize(doorBody, hingeBody, new Vector2(((EllipseMapObject) hinge).getEllipse().x / BodyFactory.ppt,
+						((EllipseMapObject) hinge).getEllipse().y / BodyFactory.ppt));
+				rDef.collideConnected = false;
+				model.world.createJoint(rDef);
 				break;
 			}
-
+			
+			MapObjects lockObjects = tiledMap.getLayers().get("Lock Layer").getObjects();
+			for (MapObject lock: lockObjects) {
+				Shape lockShape;
+				if (lock instanceof EllipseMapObject && lock.getName().equals(doorName)) {
+					lockShape = BodyFactory.getInstance(model.world).getCircle((EllipseMapObject) lock);
+				} else {
+					continue;
+				}
+				
+				BodyDef lockBd = new BodyDef();
+				lockBd.type = BodyType.StaticBody;
+				Body lockBody = model.world.createBody(lockBd);
+				lockBody.createFixture(lockShape, 1);
+				
+				lockShape.dispose();
+				
+				DistanceJointDef dDef = new DistanceJointDef();
+				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
+				dDef.collideConnected = false;
+				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				break;
+			}
 		}
 	}
 

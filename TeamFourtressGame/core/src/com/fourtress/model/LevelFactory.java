@@ -34,7 +34,6 @@ public class LevelFactory {
 	
 	private HashMap<String, Item> getLevel1Items() {
 		HashMap<String, Item> items = new HashMap<String, Item>();
-		items.put("Office Key", new Key("Office Key", "key", null, "blue"));
 		LinkedList<Book> books = new LinkedList<Book>();
 		books.add(new Book("A", "Book", null));
 		books.add(new Book("B", "Book", null));
@@ -46,6 +45,9 @@ public class LevelFactory {
 		ItemPile<Book> pileOfBooks = new ItemPile<Book>("Pile of books", "Pile", null);
 		pileOfBooks.setContents(books);
 		items.put("Books",  pileOfBooks);
+		items.put("LibraryKey", new Key("LibraryKey", "Key", null, "red"));
+		items.put("OfficeKey", new Key("OfficeKey", "Key", null, "blue"));
+		items.put("EndKey", new Key("EndKey", "Key", null, "green"));
 		return items;
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="31" nextobjectid="178">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="186">
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
  </tileset>
@@ -21,15 +21,15 @@
  <tileset firstgid="2817" name="rpg_maker_vx_rtp_tileset_by_telles0808" tilewidth="32" tileheight="32" tilecount="2016" columns="32">
   <image source="images/rpg_maker_vx_rtp_tileset_by_telles0808.png" width="1024" height="2016"/>
  </tileset>
- <layer id="23" name="Floor" width="68" height="42" visible="0">
+ <layer id="23" name="Floor" width="68" height="42">
   <data encoding="base64" compression="zlib">
    eJzt17sJgDAUQNGIu9g7gq7rEvZZShsLEeKHxB/nwe0CIYfXJARzZZqqXEO9LfcdPHjw+KdH5GE/TnhEHvaDx65H5GE/ePDgkc0jPuzRhjAu9Ym6+eyX6xO163jw4MGDBw8ePHjweI3H0Sn5f7mj3PP0e3jwuPpOHvaDBw8ePHi8Ix48ePAo7TEByycQSw==
   </data>
  </layer>
- <objectgroup id="27" name="Interaction Layer" visible="0">
+ <objectgroup id="27" name="Interaction Layer">
   <object id="15" name="Plant" type="Item" x="1230" y="798" width="70" height="70">
    <properties>
-    <property name="Item" value="Office Key"/>
+    <property name="Item" value="OfficeKey"/>
     <property name="Message" value="You found a key"/>
    </properties>
    <ellipse/>
@@ -450,6 +450,27 @@
    </properties>
    <ellipse/>
   </object>
+  <object id="183" name="Library" type="Lock" x="575" y="490.333" width="70" height="70">
+   <properties>
+    <property name="KeyID" value="LibraryKey"/>
+    <property name="Message" value="You need a key for this door"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="184" name="Office" type="Lock" x="1343" y="484.333" width="70" height="70">
+   <properties>
+    <property name="KeyID" value="OfficeKey"/>
+    <property name="Message" value="You need a key for this door"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="185" name="End" type="Lock" x="1797" y="649.667" width="70" height="70">
+   <properties>
+    <property name="KeyID" value="EndKey"/>
+    <property name="Message" value="You need a key for this door"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup id="26" name="Object Layer">
   <object id="2" x="320" y="23" width="1543" height="10"/>
@@ -521,7 +542,7 @@
  </objectgroup>
  <objectgroup id="29" name="Door Layer">
   <object id="155" name="Library" x="549.333" y="504" width="117.334" height="10.6667"/>
-  <object id="156" name="Office" x="1328" y="507" width="105.334" height="9.33333"/>
+  <object id="156" name="Office" x="1316" y="504" width="117.334" height="9.33333"/>
   <object id="157" name="Theatre 1" x="1028" y="861.333" width="94.6667" height="10.6667"/>
   <object id="158" name="Theatre 2" x="1128" y="860.667" width="82.6666" height="10.6666"/>
   <object id="163" name="End 1" x="1852" y="520" width="13.3333" height="165.333"/>
@@ -532,13 +553,10 @@
   <object id="169" name="Secret" x="1050" y="493.333" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="171" name="Office" x="1314.67" y="505.667" width="10" height="10">
+  <object id="171" name="Office" x="1308.67" y="505.667" width="10" height="10">
    <ellipse/>
   </object>
   <object id="172" name="End 1" x="1854.33" y="513.667" width="10" height="10">
-   <ellipse/>
-  </object>
-  <object id="173" name="End 2" x="1855.33" y="855.667" width="10" height="10">
    <ellipse/>
   </object>
   <object id="174" name="Theatre 2" x="1207" y="861" width="10" height="10">
@@ -547,7 +565,27 @@
   <object id="175" name="Theatre 1" x="1023.33" y="862.333" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="177" name="Library" x="541.667" y="505" width="10" height="10">
+  <object id="177" name="Library" x="541.667" y="504" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="181" name="End 2" x="1860.5" y="855" width="10" height="10">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="31" name="Lock Layer">
+  <object id="182" name="End 1" x="1857" y="672.5" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="173" name="End 2" x="1855.33" y="688.667" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="178" name="Library" x="668.5" y="504" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="179" name="Secret" x="1051" y="406.5" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="180" name="Office" x="1434" y="503.5" width="10" height="10">
    <ellipse/>
   </object>
  </objectgroup>
@@ -556,12 +594,12 @@
    <ellipse/>
   </object>
  </objectgroup>
- <layer id="24" name="Furniture" width="68" height="42" visible="0">
+ <layer id="24" name="Furniture" width="68" height="42">
   <data encoding="base64" compression="zlib">
    eJzt2c1qwkAQB/DtKR83ay4tvoZob76EVB/Dvkl78OJj6L0PoRdB8BlsvQg9OCHZkh0SOnE/MPT/gyE7g0w26xoiUQpu8RUp9RYVxzy+Kc7leE2xYTU9XlCcKrnEZ+z3Wlx4pDl+RMUxjz5FVo63VN9FZk2P36neq+QSx5rPjVKlxhQvqdvr6qpXWocZxRzrAQAAAAAOrYT/YQAAAAAAAAB8yB7M/BC7zZu07bMP9G4vXw+9JstEqZ/KeW3zJrf0uZT50PN7q+p65Pg8bPMmbfvo9ZgGWA+tC/vDN37/uPf94VtX9scT1Z6Tv3vb4vePATunbd7EVR/X+O/lv+PrQd/LxGUurUn6hFDz/PE7D9tcWpP0CaXm+cOYh20urUn6hID9YcL+MNU8f0xc5dLaPe0P7sDmYZtLa5I+Nq7KC7eE
   </data>
  </layer>
- <layer id="25" name="Walls" width="68" height="42" visible="0">
+ <layer id="25" name="Walls" width="68" height="42">
   <data encoding="base64" compression="zlib">
    eJztmktOwzAQhp1sEhU2vNawZ89J2II4QSsVNjxETwCV2hUPwSlg3T1r2HAKCgdgQuJiR3bkJOPQMfNJo1iOazt/+4+TuEK40Y/E0SXENcQDRJ9IyDk7XqYTgwizN52d2Fy/a6lvyjgSM6y+RgHoMULUY+xBj0GaH7H1eOoJ8dwzjIeoByW/vIIWbwY9sP1ynAjxkeTHIcQnxFdRniv1so08n5WrcNFjBX5LqxAvyW+5wTXM6n/KTOaXKcxlLc2PE4gNKG+meXldqZdt5Pkpgh4Y/Fe/2Ahtfdkr5rDVcC4+1hc1byxyRpqXhzVyhgplv6h5Y5EzivKkRs5QYb/o8P2YDmW/qPlhXuSOtlD2i5offnIGIT2w/bId26NMVdtyHFrqD5D6l4HpFxOnhmeEMhcObdpwZun/3PO4Jm4cxrz3PK9bS/93f6AHwzAMwzBhsM/3ERonS6pH9nx7FfsJG9jjPBJ5H9QVmHr4fB/UFZh6+Nxv6Ar2iw77RYf9okNlv6ErqOw3+ET9HqnsZ7flvWJuqh68vujzxswfIfgFM38ss1+q8JU/QvAL9vpC/f+4rr+Pb9UA1Wg=
   </data>

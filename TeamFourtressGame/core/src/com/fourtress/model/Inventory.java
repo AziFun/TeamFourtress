@@ -34,6 +34,10 @@ public class Inventory {
 			}
 		}
 	}
+	
+	public boolean contains(Item item) {
+		return items.values().contains(item);
+	}
 
 	// Return all of the Items currently stored in the inventory
 	public HashMap<Integer, Item> getInventory() {

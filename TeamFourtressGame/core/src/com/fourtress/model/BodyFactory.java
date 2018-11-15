@@ -21,7 +21,7 @@ public class BodyFactory {
 
 	private World world;
 	private static BodyFactory thisInstance;
-	private static float ppt = 32f;
+	public static float ppt = 32f;
 
 	private BodyFactory(World world) {
 		this.world = world;
@@ -142,6 +142,12 @@ public class BodyFactory {
 			f.setSensor(true);
 		}
 		body.setUserData(new StorageBoxLock(message, correctItem));
+	}
+	public void makeBodyLockSensor(Body body, String message, Key key, String lockName) {
+		for (Fixture f : body.getFixtureList()) {
+			f.setSensor(true);
+		}
+		body.setUserData(new Lock(message, key, lockName));
 	}
 
 	public CircleShape getCircle(EllipseMapObject ellipseObject) {

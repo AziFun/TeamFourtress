@@ -2,6 +2,9 @@ package com.fourtress.model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Game;
@@ -13,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -37,6 +41,8 @@ public class Box2dModel {
 	private boolean grabKey = false;
 	private String actionText;
 	private Item actionItem;
+	private HashMap<String, Joint> lockJoints;
+	private Lock actionUnlock;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
@@ -48,6 +54,7 @@ public class Box2dModel {
 		listener = new ContactListener(this);
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
+		lockJoints = new HashMap<String, Joint>();
 	}
 
 	public void logicStep(float delta) {
@@ -125,9 +132,13 @@ public class Box2dModel {
 		world.step(delta, 3, 3);
 	}
 
+	public void addLockJoint(String name, Joint j) {
+		lockJoints.put(name, j);
+	}
+
 	public void setSpawn(Ellipse spawn) {
-		player = bodyFactory.makeCirclePolyBody(spawn.x / 32, spawn.y / 32, 1, Material.Player, BodyType.DynamicBody,
-				false);
+		player = bodyFactory.makeCirclePolyBody(spawn.x / BodyFactory.ppt, spawn.y / BodyFactory.ppt, 1,
+				Material.Player, BodyType.DynamicBody, false);
 		player.setUserData("Player");
 	}
 
@@ -138,9 +149,19 @@ public class Box2dModel {
 		} else {
 			actionItem = null;
 		}
+		if (iEntity instanceof Lock) {
+			actionUnlock = (Lock) iEntity;
+		}
 	}
 
 	public void playerAction() {
+		if (actionUnlock != null) {
+			if (actionUnlock.attemptUnlock(inventory)) {
+				if (lockJoints.containsKey(actionUnlock.getName())) {
+					world.destroyJoint(lockJoints.remove(actionUnlock.getName()));
+				}
+			}
+		}
 		if (actionText != null) {
 			System.out.println(actionText);
 		}
