@@ -190,8 +190,8 @@ public class Box2dModel {
 		actionDialog.getContentTable().clear();
 		actionItem = null;
 		actionText = null;
-		com.fourtress.controller.MyTextInputListener listener = new com.fourtress.controller.MyTextInputListener();
-		Gdx.input.getTextInput(listener, "Please Enter Combo Code", "", "Combo Code");
+		//com.fourtress.controller.MyTextInputListener listener = new com.fourtress.controller.MyTextInputListener();
+		//Gdx.input.getTextInput(listener, "Please Enter Combo Code", "", "Combo Code");
 	}
 
 }
