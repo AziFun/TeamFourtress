@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="186">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="187">
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
  </tileset>
@@ -604,6 +604,11 @@
  </objectgroup>
  <objectgroup id="28" name="Spawn Layer">
   <object id="147" name="Player Spawn" x="96" y="672" width="35" height="35">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="32" name="End Layer">
+  <object id="186" name="Player End" x="1908.5" y="548.5" width="222" height="268">
    <ellipse/>
   </object>
  </objectgroup>

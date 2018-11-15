@@ -36,6 +36,7 @@ public class Level {
 		createWalls();
 		createInteractionPoints();
 		setPlayerSpawn();
+		setPlayerFinish();
 		createDoors();
 	}
 
@@ -185,6 +186,16 @@ public class Level {
 			model.setSpawn(((EllipseMapObject) spawn).getEllipse());
 		}
 	}
+	
+
+	private void setPlayerFinish() {
+		MapObjects objects = tiledMap.getLayers().get("End Layer").getObjects();
+		MapObject finish = objects.get("Player End");
+		if (finish instanceof EllipseMapObject) {
+			model.setFinish(((EllipseMapObject) finish).getEllipse());
+		}
+	}
+	
 
 	public TiledMap getTiledMap() {
 		return tiledMap;

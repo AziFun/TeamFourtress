@@ -53,6 +53,7 @@ public class Box2dModel {
 	public String inputText;
 	public List<StorageBoxLock> multiLocks;
 	public Joint jointToDestroy;
+	private Body finishLine;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
@@ -158,6 +159,13 @@ public class Box2dModel {
 		player = bodyFactory.makeCirclePolyBody(spawn.x / BodyFactory.ppt, spawn.y / BodyFactory.ppt, 1,
 				Material.Player, BodyType.DynamicBody, false);
 		player.setUserData("Player");
+	}
+	
+	public void setFinish(Ellipse finish) {
+		finishLine = bodyFactory.makeCirclePolyBody(finish.x / BodyFactory.ppt, finish.y / BodyFactory.ppt, 1,
+				Material.Rubber, BodyType.StaticBody, false);
+		bodyFactory.makeBodySensor(finishLine,"finish");
+		finishLine.setUserData("finish");
 	}
 
 	public void setPlayerAction(InteractableEntity iEntity) {
