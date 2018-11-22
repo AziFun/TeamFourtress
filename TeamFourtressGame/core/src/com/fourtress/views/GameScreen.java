@@ -86,9 +86,6 @@ public class GameScreen extends ScreenAdapter {
 		sb.setProjectionMatrix(cam.combined);
         skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 		
-		// Music setup
-		SoundManager.playMusic("audio/music/musicbox.mp3");
-		
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
@@ -99,6 +96,9 @@ public class GameScreen extends ScreenAdapter {
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
 		//Gdx.input.setInputProcessor(stage);
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/musicbox.mp3");
 	}
 
 	@Override
@@ -146,6 +146,7 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void dispose() {
 		SoundManager.dispose();
+		stage.dispose();
 
 	}
 	
