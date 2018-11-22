@@ -126,7 +126,6 @@ public class Level {
 			doorBody.createFixture(doorShape, 10);
 
 			doorShape.dispose();
-
 			String doorName = door.getName();
 
 			MapObjects hingeObjects = tiledMap.getLayers().get("Hinge Layer").getObjects();
