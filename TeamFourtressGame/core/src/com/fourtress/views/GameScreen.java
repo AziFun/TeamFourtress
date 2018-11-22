@@ -112,41 +112,40 @@ public class GameScreen extends ScreenAdapter {
 		debugRenderer.render(model.world, cam.combined);
 		sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));		
+		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));	
+		
 		sb.draw(playerSprite, model.player.getPosition().x - 1,
 		model.player.getPosition().y - 1, 2, 2);
 		sb.end();
         stage.draw();
+		playerSprite.dispose();
+        keySprite.dispose();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		stage.getViewport().update(width, height, true);
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void dispose() {
 		SoundManager.dispose();
-		stage.dispose();
 
 	}
 	

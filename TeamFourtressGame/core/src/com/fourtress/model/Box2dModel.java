@@ -223,6 +223,7 @@ public class Box2dModel {
 		}
 		if (actionText != null) {
 			Stage stage = gameScreen.getStage();
+			actionDialog.getContentTable().clear();
 			actionDialog.text(actionText);
 			actionDialog.setVisible(true);
 
@@ -253,6 +254,7 @@ public class Box2dModel {
 		actionDialog.getContentTable().clear();
 		actionItem = null;
 		actionText = null;
+
 		inputText = null;
 		actionUnlock = null;
 	}
