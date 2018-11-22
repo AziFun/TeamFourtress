@@ -95,9 +95,6 @@
   <object id="242" name="Chest" x="1149" y="39" width="70" height="70">
    <ellipse/>
   </object>
-  <object id="243" name="Document4" x="1233" y="169" width="70" height="70">
-   <ellipse/>
-  </object>
   <object id="244" name="Document3" x="1677" y="75" width="70" height="70">
    <ellipse/>
   </object>
@@ -125,19 +122,7 @@
   <object id="252" name="Crates2" x="1659" y="875" width="70" height="70">
    <ellipse/>
   </object>
-  <object id="253" name="Plate3" x="1775" y="1103" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="254" name="Plate2" x="1483" y="1257" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="255" name="Plate1" x="1389" y="1129" width="70" height="70">
-   <ellipse/>
-  </object>
   <object id="256" name="Cooker1" x="391" y="961" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="257" name="Sink2" x="637" y="957" width="70" height="70">
    <ellipse/>
   </object>
   <object id="258" name="Cooker2" x="635" y="1141" width="70" height="70">
@@ -146,91 +131,10 @@
   <object id="259" name="Food stand" x="1497" y="1041" width="70" height="70">
    <ellipse/>
   </object>
-  <object id="260" x="1334" y="303" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="261" x="1332" y="230" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="262" x="1330" y="160" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="263" x="1462" y="236" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="264" x="1463" y="306" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="265" x="1461" y="163" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="266" x="696" y="304" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="267" x="695" y="234" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="270" x="694" y="164" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="271" x="569" y="237" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="272" x="567" y="311" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="273" x="568" y="169" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="274" x="443" y="304" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="275" x="441" y="235" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="276" x="440" y="166" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="277" x="322" y="175" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="278" x="320" y="243" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="279" x="319" y="315" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="280" name="Sink1" x="412" y="1147" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="281" name="Chicken" x="1336" y="1004" width="70" height="70">
-   <ellipse/>
-  </object>
   <object id="282" name="Bottles" x="1255" y="986" width="70" height="70">
    <ellipse/>
   </object>
-  <object id="283" name="Fish" x="1139" y="1133" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="284" name="Coffee" x="1138" y="982" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="286" name="Coffee" x="983" y="1133" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="287" name="Coffee" x="1614" y="1131" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="288" name="Coffee" x="1644" y="1251" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="289" name="Plate4" x="1776" y="1223" width="70" height="70">
-   <ellipse/>
-  </object>
   <object id="290" name="Baskets" x="1726" y="880" width="70" height="70">
-   <ellipse/>
-  </object>
-  <object id="317" name="Coffee" x="1162" y="1260" width="70" height="70">
    <ellipse/>
   </object>
   <object id="318" x="1095" y="505" width="14" height="7"/>

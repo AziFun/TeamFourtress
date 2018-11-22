@@ -2,6 +2,7 @@ package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.SoundManager;
 
 public class MenuScreen implements Screen {
 	
@@ -33,6 +35,9 @@ public class MenuScreen implements Screen {
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		addListeners();
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -102,6 +107,7 @@ public class MenuScreen implements Screen {
 		exit.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				SoundManager.dispose();
 				Gdx.app.exit();				
 			}
 		});

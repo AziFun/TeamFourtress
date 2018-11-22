@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.fourtress.controller.KeyboardController;
+import com.fourtress.controller.MyTextInputListener;
 import com.fourtress.views.GameScreen;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -46,27 +47,36 @@ public class Box2dModel {
 	private String actionText;
 	private Item actionItem;
 	private HashMap<String, Joint> lockJoints;
-	private Lock actionUnlock;
+	private InteractableEntity actionUnlock;
 	private Dialog actionDialog;
 	private Skin skin;
+	public String inputText;
+	public List<StorageBoxLock> multiLocks;
+	public Joint jointToDestroy;
+	private Body finishLine;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
 		this.gameScreen = gameScreen;
 		this.controller = controller;
 		this.bodyFactory = bodyFactory;
+		multiLocks = new LinkedList<StorageBoxLock>();
 		this.inventory = new Inventory();
 		this.world = new World(new Vector2(), true);
 		listener = new ContactListener(this);
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
 		lockJoints = new HashMap<String, Joint>();
-        skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
-		actionDialog = new Dialog("",skin);
+		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
+		actionDialog = new Dialog("", skin);
 
 	}
 
 	public void logicStep(float delta) {
+		if (jointToDestroy != null) {
+			world.destroyJoint(jointToDestroy);
+			jointToDestroy = null;
+		}
 
 		if (controller.left) {
 			if (controller.shift) {
@@ -150,6 +160,13 @@ public class Box2dModel {
 				Material.Player, BodyType.DynamicBody, false);
 		player.setUserData("Player");
 	}
+	
+	public void setFinish(Ellipse finish) {
+		finishLine = bodyFactory.makeCirclePolyBody((finish.x + finish.width/2)/ BodyFactory.ppt, (finish.y + finish.height/2)/ BodyFactory.ppt, finish.width / BodyFactory.ppt,
+				Material.Rubber, BodyType.StaticBody, false);
+		bodyFactory.makeBodySensor(finishLine,"finish");
+		finishLine.setUserData("finish");
+	}
 
 	public void setPlayerAction(InteractableEntity iEntity) {
 		actionText = iEntity.getMessage();
@@ -158,16 +175,49 @@ public class Box2dModel {
 		} else {
 			actionItem = null;
 		}
+		if (iEntity instanceof CombinationLock) {
+			actionUnlock = iEntity;
+		}
 		if (iEntity instanceof Lock) {
-			actionUnlock = (Lock) iEntity;
+			actionUnlock = iEntity;
+		}
+		if (iEntity instanceof StorageBoxLock) {
+			actionUnlock = iEntity;
 		}
 	}
 
 	public void playerAction() {
 		if (actionUnlock != null) {
-			if (actionUnlock.attemptUnlock(inventory)) {
-				if (lockJoints.containsKey(actionUnlock.getName())) {
-					world.destroyJoint(lockJoints.remove(actionUnlock.getName()));
+			if (actionUnlock instanceof Lock) {
+				if (((Lock) actionUnlock).attemptUnlock(inventory)) {
+					if (lockJoints.containsKey(((Lock) actionUnlock).getName())) {
+						world.destroyJoint(lockJoints.remove(((Lock) actionUnlock).getName()));
+					} else if (((Lock) actionUnlock).getName().equals("End")) {
+						world.destroyJoint(lockJoints.remove("End 1"));
+						world.destroyJoint(lockJoints.remove("End 2"));
+					}
+				}
+			} else if (actionUnlock instanceof CombinationLock) {
+				if (inputText == null) {
+					MyTextInputListener listener = new MyTextInputListener(this);
+					Gdx.input.getTextInput(listener, "Please Enter Combo Code", "", "Combo Code");
+				} else if (((CombinationLock) actionUnlock).attemptUnlock(inputText)) {
+					if (lockJoints.containsKey(((CombinationLock) actionUnlock).getName())) {
+						world.destroyJoint(lockJoints.remove(((CombinationLock) actionUnlock).getName()));
+					}
+				}
+			} else if (actionUnlock instanceof StorageBoxLock) {
+				if (inputText == null) {
+					actionText = "Please enter the number of the item you want to insert. ";
+					actionText += inventory.toString();
+					MyTextInputListener listener = new MyTextInputListener(this);
+					Gdx.input.getTextInput(listener, "Please Enter Slot Number or R to remove item", "", "Slot Number");
+				} else {
+					if (inputText.equals("R")) {
+						inventory.addItem(actionUnlock.getItem());
+					} else {
+						actionUnlock.item = inventory.remove(inputText);
+					}
 				}
 			}
 		}
@@ -177,7 +227,7 @@ public class Box2dModel {
 			actionDialog.text(actionText);
 			actionDialog.setVisible(true);
 
-	        actionDialog.show(stage);
+			actionDialog.show(stage);
 			System.out.println(actionText);
 		}
 		if (actionItem != null) {
@@ -186,12 +236,27 @@ public class Box2dModel {
 	}
 
 	public void endPlayerAction() {
+		if (actionUnlock != null && actionUnlock instanceof StorageBoxLock) {
+			boolean atLeastOneLocked = false;
+			for (StorageBoxLock lock : multiLocks) {
+				if (!lock.checkLock()) {
+					atLeastOneLocked = true;
+					break;
+				}
+			}
+			if (atLeastOneLocked == false) {
+				if (lockJoints.containsKey(((StorageBoxLock) actionUnlock).getLockName())) {
+					jointToDestroy = lockJoints.remove(((StorageBoxLock) actionUnlock).getLockName());
+				}
+			}
+		}
 		actionDialog.setVisible(false);
 		actionDialog.getContentTable().clear();
 		actionItem = null;
 		actionText = null;
-		//com.fourtress.controller.MyTextInputListener listener = new com.fourtress.controller.MyTextInputListener();
-		//Gdx.input.getTextInput(listener, "Please Enter Combo Code", "", "Combo Code");
+
+		inputText = null;
+		actionUnlock = null;
 	}
 
 }

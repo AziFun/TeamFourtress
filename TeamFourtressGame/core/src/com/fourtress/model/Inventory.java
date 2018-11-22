@@ -13,6 +13,10 @@ public class Inventory {
 	public int getInventorySize() {
 		return items.size();
 	}
+	
+	public Item remove(String slotNumber) {
+		return items.remove(Integer.parseInt(slotNumber));
+	}
 
 	public void addItem(Item item) {
 		if (item != null) {
@@ -20,21 +24,32 @@ public class Inventory {
 				for (Item i : ((ItemPile<? extends Item>) item).getContents()) {
 					addItem(i);
 				}
-			}
-			// Retrieve the current inventory size
-			int invSize = getInventorySize();
-
-			// Check in the inventory is full (Maximum slots is 10)
-			if (invSize >= 10) {
-
 			} else {
-				// Inventory is not full, so add the item to the inventory and use invSize as
-				// the ID
-				items.put(invSize, item);
+				// Retrieve the current inventory size
+				int invSize = getInventorySize();
+
+				// Check in the inventory is full (Maximum slots is 10)
+				if (invSize >= 10) {
+
+				} else {
+					// Inventory is not full, so add the item to the inventory and use invSize as
+					// the ID
+					items.put(invSize, item);
+				}
 			}
 		}
 	}
-	
+
+	public String toString() {
+		String string = "";
+		for (Integer i : items.keySet()) {
+			string += i + ":";
+			string += items.get(i);
+			string += ".\n";
+		}
+		return string;
+	}
+
 	public boolean contains(Item item) {
 		return items.values().contains(item);
 	}

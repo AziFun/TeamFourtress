@@ -1,49 +1,30 @@
 package com.fourtress.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+public class CombinationLock extends InteractableEntity {
 
-public class CombinationLock extends Lock {
-
-	private char[] combinationCode;
-
-	public CombinationLock(char[] combinationCode) {
-		this.combinationCode = combinationCode;
-		lock();
-
+	private String combination;
+	private String name;
+	
+	public CombinationLock(String message, String combination, String name) {
+		super(message);
+		this.name = name;
+		this.combination = combination;
 	}
-
-	public void tryLock() {
-		Scanner comboScanner = new Scanner(System.in);
-		System.out.println("Please enter the combination code which you want to try: ");
-		String enteredCombo = comboScanner.nextLine();
-		tryCombination(enteredCombo);
-		comboScanner.close();
+	
+	@Override
+	public Item getItem() {
+		return null;
 	}
-
-	private void tryCombination(String codeAttempt) {
-		char[] codeToTry = codeAttempt.toCharArray();
-		if (combinationCode.equals(codeToTry)) {
-			System.out.println("Combination was correct! The lock is unlocked ");
-			unlock();
-		} else if (codeToTry.length != codeAttempt.length()) {
-			System.out.println("Combination was incorrect! Your code had " + codeAttempt.length()
-					+ "digits and we expect: " + combinationCode.length);
+	
+	public boolean attemptUnlock(String combination) {
+		if (this.combination.equals(combination)) {
+			return true;
 		} else {
-			List<String> checks = new ArrayList<>();
-			for (int i = 0; i < codeToTry.length; i++) {
-				Character attempt = codeToTry[i];
-				Character actual = combinationCode[i];
-				if (attempt == actual) {
-					checks.add(i + ": Correct!");
-				} else {
-					checks.add(i + ": Incorrect!");
-				}
-			}
-			System.out.println("Combination was incorrect!" + checks.toString());
+			return false;
 		}
-
 	}
-
+	
+	public String getName() {
+		return name;
+	}
 }
