@@ -13,11 +13,14 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Joint;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
@@ -124,7 +127,10 @@ public class Level {
 			bdoorBd.type = BodyType.DynamicBody;
 			Body doorBody = model.world.createBody(bdoorBd);
 			doorBody.createFixture(doorShape, 10);
-
+			DoorData doorData = new DoorData();
+			doorData.doorBody = (RectangleMapObject) door;
+			doorBody.setUserData(doorData);
+			model.physicsObjects.add(doorBody);
 			doorShape.dispose();
 
 			String doorName = door.getName();
@@ -142,7 +148,8 @@ public class Level {
 				hingeBd.type = BodyType.StaticBody;
 				Body hingeBody = model.world.createBody(hingeBd);
 				hingeBody.createFixture(hingeShape, 1);
-
+				doorData.hingeCentre = new Vector2(((EllipseMapObject) hinge).getEllipse().x, ((EllipseMapObject) hinge).getEllipse().y).sub(((RectangleMapObject) door).getRectangle().getPosition(new Vector2()));
+						doorBody.getLocalPoint(((CircleShape) hingeShape).getPosition());
 				hingeShape.dispose();
 
 				RevoluteJointDef rDef = new RevoluteJointDef();
@@ -171,9 +178,9 @@ public class Level {
 				lockShape.dispose();
 
 				DistanceJointDef dDef = new DistanceJointDef();
-				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
+				//dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				//model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
 				break;
 			}
 		}
