@@ -32,8 +32,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -64,6 +67,7 @@ public class GameScreen extends ScreenAdapter {
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private ShapeRenderer shapeRenderer;
 	private Level level;
+	public TextArea textArea;
 
 	
 	public GameScreen(TeamFourtressGame parent) {
@@ -86,6 +90,7 @@ public class GameScreen extends ScreenAdapter {
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
         skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
+        
 		
 		// Music setup
 		SoundManager.playMusic("audio/music/musicbox.mp3");
@@ -94,6 +99,17 @@ public class GameScreen extends ScreenAdapter {
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+		
+		//Text Area Setup
+		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
+		textArea.setPosition(20, 1800);
+		textArea.setHeight(200);
+		textArea.setWidth(700);
+        textArea.setColor(Color.BLACK);
+        skin.getFont("default-font").getData().setScale(2f,2f);
+        stage.addActor(textArea);
+
+
 	}
 
 	@Override
@@ -121,6 +137,7 @@ public class GameScreen extends ScreenAdapter {
         stage.draw();
         playerSprite.dispose();
         keySprite.dispose();
+       
 	}
 
 	@Override
