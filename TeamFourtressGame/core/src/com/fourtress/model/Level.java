@@ -132,7 +132,6 @@ public class Level {
 			doorBody.setUserData(doorData);
 			model.physicsObjects.add(doorBody);
 			doorShape.dispose();
-
 			String doorName = door.getName();
 
 			MapObjects hingeObjects = tiledMap.getLayers().get("Hinge Layer").getObjects();
