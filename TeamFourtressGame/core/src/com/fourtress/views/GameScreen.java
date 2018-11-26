@@ -1,6 +1,5 @@
 package com.fourtress.views;
 
-
 import org.omg.CORBA.DomainManagerOperations;
 
 import com.badlogic.gdx.Gdx;
@@ -20,7 +19,10 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -29,6 +31,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -40,6 +44,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.Box2dModel;
+import com.fourtress.model.DoorData;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -69,32 +74,37 @@ public class GameScreen extends ScreenAdapter {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		
+
 		// Camera setup
-		cam = new OrthographicCamera(w/10, h/10);
+		cam = new OrthographicCamera(w / 10, h / 10);
 		stage = new Stage(new ScreenViewport());
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
-		
+    
 		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(cam, controller, this);
 		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
-		
+
 		// Sprite setup
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
-        skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
-		
+		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
+
+		// Music setup
+		SoundManager.playMusic("audio/music/musicbox.mp3");
+
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+		shapeRenderer = new ShapeRenderer();
 	}
 
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
+
 		//Gdx.input.setInputProcessor(stage);
 		
 		// Music setup
@@ -109,17 +119,27 @@ public class GameScreen extends ScreenAdapter {
 		cam.update();
 		mapRenderer.setView(cam);
 		mapRenderer.render();
-		debugRenderer.render(model.world, cam.combined);
+		//debugRenderer.render(model.world, cam.combined);
 		sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));	
-		
-		sb.draw(playerSprite, model.player.getPosition().x - 1,
-		model.player.getPosition().y - 1, 2, 2);
+		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
+		sb.draw(playerSprite, model.player.getPosition().x - 1, model.player.getPosition().y - 1, 2, 2);
 		sb.end();
-        stage.draw();
-		playerSprite.dispose();
-        keySprite.dispose();
+		shapeRenderer.setAutoShapeType(true);
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setProjectionMatrix(cam.combined);
+		shapeRenderer.setColor(Color.CYAN);
+		for (Body door : model.physicsObjects) {
+			DoorData doorData = (DoorData) door.getUserData();
+			shapeRenderer.rect(doorData.doorBody.getRectangle().x / 32, doorData.doorBody.getRectangle().y / 32,
+					doorData.hingeCentre.x / 32, doorData.hingeCentre.y / 32,
+					doorData.doorBody.getRectangle().width / 32, doorData.doorBody.getRectangle().height / 32, 1, 1,
+					door.getAngle() * MathUtils.radiansToDegrees);
+		}
+		shapeRenderer.end();
+		stage.draw();
+    playerSprite.dispose();
+    keySprite.dispose();
 	}
 
 	@Override
@@ -140,7 +160,7 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void hide() {
-		
+    
 	}
 
 	@Override
@@ -148,11 +168,12 @@ public class GameScreen extends ScreenAdapter {
 		SoundManager.dispose();
 
 	}
-	
+
 	public Stage getStage() {
 		return stage;
 	}
-	
+
+
 	public Skin getSkin() {
 		return skin;
 	}
