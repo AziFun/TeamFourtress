@@ -178,9 +178,9 @@ public class Level {
 				lockShape.dispose();
 
 				DistanceJointDef dDef = new DistanceJointDef();
-				//dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
+				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				//model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
 				break;
 			}
 		}
