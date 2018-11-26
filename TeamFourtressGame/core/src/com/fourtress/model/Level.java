@@ -139,6 +139,7 @@ public class Level {
 				Shape hingeShape;
 				if (hinge instanceof EllipseMapObject && hinge.getName().equals(doorName)) {
 					hingeShape = BodyFactory.getInstance(model.world).getCircle((EllipseMapObject) hinge);
+					
 				} else {
 					continue;
 				}

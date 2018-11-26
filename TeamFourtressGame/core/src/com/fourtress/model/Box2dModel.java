@@ -20,6 +20,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.controller.MyTextInputListener;
 import com.fourtress.views.GameScreen;
@@ -218,12 +219,8 @@ public class Box2dModel {
 			}
 		}
 		if (actionText != null) {
-			Stage stage = gameScreen.getStage();
-      actionDialog.getContentTable().clear();
-			actionDialog.text(actionText);
-			actionDialog.setVisible(true);
-
-			actionDialog.show(stage);
+			// Text Area set for actions
+			gameScreen.textArea.appendText(actionText + "\n");
 			System.out.println(actionText);
 		}
 		if (actionItem != null) {
@@ -246,10 +243,7 @@ public class Box2dModel {
 				}
 			}
 		}
-		actionDialog.setVisible(false);
-		actionDialog.getContentTable().clear();
-		actionItem = null;
-		actionText = null;
+		
 		inputText = null;
 		actionUnlock = null;
 	}

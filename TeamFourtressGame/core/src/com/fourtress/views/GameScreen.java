@@ -63,7 +63,6 @@ public class GameScreen extends ScreenAdapter {
 	private SpriteBatch sb;
 	private Stage stage;
 	private Skin skin;
-	PopUpDialog test;
 	BitmapFont font;
 	Dialog welcome;
 	private OrthogonalTiledMapRenderer mapRenderer;
@@ -99,6 +98,17 @@ public class GameScreen extends ScreenAdapter {
 		level = levelGen.makeLevel(1, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
 		shapeRenderer = new ShapeRenderer();
+
+        	
+		//Text Area Setup
+		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
+		textArea.setPosition(20, 1800);
+		textArea.setHeight(200);
+		textArea.setWidth(700);
+        textArea.setColor(Color.BLACK);
+        skin.getFont("default-font").getData().setScale(2f,2f);
+        stage.addActor(textArea);
+
 	}
 
 	@Override
@@ -179,3 +189,4 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 }
+
