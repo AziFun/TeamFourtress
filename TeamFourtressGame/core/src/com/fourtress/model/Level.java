@@ -178,9 +178,9 @@ public class Level {
 				lockShape.dispose();
 
 				DistanceJointDef dDef = new DistanceJointDef();
-				//dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
+				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				//model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
 				break;
 			}
 		}
@@ -201,6 +201,12 @@ public class Level {
 		if (finish instanceof EllipseMapObject) {
 			model.setFinish(((EllipseMapObject) finish).getEllipse());
 		}
+	}
+	
+	public String getInitialMessage() {
+		MapObjects objects = tiledMap.getLayers().get("Spawn Layer").getObjects();
+		return (String) objects.get("Initial Message").getProperties().get("Message");
+
 	}
 	
 
