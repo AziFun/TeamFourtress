@@ -65,7 +65,6 @@ public class GameScreen extends ScreenAdapter {
 	private ShapeRenderer shapeRenderer;
 	private Level level;
 
-	
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
 		float w = Gdx.graphics.getWidth();
@@ -87,9 +86,6 @@ public class GameScreen extends ScreenAdapter {
 		sb.setProjectionMatrix(cam.combined);
         skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 		
-		// Music setup
-		SoundManager.playMusic("audio/music/musicbox.mp3");
-		
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
@@ -100,6 +96,9 @@ public class GameScreen extends ScreenAdapter {
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
 		//Gdx.input.setInputProcessor(stage);
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/musicbox.mp3");
 	}
 
 	@Override
@@ -113,38 +112,35 @@ public class GameScreen extends ScreenAdapter {
 		debugRenderer.render(model.world, cam.combined);
 		sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-
+		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));	
+		
 		sb.draw(playerSprite, model.player.getPosition().x - 1,
 		model.player.getPosition().y - 1, 2, 2);
 		sb.end();
         stage.draw();
-        playerSprite.dispose();
+		playerSprite.dispose();
         keySprite.dispose();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		stage.getViewport().update(width, height, true);
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
