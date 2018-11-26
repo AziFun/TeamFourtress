@@ -1,15 +1,10 @@
 package com.fourtress.model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Circle;
@@ -44,8 +39,6 @@ public class Box2dModel {
 	private Room room;
 	public KeyboardController controller;
 	private ContactListener listener;
-	private boolean doorToOpen = false;
-	private boolean grabKey = false;
 	private String actionText;
 	private Item actionItem;
 	private HashMap<String, Joint> lockJoints;
@@ -56,12 +49,14 @@ public class Box2dModel {
 	public List<StorageBoxLock> multiLocks;
 	public Joint jointToDestroy;
 	private Body finishLine;
+	public List<Body> physicsObjects;
 
 	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
 		this.cam = cam;
 		this.gameScreen = gameScreen;
 		this.controller = controller;
 		this.bodyFactory = bodyFactory;
+		physicsObjects = new LinkedList<Body>();
 		multiLocks = new LinkedList<StorageBoxLock>();
 		this.inventory = new Inventory();
 		this.world = new World(new Vector2(), true);
@@ -224,8 +219,6 @@ public class Box2dModel {
 			}
 		}
 		if (actionText != null) {
-			Stage stage = gameScreen.getStage();
-			
 			// Text Area set for actions
 			gameScreen.textArea.appendText(actionText + "\n");
 			System.out.println(actionText);
@@ -250,13 +243,7 @@ public class Box2dModel {
 				}
 			}
 		}
-		/*
-		actionDialog.setVisible(false);
-		//actionDialog.getContentTable().clear();
-		actionItem = null;
-		actionText = null;
-		*/
-
+		
 		inputText = null;
 		actionUnlock = null;
 	}

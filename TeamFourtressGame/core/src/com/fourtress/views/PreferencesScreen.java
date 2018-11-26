@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.model.SoundManager;
@@ -34,26 +35,35 @@ public class PreferencesScreen implements Screen {
 	private Label musicOnOffLabel;
 	private Label effectsOnOffLabel;
 	private TextButton backButton;
+	private TextButtonStyle style;
 
 	public PreferencesScreen(TeamFourtressGame tfg) {
 		parent = tfg;
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
-		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
+		
+		// UI Setup
+		skin = new Skin(Gdx.files.internal("skins/glassy/skin/glassy-ui.json"));
+		style = new TextButtonStyle(skin.get("small",TextButtonStyle.class));
+		
+		titleLabel = new Label("PREFERENCES", skin);
+		
+		// Music
+		volumeMusicLabel = new Label("Music Volume", skin);
+		musicOnOffLabel = new Label("Toggle Music", skin);
 		musicSlider = new Slider(0f, 1f, 0.1f, false, skin);
 		musicSlider.setValue(parent.getPreferences().getMusicVolume());
 		musicCheckBox = new CheckBox(null, skin);
 		musicCheckBox.setChecked(parent.getPreferences().isMusicEnabled());
+		// SFX
+		volumeEffectsLabel = new Label("Sound Effects Volume", skin);
 		effectsSlider = new Slider(0f, 1f, 0.1f, false, skin);
 		effectsSlider.setValue(parent.getPreferences().getSoundVolume());
 		effectsCheckBox = new CheckBox(null, skin);
-		effectsCheckBox.setChecked(parent.getPreferences().isSoundEffectsEnabled());
-		titleLabel = new Label("Preferences", skin);
-		volumeMusicLabel = new Label("Music Volume", skin);
-		volumeEffectsLabel = new Label("Effects Volume", skin);
-		musicOnOffLabel = new Label("Music", skin);
-		effectsOnOffLabel = new Label("Effects", skin);
-		backButton = new TextButton("Back", skin);
+		effectsCheckBox.setChecked(parent.getPreferences().isSoundEffectsEnabled());		
+		effectsOnOffLabel = new Label("Toggle Sound Effects", skin);
+		
+		backButton = new TextButton("Back", style);
 		addListeners();
 	}
 
@@ -63,20 +73,20 @@ public class PreferencesScreen implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
-		table.add(titleLabel);
-		table.row();
+		table.add(titleLabel).width(100).height(50);
+		table.row().pad(10, 0, 10, 0);
 		table.add(volumeMusicLabel);
 		table.add(musicSlider);
-		table.row();
+		table.row().pad(10, 0, 10, 0);
 		table.add(musicOnOffLabel);
 		table.add(musicCheckBox);
-		table.row();
-		table.add(volumeEffectsLabel);
+		table.row().pad(10, 0, 10, 0);
+		table.add(volumeEffectsLabel).pad(0,0,0,20);
 		table.add(effectsSlider);
-		table.row();
-		table.add(effectsOnOffLabel);
+		table.row().pad(10, 0, 10, 0);
+		table.add(effectsOnOffLabel).pad(0,0,0,20);
 		table.add(effectsCheckBox);
-		table.row();
+		table.row().pad(10, 0, 10, 0);
 		table.add(backButton);
 	}
 

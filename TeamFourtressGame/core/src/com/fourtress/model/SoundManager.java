@@ -9,22 +9,29 @@ public class SoundManager {
 	private static Music music;
 	private static Sound sfx;
 	private static float musicVolume = 0.5f;
-	public static float sfxVolume = 0.5f;
-	public static boolean musicStatus = true;
-	public static boolean sfxStatus = true;
+	private static float sfxVolume = 0.5f;
+	private static boolean musicStatus = true;
+	private static boolean sfxStatus = true;
+	
+	private static String musicTrack = "";
 	
 	// Audio for Music	
 	public static void playMusic(String filePath) {
 		// Check to see if Music has been turned off by the player
 		if(musicStatus == true) {
-			if(music != null) {
-				music.stop();
-				music.dispose();
-			}
-			music = Gdx.audio.newMusic(Gdx.files.internal(filePath));
-			music.setLooping(true);
-			music.setVolume(musicVolume);
-			music.play();
+			if(filePath == musicTrack) {
+				// We are already playing this track
+			} else {
+				if(music != null) {
+					music.stop();
+					music.dispose();
+				}
+				music = Gdx.audio.newMusic(Gdx.files.internal(filePath));
+				music.setLooping(true);
+				music.setVolume(musicVolume);
+				music.play();
+				setMusic(filePath);
+			}					
 		}	
 	}
 	
@@ -80,7 +87,12 @@ public class SoundManager {
 				sfx.stop();		
 			}
 		}
-	}	
+	}
+	
+	// Store the filePath of the current music track playing
+	private static void setMusic(String filePath) {
+		musicTrack = filePath;
+	}
 	
 	public static void dispose() {
 		if(music != null) {

@@ -420,7 +420,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="91" name="Board" x="1729.5" y="1177" width="70" height="70">
+  <object id="91" name="Board" type="Information" x="1729.5" y="1177" width="70" height="70">
    <properties>
     <property name="Message" value="A whiteboard. There is something written on it about the Battle of Hastings. When was that?"/>
    </properties>
