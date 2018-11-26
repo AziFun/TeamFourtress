@@ -6,9 +6,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
@@ -23,21 +25,25 @@ public class MenuScreen implements Screen {
 	private TextButton newGame;
 	private TextButton preferences;
 	private TextButton exit;
-
+	private TextButtonStyle style;
+	private Label titleLabel;
 	
 	public MenuScreen(TeamFourtressGame tfg) {
 		parent = tfg;
 		stage = new Stage(new ScreenViewport());
-		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
-		newGame = new TextButton("New Game", skin);
-		preferences = new TextButton("Preferences", skin);
-		exit = new TextButton("Exit", skin);
+		
+		// UI Setup
+		skin = new Skin(Gdx.files.internal("skins/glassy/skin/glassy-ui.json"));
+		style = new TextButtonStyle(skin.get("small",TextButtonStyle.class));
+		
+		titleLabel = new Label("ESCAPE ADVENTURE!", skin);
+		newGame = new TextButton("New Game", style);
+		preferences = new TextButton("Preferences", style);
+		exit = new TextButton("Exit", style);
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		addListeners();
 		
-		// Music setup
-		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -46,11 +52,16 @@ public class MenuScreen implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
+		table.add(titleLabel).height(100);
+		table.row();
 		table.add(newGame).fillX().uniformX();
 		table.row().pad(10, 0, 10, 0);
 		table.add(preferences).fillX().uniformX();
 		table.row();
 		table.add(exit).fillX().uniformX();
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -93,6 +104,7 @@ public class MenuScreen implements Screen {
 		newGame.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				SoundManager.dispose();
 				parent.changeScreen(ScreenType.GAME);
 			}
 		});

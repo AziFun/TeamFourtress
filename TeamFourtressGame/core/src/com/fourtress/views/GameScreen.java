@@ -52,6 +52,7 @@ import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
 import com.fourtress.model.SoundManager;
 
+
 public class GameScreen extends ScreenAdapter {
 
 	private Box2dModel model;
@@ -79,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
 		stage = new Stage(new ScreenViewport());
 		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
 		cam.update();
-
+    
 		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(cam, controller, this);
@@ -103,11 +104,15 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
-		// Gdx.input.setInputProcessor(stage);
+
+		//Gdx.input.setInputProcessor(stage);
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/musicbox.mp3");
 	}
 
 	@Override
-	public void render(float delta) {
+	public void render(float delta) {		
 		model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -133,30 +138,29 @@ public class GameScreen extends ScreenAdapter {
 		}
 		shapeRenderer.end();
 		stage.draw();
+    playerSprite.dispose();
+    keySprite.dispose();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		stage.getViewport().update(width, height, true);
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+    
 	}
 
 	@Override
@@ -168,6 +172,7 @@ public class GameScreen extends ScreenAdapter {
 	public Stage getStage() {
 		return stage;
 	}
+
 
 	public Skin getSkin() {
 		return skin;
