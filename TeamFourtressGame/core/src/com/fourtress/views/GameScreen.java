@@ -1,7 +1,5 @@
 package com.fourtress.views;
 
-import org.omg.CORBA.DomainManagerOperations;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
@@ -37,6 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -68,6 +67,7 @@ public class GameScreen extends ScreenAdapter {
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private ShapeRenderer shapeRenderer;
 	private Level level;
+	public TextArea textArea;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
@@ -109,6 +109,8 @@ public class GameScreen extends ScreenAdapter {
         skin.getFont("default-font").getData().setScale(2f,2f);
         stage.addActor(textArea);
 
+        
+       textArea.appendText(level.getInitialMessage() + "\n");
 	}
 
 	@Override

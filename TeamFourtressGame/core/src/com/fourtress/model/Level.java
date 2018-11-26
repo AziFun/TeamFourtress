@@ -203,6 +203,12 @@ public class Level {
 		}
 	}
 	
+	public String getInitialMessage() {
+		MapObjects objects = tiledMap.getLayers().get("Spawn Layer").getObjects();
+		return (String) objects.get("Initial Message").getProperties().get("Message");
+
+	}
+	
 
 	public TiledMap getTiledMap() {
 		return tiledMap;
