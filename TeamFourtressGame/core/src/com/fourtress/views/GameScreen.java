@@ -40,6 +40,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.Box2dModel;
@@ -50,6 +51,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
 import com.fourtress.model.SoundManager;
+import com.fourtress.model.GameTimer;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -68,6 +70,9 @@ public class GameScreen extends ScreenAdapter {
 	private ShapeRenderer shapeRenderer;
 	private Level level;
 	public TextArea textArea;
+	public GameTimer timer;
+	private float elapsed;
+	
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
@@ -97,8 +102,7 @@ public class GameScreen extends ScreenAdapter {
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
-		shapeRenderer = new ShapeRenderer();
-
+		shapeRenderer = new ShapeRenderer();	
         	
 		//Text Area Setup
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
@@ -108,9 +112,8 @@ public class GameScreen extends ScreenAdapter {
         textArea.setColor(Color.BLACK);
         skin.getFont("default-font").getData().setScale(2f,2f);
         stage.addActor(textArea);
-
-        
-       textArea.appendText(level.getInitialMessage() + "\n");
+       
+        textArea.appendText(level.getInitialMessage() + "\n");
 	}
 
 	@Override
@@ -120,7 +123,10 @@ public class GameScreen extends ScreenAdapter {
 		//Gdx.input.setInputProcessor(stage);
 		
 		// Music setup
-		SoundManager.playMusic("audio/music/musicbox.mp3");
+		SoundManager.playMusic("audio/music/musicbox.mp3");	
+		
+		// Timer setup
+		timer = new GameTimer();
 	}
 
 	@Override
@@ -137,10 +143,24 @@ public class GameScreen extends ScreenAdapter {
 		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
 		sb.draw(playerSprite, model.player.getPosition().x - 1, model.player.getPosition().y - 1, 2, 2);
 		sb.end();
+		
+		// Display the time remaining for the player to complete the level
+		elapsed += delta;
+	
+		if (elapsed >= 0.99f) {
+		   System.out.println("minutes " + timer.getFormattedMinutes() + " seconds " + timer.getFormattedSeconds());
+		   elapsed = 0f;
+		   
+		   if(timer.getTimeUp() == true) {
+			   parent.changeScreen(ScreenType.GAMEOVER);
+		   }
+		}
+		
 		shapeRenderer.setAutoShapeType(true);
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.setColor(Color.CYAN);
+		
 		for (Body door : model.physicsObjects) {
 			DoorData doorData = (DoorData) door.getUserData();
 			shapeRenderer.rect(doorData.doorBody.getRectangle().x / 32, doorData.doorBody.getRectangle().y / 32,
@@ -148,10 +168,11 @@ public class GameScreen extends ScreenAdapter {
 					doorData.doorBody.getRectangle().width / 32, doorData.doorBody.getRectangle().height / 32, 1, 1,
 					door.getAngle() * MathUtils.radiansToDegrees);
 		}
+		
 		shapeRenderer.end();
 		stage.draw();
-    playerSprite.dispose();
-    keySprite.dispose();
+	    playerSprite.dispose();
+	    keySprite.dispose();	
 	}
 
 	@Override
@@ -159,6 +180,7 @@ public class GameScreen extends ScreenAdapter {
 		stage.getViewport().update(width, height, true);
 
 	}
+
 
 	@Override
 	public void pause() {
