@@ -18,13 +18,17 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.AssetManager;
 import com.fourtress.model.SoundManager;
 
 public class PreferencesScreen implements Screen {
 
 	private TeamFourtressGame parent;
-	private Stage stage;
+	private AssetManager assets;	
 	private Skin skin;
+	private TextButtonStyle style;
+	private Label.LabelStyle lblStyle;
+	private Stage stage;
 	private Slider musicSlider;
 	private CheckBox musicCheckBox;
 	private Slider effectsSlider;
@@ -35,18 +39,19 @@ public class PreferencesScreen implements Screen {
 	private Label musicOnOffLabel;
 	private Label effectsOnOffLabel;
 	private TextButton backButton;
-	private TextButtonStyle style;
 
 	public PreferencesScreen(TeamFourtressGame tfg) {
 		parent = tfg;
+		assets = new AssetManager();
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 		
 		// UI Setup
-		skin = new Skin(Gdx.files.internal("skins/glassy/skin/glassy-ui.json"));
-		style = new TextButtonStyle(skin.get("small",TextButtonStyle.class));
+		skin = assets.getSkin();
+		style = assets.getTextButtonStyle();		
+		lblStyle = assets.getLabelStyle();
 		
-		titleLabel = new Label("PREFERENCES", skin);
+		titleLabel = new Label("PREFERENCES", lblStyle);
 		
 		// Music
 		volumeMusicLabel = new Label("Music Volume", skin);
@@ -73,21 +78,21 @@ public class PreferencesScreen implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
-		table.add(titleLabel).width(100).height(50);
-		table.row().pad(10, 0, 10, 0);
+		table.add(titleLabel).padBottom(40);
+		table.row();
 		table.add(volumeMusicLabel);
-		table.add(musicSlider);
-		table.row().pad(10, 0, 10, 0);
+		table.add(musicSlider).padBottom(10);
+		table.row();
 		table.add(musicOnOffLabel);
-		table.add(musicCheckBox);
-		table.row().pad(10, 0, 10, 0);
+		table.add(musicCheckBox).padBottom(10);
+		table.row();
 		table.add(volumeEffectsLabel).pad(0,0,0,20);
-		table.add(effectsSlider);
-		table.row().pad(10, 0, 10, 0);
+		table.add(effectsSlider).padBottom(10);
+		table.row();
 		table.add(effectsOnOffLabel).pad(0,0,0,20);
-		table.add(effectsCheckBox);
-		table.row().pad(10, 0, 10, 0);
-		table.add(backButton);
+		table.add(effectsCheckBox).padBottom(10);
+		table.row();
+		table.add(backButton).padTop(15);
 	}
 
 	@Override
