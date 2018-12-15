@@ -42,7 +42,7 @@ public class PreferencesScreen implements Screen {
 
 	public PreferencesScreen(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = new AssetManager();
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 		

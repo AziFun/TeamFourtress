@@ -34,7 +34,7 @@ public class GameOverScreen implements Screen {
 	
 	public GameOverScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		assets = new AssetManager();
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup

@@ -29,7 +29,7 @@ public class FinishScreen implements Screen {
 
 	public FinishScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		assets = new AssetManager();
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup

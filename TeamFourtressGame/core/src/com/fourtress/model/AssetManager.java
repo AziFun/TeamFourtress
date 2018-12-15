@@ -14,7 +14,9 @@ public class AssetManager {
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
 	
-	public AssetManager() {
+	private static AssetManager asset_instance;
+	
+	private AssetManager() {
 		
 		skin = new Skin(Gdx.files.internal("skins/glassy/skin/glassy-ui.json"));
 		
@@ -27,6 +29,14 @@ public class AssetManager {
 		
 		lblStyle = new Label.LabelStyle(font, null);
 	
+	}
+	
+	public static AssetManager getInstance() {
+		if(asset_instance == null) {
+			asset_instance = new AssetManager();
+		}
+		
+		return asset_instance;
 	}
 	
 	public Skin getSkin() {

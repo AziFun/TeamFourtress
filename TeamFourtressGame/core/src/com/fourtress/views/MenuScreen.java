@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
 	
 	public MenuScreen(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = new AssetManager();
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup

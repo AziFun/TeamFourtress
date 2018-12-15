@@ -74,7 +74,7 @@ public class GameControls implements Screen {
 	
 	public GameControls(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = new AssetManager();
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup
