@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="187">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="193">
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
  </tileset>
@@ -420,7 +420,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="91" name="Board" x="1729.5" y="1177" width="70" height="70">
+  <object id="91" name="Board" type="Information" x="1729.5" y="1177" width="70" height="70">
    <properties>
     <property name="Message" value="A whiteboard. There is something written on it about the Battle of Hastings. When was that?"/>
    </properties>
@@ -606,6 +606,13 @@
   <object id="147" name="Player Spawn" x="96" y="672" width="35" height="35">
    <ellipse/>
   </object>
+  <object id="188" x="102" y="258" width="61" height="37" visible="0"/>
+  <object id="189" name="Initial Message" x="135" y="269">
+   <properties>
+    <property name="Message" value="Hint.. Speak to the teacher in the lecture room ;)"/>
+   </properties>
+  </object>
+  <object id="190" x="179" y="245"/>
  </objectgroup>
  <objectgroup id="32" name="End Layer">
   <object id="186" name="Player End" x="1900.5" y="481.833" width="400" height="400">

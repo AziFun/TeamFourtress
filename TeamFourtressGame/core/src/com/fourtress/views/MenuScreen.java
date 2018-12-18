@@ -2,42 +2,55 @@ package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.AssetManager;
 import com.fourtress.model.SoundManager;
 
 public class MenuScreen implements Screen {
 	
 	private TeamFourtressGame parent;
+	private AssetManager assets;
 	private Stage stage;
-	private Skin skin;
+	
+	private Label.LabelStyle lblStyle;
+	private TextButtonStyle style;
+	
 	private TextButton newGame;
 	private TextButton preferences;
+	private TextButton gameControls;
 	private TextButton exit;
-
+	private Label titleLabel;
+	
 	
 	public MenuScreen(TeamFourtressGame tfg) {
 		parent = tfg;
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
-		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
-		newGame = new TextButton("New Game", skin);
-		preferences = new TextButton("Preferences", skin);
-		exit = new TextButton("Exit", skin);
+		
+		// UI Setup
+		style = assets.getTextButtonStyle();		
+		lblStyle = assets.getLabelStyle();
+		
+		titleLabel = new Label("FOURTRESS ESCAPE!", lblStyle);
+		newGame = new TextButton("New Game", style);
+		preferences = new TextButton("Preferences", style);
+		gameControls = new TextButton("Game Controls", style);
+		exit = new TextButton("Exit", style);
+		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		addListeners();
 		
-		// Music setup
-		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -46,11 +59,18 @@ public class MenuScreen implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
-		table.add(newGame).fillX().uniformX();
-		table.row().pad(10, 0, 10, 0);
-		table.add(preferences).fillX().uniformX();
+		table.add(titleLabel).padBottom(50);
+		table.row();
+		table.add(newGame).fillX().uniformX().padBottom(10);
+		table.row();
+		table.add(preferences).fillX().uniformX().padBottom(10);;
+		table.row();
+		table.add(gameControls).fillX().uniformX().padBottom(10);;
 		table.row();
 		table.add(exit).fillX().uniformX();
+		
+		// Music setup
+		SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -86,13 +106,13 @@ public class MenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		stage.dispose();
 	}
 	
 	private void addListeners() {
 		newGame.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				SoundManager.dispose();
 				parent.changeScreen(ScreenType.GAME);
 			}
 		});
@@ -101,6 +121,13 @@ public class MenuScreen implements Screen {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				parent.changeScreen(ScreenType.PREFERENCES);
+			}
+		});
+		
+		gameControls.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				parent.changeScreen(ScreenType.CONTROLS);
 			}
 		});
 		

@@ -3,6 +3,8 @@ package com.fourtress;
 import com.badlogic.gdx.Game;
 import com.fourtress.model.SoundManager;
 import com.fourtress.views.FinishScreen;
+import com.fourtress.views.GameControls;
+import com.fourtress.views.GameOverScreen;
 import com.fourtress.views.GameScreen;
 import com.fourtress.views.LoadingScreen;
 import com.fourtress.views.MenuScreen;
@@ -10,12 +12,14 @@ import com.fourtress.views.PreferencesScreen;
 
 public class TeamFourtressGame extends Game {
 
-	private FinishScreen finishScreen;
 	private GameScreen gameScreen;
 	private LoadingScreen loadingScreen;
 	private MenuScreen menuScreen;
 	private PreferencesScreen preferencesScreen;
 	private ApplicationPreferences preferences;
+	private FinishScreen finishScreen;
+	private GameOverScreen gameOverScreen;
+	private GameControls gameControlsScreen;
 	
 	@Override
 	public void create () {
@@ -70,6 +74,14 @@ public class TeamFourtressGame extends Game {
 		case PREFERENCES:
 			if (preferencesScreen == null) preferencesScreen = new PreferencesScreen(this);
 			this.setScreen(preferencesScreen);
+			break;
+		case GAMEOVER:
+			if (gameOverScreen == null) gameOverScreen = new GameOverScreen(this);
+			this.setScreen(gameOverScreen);
+			break;
+		case CONTROLS:
+			if (gameControlsScreen == null) gameControlsScreen = new GameControls(this);
+			this.setScreen(gameControlsScreen);
 			break;
 		default: 
 		}
