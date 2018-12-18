@@ -2,12 +2,10 @@ package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -15,31 +13,40 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.AssetManager;
 import com.fourtress.model.SoundManager;
 
 public class MenuScreen implements Screen {
 	
 	private TeamFourtressGame parent;
+	private AssetManager assets;
 	private Stage stage;
-	private Skin skin;
+	
+	private Label.LabelStyle lblStyle;
+	private TextButtonStyle style;
+	
 	private TextButton newGame;
 	private TextButton preferences;
+	private TextButton gameControls;
 	private TextButton exit;
-	private TextButtonStyle style;
 	private Label titleLabel;
+	
 	
 	public MenuScreen(TeamFourtressGame tfg) {
 		parent = tfg;
+		assets = AssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup
-		skin = new Skin(Gdx.files.internal("skins/glassy/skin/glassy-ui.json"));
-		style = new TextButtonStyle(skin.get("small",TextButtonStyle.class));
+		style = assets.getTextButtonStyle();		
+		lblStyle = assets.getLabelStyle();
 		
-		titleLabel = new Label("ESCAPE ADVENTURE!", skin);
+		titleLabel = new Label("FOURTRESS ESCAPE!", lblStyle);
 		newGame = new TextButton("New Game", style);
 		preferences = new TextButton("Preferences", style);
+		gameControls = new TextButton("Game Controls", style);
 		exit = new TextButton("Exit", style);
+		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 		addListeners();
@@ -52,11 +59,13 @@ public class MenuScreen implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
-		table.add(titleLabel).height(100);
+		table.add(titleLabel).padBottom(50);
 		table.row();
-		table.add(newGame).fillX().uniformX();
-		table.row().pad(10, 0, 10, 0);
-		table.add(preferences).fillX().uniformX();
+		table.add(newGame).fillX().uniformX().padBottom(10);
+		table.row();
+		table.add(preferences).fillX().uniformX().padBottom(10);;
+		table.row();
+		table.add(gameControls).fillX().uniformX().padBottom(10);;
 		table.row();
 		table.add(exit).fillX().uniformX();
 		
@@ -112,6 +121,13 @@ public class MenuScreen implements Screen {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				parent.changeScreen(ScreenType.PREFERENCES);
+			}
+		});
+		
+		gameControls.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				parent.changeScreen(ScreenType.CONTROLS);
 			}
 		});
 		
