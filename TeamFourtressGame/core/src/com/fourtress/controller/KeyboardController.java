@@ -11,6 +11,7 @@ public class KeyboardController implements InputProcessor {
 	public boolean up;
 	public boolean down;
 	public boolean shift;
+	public boolean p;
 	public boolean switchAvailable = false;
 	public boolean playerAction;
 	
@@ -28,6 +29,7 @@ public class KeyboardController implements InputProcessor {
 			left = false;
 			up = false;
 			down = false;
+			p = false;
 	}
 	
 	@Override
@@ -55,6 +57,10 @@ public class KeyboardController implements InputProcessor {
 			keyProcessed = true;
 			break;
 		case Keys.SHIFT_LEFT:
+			shift = true;
+			keyProcessed = true;
+			break;
+		case Keys.P:
 			shift = true;
 			keyProcessed = true;
 			break;
@@ -90,11 +96,15 @@ public class KeyboardController implements InputProcessor {
 			shift = false;
 			keyProcessed = true;
 			break;
+		case Keys.P:
+			shift = true;
+			keyProcessed = true;
+			break;
 		}
 		
 		return keyProcessed;
 	}
-
+	
 	@Override
 	public boolean keyTyped(char character) {
 		// TODO Auto-generated method stub

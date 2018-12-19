@@ -8,6 +8,7 @@ import com.fourtress.views.GameOverScreen;
 import com.fourtress.views.GameScreen;
 import com.fourtress.views.LoadingScreen;
 import com.fourtress.views.MenuScreen;
+import com.fourtress.views.PauseMenu;
 import com.fourtress.views.PreferencesScreen;
 
 public class TeamFourtressGame extends Game {
@@ -15,6 +16,7 @@ public class TeamFourtressGame extends Game {
 	private GameScreen gameScreen;
 	private LoadingScreen loadingScreen;
 	private MenuScreen menuScreen;
+	private PauseMenu pauseMenu;
 	private PreferencesScreen preferencesScreen;
 	private ApplicationPreferences preferences;
 	private FinishScreen finishScreen;
@@ -63,6 +65,10 @@ public class TeamFourtressGame extends Game {
 			this.setScreen(gameScreen);
 			menuScreen.dispose();
 			break;
+		case PAUSE: 
+			if (pauseMenu == null) pauseMenu = new PauseMenu(this);
+			this.setScreen(pauseMenu);
+			break;	
 		case LOADING: 
 			if (loadingScreen == null) loadingScreen = new LoadingScreen(this);
 			this.setScreen(loadingScreen);

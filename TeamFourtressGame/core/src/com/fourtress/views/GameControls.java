@@ -1,6 +1,7 @@
 package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -40,6 +41,7 @@ public class GameControls implements Screen {
 	private Image keyA;
 	private Image keyS;
 	private Image keyD;
+	private Image keyP;
 	private Image arrowUp;
 	private Image arrowLeft;
 	private Image arrowDown;
@@ -54,6 +56,7 @@ public class GameControls implements Screen {
 	private Label keySLabel;
 	private Label keyDLabel;
 	private Label keyELabel;
+	private Label keyPLabel;
 	private Label shiftLabel;
 	
 	//Keyboard Textures
@@ -61,6 +64,7 @@ public class GameControls implements Screen {
 	private Texture texKeyA;
 	private Texture texKeyS;
 	private Texture texKeyD;
+	private Texture texKeyP;
 	private Texture texArrowUp;
 	private Texture texArrowLeft;
 	private Texture texArrowDown;
@@ -92,6 +96,7 @@ public class GameControls implements Screen {
 		texKeyA = new Texture("images/KeyBoardMouseIcons/Keyboard_White_A.png");
 		texKeyS = new Texture("images/KeyBoardMouseIcons/Keyboard_White_S.png");
 		texKeyD = new Texture("images/KeyBoardMouseIcons/Keyboard_White_D.png");
+		texKeyP = new Texture("images/KeyBoardMouseIcons/Keyboard_White_P.png");
 		texArrowUp = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Up.png");
 		texArrowLeft = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Left.png");
 		texArrowDown = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Down.png");
@@ -104,6 +109,7 @@ public class GameControls implements Screen {
 		keyA = new Image(texKeyA);
 		keyS = new Image(texKeyS);
 		keyD = new Image(texKeyD);
+		keyP = new Image(texKeyP);
 		arrowUp = new Image(texArrowUp);
 		arrowLeft = new Image(texArrowLeft);
 		arrowDown = new Image(texArrowDown);
@@ -117,7 +123,8 @@ public class GameControls implements Screen {
 		keySLabel = new Label("Down", skin);
 		keyDLabel = new Label("Right", skin);
 		keyELabel = new Label("Use", skin);
-		shiftLabel = new Label("Run", skin);	
+		shiftLabel = new Label("Run", skin);
+		keyPLabel = new Label("Pause", skin);
 	}
 
 	@Override
@@ -159,6 +166,11 @@ public class GameControls implements Screen {
 		selectionContainer.add(shiftLabel);
 		selectionContainer.add(shift).pad(0,0,0,20);
 		selectionContainer.row();
+		// Pause
+		selectionContainer.row();
+		selectionContainer.add(keyPLabel);
+		selectionContainer.add(keyP).pad(0,0,0,20);
+		selectionContainer.add();
 		// Interaction Keys
 		selectionContainer.row();
 		selectionContainer.add(interactionLabel).padTop(50).padBottom(20).colspan(4);
@@ -227,7 +239,7 @@ public class GameControls implements Screen {
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				parent.changeScreen(ScreenType.MENU);
+					parent.changeScreen(ScreenType.MENU);
 			}
 		});
 	}
