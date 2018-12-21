@@ -9,35 +9,43 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.AssetManager;
+import com.fourtress.model.GameState;
 import com.fourtress.model.SoundManager;
 
 public class PauseMenu implements Screen {
 	
 	private TeamFourtressGame parent;
 	private Stage stage;
-	private Skin skin;
+	private AssetManager assets;
+	private TextButtonStyle style;
 	private TextButton restartGame;
 	private TextButton continueGame;
+	private TextButton returnToMenu;
 	private TextButton exit;
+	private GameScreen screen;
 
 	
-	public PauseMenu(TeamFourtressGame tfg) {
+	public PauseMenu(TeamFourtressGame tfg, GameScreen screen) {
 		parent = tfg;
 		stage = new Stage(new ScreenViewport());
-		skin = new Skin(Gdx.files.internal("assets/vhs/skin/vhs-ui.json"));
-		restartGame = new TextButton("Restart Game", skin);
-		continueGame = new TextButton("Continue Game", skin);
-		exit = new TextButton("Exit", skin);
+		this.screen = screen;
+		assets = AssetManager.getInstance();
+		style = assets.getTextButtonStyle();
+		restartGame = new TextButton("Restart Game", style);
+		continueGame = new TextButton("Continue Game", style);
+		returnToMenu = new TextButton("Back to Menu", style);
+		exit = new TextButton("Exit", style);
 		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
 		addListeners();
 		
 		// Music setup
-		SoundManager.playMusic("audio/music/CatMouse.mp3");
+		//SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override
@@ -46,11 +54,13 @@ public class PauseMenu implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
-		table.add(restartGame).fillX().uniformX();
-		table.row().pad(10, 0, 10, 0);
-		table.add(continueGame).fillX().uniformX();
+		table.add(restartGame).fillX().uniformX().pad(10, 0, 0, 0);
 		table.row();
-		table.add(exit).fillX().uniformX();
+		table.add(continueGame).fillX().uniformX().pad(10, 0, 0, 0);
+		table.row();
+		table.add(returnToMenu).fillX().uniformX().pad(10, 0, 0, 0);
+		table.row();
+		table.add(exit).fillX().uniformX().pad(10, 0, 10, 0);
 	}
 
 	@Override
@@ -89,17 +99,27 @@ public class PauseMenu implements Screen {
 		stage.dispose();
 	}
 	
-	private void addListeners() {
-		restartGame.addListener(new ChangeListener() {
+	private void addListeners() {		
+		continueGame.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				screen.setState(GameState.RESUME);
 				parent.changeScreen(ScreenType.GAME);
 			}
 		});
 		
-		continueGame.addListener(new ChangeListener() {
+		restartGame.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				screen.setState(GameState.RESTART);
+				parent.changeScreen(ScreenType.GAME);
+			}
+		});
+		
+		returnToMenu.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				screen.setState(GameState.ENDGAME);
 				parent.changeScreen(ScreenType.GAME);
 			}
 		});

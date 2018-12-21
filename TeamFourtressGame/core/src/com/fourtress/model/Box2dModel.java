@@ -74,7 +74,15 @@ public class Box2dModel {
 			world.destroyJoint(jointToDestroy);
 			jointToDestroy = null;
 		}
-
+		
+		if(controller.p == true) {			
+			if(gameScreen.getState() == GameState.RUNNING) {
+				// Game is currently running so pause the game
+				controller.setPause(false);
+				gameScreen.setState(GameState.PAUSED);
+			}
+		}
+		
 		if (controller.left) {
 			if (controller.shift) {
 				if (player.getLinearVelocity().x >= -20) {

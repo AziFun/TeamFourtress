@@ -80,7 +80,21 @@ public class GameTimer {
 	public void setMaxSeconds(int maxSeconds) {
 			this.maxSeconds = maxSeconds;		
 	}
-		
+	
+	/**
+	 * Set the the maxSeconds
+	 */
+	public void setSeconds (int seconds) {
+		this.seconds = seconds;		
+	}
+	
+	/**
+	 * @return the maxSeconds
+	 */
+	public int getSeconds () {
+		return seconds;		
+	}
+	
 	/**
 	 * @return the TickValue
 	 */

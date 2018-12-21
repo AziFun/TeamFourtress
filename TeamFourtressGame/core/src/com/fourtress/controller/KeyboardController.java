@@ -11,7 +11,7 @@ public class KeyboardController implements InputProcessor {
 	public boolean up;
 	public boolean down;
 	public boolean shift;
-	public boolean p;
+	public boolean p = false;
 	public boolean switchAvailable = false;
 	public boolean playerAction;
 	
@@ -61,13 +61,13 @@ public class KeyboardController implements InputProcessor {
 			keyProcessed = true;
 			break;
 		case Keys.P:
-			shift = true;
+			setPause(true);
 			keyProcessed = true;
 			break;
 		}
 		return keyProcessed;
 	}
-
+	
 	@Override
 	public boolean keyUp(int keycode) {
 		boolean keyProcessed = false;
@@ -94,10 +94,6 @@ public class KeyboardController implements InputProcessor {
 			break;
 		case Keys.SHIFT_LEFT:
 			shift = false;
-			keyProcessed = true;
-			break;
-		case Keys.P:
-			shift = true;
 			keyProcessed = true;
 			break;
 		}
@@ -139,6 +135,14 @@ public class KeyboardController implements InputProcessor {
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public void setPause(Boolean status) {
+		this.p = status;
+		left = false;
+		right = false;
+		up = false;
+		down = false;
 	}
 
 }
