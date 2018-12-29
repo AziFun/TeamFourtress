@@ -1,5 +1,7 @@
 package com.fourtress.views;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
@@ -72,6 +74,7 @@ public class GameScreen extends ScreenAdapter {
 	public TextArea textArea;
 	public GameTimer timer;
 	private float elapsed;
+	private int levelNo = 1;
 	
 
 	public GameScreen(TeamFourtressGame parent) {
@@ -99,10 +102,13 @@ public class GameScreen extends ScreenAdapter {
 		SoundManager.playMusic("audio/music/musicbox.mp3");
 
 		// Map setup
+
 		LevelFactory levelGen = LevelFactory.getInstance();
-		level = levelGen.makeLevel(1, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
 		shapeRenderer = new ShapeRenderer();	
+
+		level = levelGen.makeLevel(levelNo, model);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+		
         	
 		//Text Area Setup
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
@@ -181,6 +187,16 @@ public class GameScreen extends ScreenAdapter {
 
 	}
 
+	public void setupNextLevel() {
+		
+		System.out.println("Setup Next Level Here...");
+		/*
+		LevelFactory levelGen = LevelFactory.getInstance();
+		levelNo++;
+		level = levelGen.makeLevel(levelNo, model);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f); */
+	}
+	
 
 	@Override
 	public void pause() {
@@ -207,6 +223,9 @@ public class GameScreen extends ScreenAdapter {
 		return stage;
 	}
 
+	public Level getLevel() {
+		return level;
+	}
 
 	public Skin getSkin() {
 		return skin;
