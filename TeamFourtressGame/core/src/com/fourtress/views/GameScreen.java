@@ -104,10 +104,11 @@ public class GameScreen extends ScreenAdapter {
 
 		// Map setup
 		levelGen = LevelFactory.getInstance();
+		level = levelGen.makeLevel(0, model);
 		level = levelGen.makeLevel(1, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
-		shapeRenderer = new ShapeRenderer();	
-        	
+		shapeRenderer = new ShapeRenderer();
+		
 		//Text Area Setup
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
 		textArea.setPosition(20, 1800);
@@ -118,9 +119,7 @@ public class GameScreen extends ScreenAdapter {
         stage.addActor(textArea);
        
         textArea.appendText(level.getInitialMessage() + "\n");
-        state = GameState.READY;
-        System.out.println(state);
-      
+        state = GameState.READY;      
 	}
 
 	@Override
@@ -193,13 +192,12 @@ public class GameScreen extends ScreenAdapter {
         	resume();
         	break;
         case RESTART:
-
+        	// Reset Level Functionality
+        	this.state = GameState.READY;
+        	parent.changeScreen(ScreenType.GAME);
         	break;
         case ENDGAME:
-        	
-        	
-        	
-        	
+        	// Reset Level Functionality then change screen to menu      	
         	break;
         default:
         	state = GameState.RUNNING;
@@ -255,6 +253,5 @@ public class GameScreen extends ScreenAdapter {
 	public GameState getState() {
 		return state;
 	}
-
 }
 
