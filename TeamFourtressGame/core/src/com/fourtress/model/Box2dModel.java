@@ -75,70 +75,41 @@ public class Box2dModel {
 			jointToDestroy = null;
 		}
 
+		float playerV;
+		float playerI;
+		if (controller.shift) {
+			playerV = maxV;
+			playerI = maxI;
+		} else {
+			playerV = minV;
+			playerI = minI;
+			slowPlayerSprint();
+		}
 		if (controller.left) {
-			if (controller.shift) {
-				if (player.getLinearVelocity().x >= -20) {
-					player.applyLinearImpulse(new Vector2(-10, 0), player.getWorldCenter(), true);
-				}
-			} else {
-				if (player.getLinearVelocity().x >= -10) {
-					player.applyLinearImpulse(new Vector2(-5, 0), player.getWorldCenter(), true);
-				}
+			if (player.getLinearVelocity().x >= -playerV) {
+				player.applyLinearImpulse(new Vector2(-playerI, 0), player.getWorldCenter(), true);
 			}
 		}
 		if (controller.right) {
-			if (controller.shift) {
-				// player.setLinearVelocity(10, player.getLinearVelocity().y);
-				if (player.getLinearVelocity().x <= 20) {
-					player.applyLinearImpulse(new Vector2(10, 0), player.getWorldCenter(), true);
-				}
-			} else {
-				// player.setLinearVelocity(5, player.getLinearVelocity().y);
-				if (player.getLinearVelocity().x <= 10) {
-					player.applyLinearImpulse(new Vector2(5, 0), player.getWorldCenter(), true);
-				}
+			if (player.getLinearVelocity().x <= playerV) {
+				player.applyLinearImpulse(new Vector2(playerI, 0), player.getWorldCenter(), true);
 			}
-
+		}
+		if (!controller.left && !controller.right) {
+			slowPlayerX();
 		}
 		if (controller.up) {
-			if (controller.shift) {
-				if (player.getLinearVelocity().y <= 20) {
-					player.applyLinearImpulse(new Vector2(0, 10), player.getWorldCenter(), true);
-				}
-			} else {
-				if (player.getLinearVelocity().y <= 10) {
-					player.applyLinearImpulse(new Vector2(0, 5), player.getWorldCenter(), true);
-				}
+			if (player.getLinearVelocity().y <= playerV) {
+				player.applyLinearImpulse(new Vector2(0, playerI), player.getWorldCenter(), true);
 			}
 		}
 		if (controller.down) {
-			if (controller.shift) {
-				if (player.getLinearVelocity().y >= -20) {
-					player.applyLinearImpulse(new Vector2(0, -10), player.getWorldCenter(), true);
-				}
-			} else {
-				if (player.getLinearVelocity().y >= -10) {
-					player.applyLinearImpulse(new Vector2(0, -5), player.getWorldCenter(), true);
-				}
-			}
-
-		}
-		if (!controller.shift) {
-			if (player.getLinearVelocity().y > 10) {
-				player.applyForceToCenter(0, -50, true);
-			}
-			if (player.getLinearVelocity().y < -10) {
-				player.applyForceToCenter(0, +50, true);
-			}
-			if (player.getLinearVelocity().x > 10) {
-				player.applyForceToCenter(-50, 0, true);
-			}
-			if (player.getLinearVelocity().x < -10) {
-				player.applyForceToCenter(+50, 0, true);
+			if (player.getLinearVelocity().y >= -playerV) {
+				player.applyLinearImpulse(new Vector2(0, -playerI), player.getWorldCenter(), true);
 			}
 		}
-		if (!controller.left && !controller.right && !controller.up && !controller.down) {
-			player.setLinearVelocity(0, 0);
+		if (!controller.up && !controller.down) {
+			slowPlayerY();
 		}
 		if (controller.playerAction) {
 			controller.playerAction = false;
@@ -146,6 +117,29 @@ public class Box2dModel {
 		}
 
 		world.step(delta, 3, 3);
+	}
+	
+	public void slowPlayerX() {
+		player.setLinearVelocity(player.getLinearVelocity().scl(0.75f, 1f));
+	}
+	
+	public void slowPlayerY() {
+		player.setLinearVelocity(player.getLinearVelocity().scl(1f, 0.75f));
+	}
+	
+	public void slowPlayerSprint() {
+		if (player.getLinearVelocity().y > minV) {
+			player.applyForceToCenter(0, -50, true);
+		}
+		if (player.getLinearVelocity().y < -minV) {
+			player.applyForceToCenter(0, +50, true);
+		}
+		if (player.getLinearVelocity().x > minV) {
+			player.applyForceToCenter(-50, 0, true);
+		}
+		if (player.getLinearVelocity().x < -minV) {
+			player.applyForceToCenter(+50, 0, true);
+		}
 	}
 
 	public void addLockJoint(String name, Joint j) {
