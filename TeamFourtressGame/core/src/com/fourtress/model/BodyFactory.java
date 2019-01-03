@@ -70,8 +70,7 @@ public class BodyFactory {
 		return fixtureDef;
 	}
 
-	public Body makeCirclePolyBody(float posx, float posy, float radius, Material material, BodyType bodyType,
-			boolean fixedRotation) {
+	public Body makeCirclePolyBody(float posx, float posy, float radius, Material material, BodyType bodyType, boolean fixedRotation) {
 		BodyDef boxBodyDef = new BodyDef();
 		boxBodyDef.type = bodyType;
 		boxBodyDef.position.x = posx;
@@ -90,13 +89,11 @@ public class BodyFactory {
 		return makeCirclePolyBody(posx, posy, radius, material, bodyType, false);
 	}
 
-	public Body makeBoxPolyBody(float posx, float posy, float width, float height, Material material,
-			BodyType bodyType) {
+	public Body makeBoxPolyBody(float posx, float posy, float width, float height, Material material, BodyType bodyType) {
 		return makeBoxPolyBody(posx, posy, width, height, material, bodyType, false);
 	}
 
-	public Body makeBoxPolyBody(float posx, float posy, float width, float height, Material material, BodyType bodyType,
-			boolean fixedRotation) {
+	public Body makeBoxPolyBody(float posx, float posy, float width, float height, Material material, BodyType bodyType, boolean fixedRotation) {
 		// create a definition
 		BodyDef boxBodyDef = new BodyDef();
 		boxBodyDef.type = bodyType;
@@ -117,8 +114,7 @@ public class BodyFactory {
 	public PolygonShape getRectangle(RectangleMapObject rectangleObject) {
 		Rectangle rectangle = rectangleObject.getRectangle();
 		PolygonShape polygon = new PolygonShape();
-		Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt,
-				(rectangle.y + rectangle.height * 0.5f) / ppt);
+		Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt, (rectangle.y + rectangle.height * 0.5f) / ppt);
 		polygon.setAsBox(rectangle.width * 0.5f / ppt, rectangle.height * 0.5f / ppt, size, 0.0f);
 		return polygon;
 	}
@@ -141,16 +137,18 @@ public class BodyFactory {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
 		}
-		StorageBoxLock sbl =  new StorageBoxLock(message, correctItem, lockName);
+		StorageBoxLock sbl = new StorageBoxLock(message, correctItem, lockName);
 		body.setUserData(sbl);
 		return sbl;
 	}
+
 	public void makeBodyLockSensor(Body body, String message, Key key, String lockName) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
 		}
 		body.setUserData(new Lock(message, key, lockName));
 	}
+
 	public void makeBodyComboLockSensor(Body body, String message, String combination, String lockName) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
@@ -162,8 +160,7 @@ public class BodyFactory {
 		Ellipse ellipse = ellipseObject.getEllipse();
 		CircleShape circleShape = new CircleShape();
 		circleShape.setRadius(ellipse.width / (2 * ppt));
-		circleShape.setPosition(
-				new Vector2((ellipse.x + ellipse.width * 0.5f) / ppt, (ellipse.y + ellipse.height * 0.5f) / ppt));
+		circleShape.setPosition(new Vector2((ellipse.x + ellipse.width * 0.5f) / ppt, (ellipse.y + ellipse.height * 0.5f) / ppt));
 		return circleShape;
 	}
 }

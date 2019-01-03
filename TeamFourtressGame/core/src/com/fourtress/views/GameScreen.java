@@ -16,6 +16,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
@@ -34,15 +36,21 @@ import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
+import com.fourtress.model.BodyFactory;
 import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -57,7 +65,8 @@ import com.fourtress.model.GameTimer;
 public class GameScreen extends ScreenAdapter {
 
 	private Box2dModel model;
-	private OrthographicCamera cam;
+	private OrthographicCamera gameCam;
+	private OrthographicCamera uiCam;
 	private Box2DDebugRenderer debugRenderer;
 	public TeamFourtressGame parent;
 	private KeyboardController controller;
@@ -70,29 +79,31 @@ public class GameScreen extends ScreenAdapter {
 	private ShapeRenderer shapeRenderer;
 	private Level level;
 	public TextArea textArea;
+	public Label timerLabel;
 	public GameTimer timer;
 	private float elapsed;
 	
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
-
+		float w = 60;
+		float h = 34;
+		
 		// Camera setup
-		cam = new OrthographicCamera(w / 10, h / 10);
-		stage = new Stage(new ScreenViewport());
-		cam.position.set(cam.viewportWidth / 2.2f, cam.viewportHeight / 2.2f, 0);
-		cam.update();
+		gameCam = new OrthographicCamera(w, h);
+		uiCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), uiCam));
+		gameCam.zoom = 0.7f;
+		gameCam.update();
     
 		// Controller setup
 		controller = new KeyboardController();
-		model = new Box2dModel(cam, controller, this);
+		model = new Box2dModel(gameCam, controller, this);
 		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
 
 		// Sprite setup
 		sb = new SpriteBatch();
-		sb.setProjectionMatrix(cam.combined);
+		sb.setProjectionMatrix(uiCam.combined);
 		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
 
 		// Music setup
@@ -101,19 +112,39 @@ public class GameScreen extends ScreenAdapter {
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(1, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1/BodyFactory.ppt);
 		shapeRenderer = new ShapeRenderer();	
         	
 		//Text Area Setup
+		Table table = new Table();
+		table.setFillParent(true);
+		table.left().top();
+		//table.debugAll();
+		//table.setFillParent(true);
+		//FreeTypeFontGenerator ftfg = new FreeTypeFontGenerator(Gdx.files.internal("assets/slkscreb.ttf"));
+		//FreeTypeFontParameter param =new FreeTypeFontParameter();
+		//param.size = 56;
+		//BitmapFont font = ftfg.generateFont(param);
+		//font.getData().setScale(1/16f, 1/16f);
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
-		textArea.setPosition(20, 1800);
-		textArea.setHeight(200);
-		textArea.setWidth(700);
         textArea.setColor(Color.BLACK);
-        skin.getFont("default-font").getData().setScale(2f,2f);
-        stage.addActor(textArea);
+        skin.getFont("default-font").getData().scale(0.2f);
+        table.add(textArea).grow().pad(10);
+        timerLabel = new Label("Time :", skin);
+        table.add(timerLabel).grow();
+        table.row();
+        table.add().grow();
+        table.row();
+        table.add().grow();
+        table.row();
+        table.add().grow();
+        table.debug();
+        //textArea.setPosition(0, 0);
+        //table.row();
+        //table.add(textArea).expand();
+        stage.addActor(table);
        
-        textArea.appendText(level.getInitialMessage() + "\n");
+        //textArea.appendText(level.getInitialMessage() + "\n");
 	}
 
 	@Override
@@ -134,21 +165,23 @@ public class GameScreen extends ScreenAdapter {
 		model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		cam.update();
-		mapRenderer.setView(cam);
+		gameCam.position.set(model.player.getPosition(), gameCam.position.z);
+		gameCam.update();
+		mapRenderer.setView(gameCam);
 		mapRenderer.render();
-		//debugRenderer.render(model.world, cam.combined);
+		debugRenderer.render(model.world, gameCam.combined);
 		sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
 		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-		sb.draw(playerSprite, model.player.getPosition().x - 1, model.player.getPosition().y - 1, 2, 2);
+		System.out.println(gameCam.viewportWidth);
+		sb.draw(playerSprite, (uiCam.viewportWidth/2)-50,(uiCam.viewportHeight/2)-50, 100, 100);
 		sb.end();
 		
 		// Display the time remaining for the player to complete the level
 		elapsed += delta;
 	
 		if (elapsed >= 0.99f) {
-		   System.out.println("minutes " + timer.getFormattedMinutes() + " seconds " + timer.getFormattedSeconds());
+		   timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
 		   elapsed = 0f;
 		   
 		   if(timer.getTimeUp() == true) {
@@ -158,14 +191,14 @@ public class GameScreen extends ScreenAdapter {
 		
 		shapeRenderer.setAutoShapeType(true);
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setProjectionMatrix(cam.combined);
+		shapeRenderer.setProjectionMatrix(gameCam.combined);
 		shapeRenderer.setColor(Color.CYAN);
 		
 		for (Body door : model.physicsObjects) {
 			DoorData doorData = (DoorData) door.getUserData();
-			shapeRenderer.rect(doorData.doorBody.getRectangle().x / 32, doorData.doorBody.getRectangle().y / 32,
-					doorData.hingeCentre.x / 32, doorData.hingeCentre.y / 32,
-					doorData.doorBody.getRectangle().width / 32, doorData.doorBody.getRectangle().height / 32, 1, 1,
+			shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt,
+					doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
+					doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1,
 					door.getAngle() * MathUtils.radiansToDegrees);
 		}
 		
@@ -178,7 +211,7 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
-
+		uiCam.update();
 	}
 
 

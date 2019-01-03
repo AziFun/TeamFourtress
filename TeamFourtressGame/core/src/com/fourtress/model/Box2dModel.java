@@ -153,15 +153,13 @@ public class Box2dModel {
 	}
 
 	public void setSpawn(Ellipse spawn) {
-		player = bodyFactory.makeCirclePolyBody(spawn.x / BodyFactory.ppt, spawn.y / BodyFactory.ppt, 1,
-				Material.Player, BodyType.DynamicBody, false);
+		player = bodyFactory.makeCirclePolyBody(spawn.x / BodyFactory.ppt, spawn.y / BodyFactory.ppt, 2, Material.Player, BodyType.DynamicBody, false);
 		player.setUserData("Player");
 	}
-	
+
 	public void setFinish(Ellipse finish) {
-		finishLine = bodyFactory.makeCirclePolyBody((finish.x + finish.width/2)/ BodyFactory.ppt, (finish.y + finish.height/2)/ BodyFactory.ppt, finish.width / BodyFactory.ppt,
-				Material.Rubber, BodyType.StaticBody, false);
-		bodyFactory.makeBodySensor(finishLine,"finish");
+		finishLine = bodyFactory.makeCirclePolyBody((finish.x + finish.width / 2) / BodyFactory.ppt, (finish.y + finish.height / 2) / BodyFactory.ppt, finish.width / BodyFactory.ppt, Material.Rubber, BodyType.StaticBody, false);
+		bodyFactory.makeBodySensor(finishLine, "finish");
 		finishLine.setUserData("finish");
 	}
 
@@ -243,7 +241,7 @@ public class Box2dModel {
 				}
 			}
 		}
-		
+
 		inputText = null;
 		actionUnlock = null;
 	}
