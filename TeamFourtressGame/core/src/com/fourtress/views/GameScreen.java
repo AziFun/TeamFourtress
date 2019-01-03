@@ -74,7 +74,7 @@ public class GameScreen extends ScreenAdapter {
 	public TextArea textArea;
 	public GameTimer timer;
 	private float elapsed;
-	private int levelNo = 1;
+	private int levelNo = 3;
 	
 
 	public GameScreen(TeamFourtressGame parent) {
