@@ -6,30 +6,24 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Joint;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.controller.MyTextInputListener;
 import com.fourtress.views.GameScreen;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 
 public class Box2dModel {
 
+	public final float maxV = 20;
+	public final float minV = 10;
+	public final float maxI = 10;
+	public final float minI = 5;
 	public World world;
 	public GameScreen gameScreen;
 	private OrthographicCamera cam;
@@ -238,6 +232,11 @@ public class Box2dModel {
 
 		inputText = null;
 		actionUnlock = null;
+		actionText = null;
+	}
+	
+	public boolean isActionAvailable() {
+		return actionText != null;
 	}
 
 }

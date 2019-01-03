@@ -1,65 +1,40 @@
 package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.BodyFactory;
 import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
+import com.fourtress.model.GameTimer;
 import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
 import com.fourtress.model.SoundManager;
-import com.fourtress.model.GameTimer;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -80,6 +55,7 @@ public class GameScreen extends ScreenAdapter {
 	private Level level;
 	public TextArea textArea;
 	public Label timerLabel;
+	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
 	
@@ -131,13 +107,19 @@ public class GameScreen extends ScreenAdapter {
         skin.getFont("default-font").getData().scale(0.2f);
         table.add(textArea).grow().pad(10);
         timerLabel = new Label("Time :", skin);
-        table.add(timerLabel).grow();
-        table.row();
+        timerLabel.setFontScale(2);;
+        table.add(timerLabel).top().expandX();
         table.add().grow();
         table.row();
         table.add().grow();
         table.row();
         table.add().grow();
+        table.row();
+        table.add().grow();
+        table.add().grow();
+        actionIndicator = new Image(new Texture(Gdx.files.internal("hand-icon.png")));
+        actionIndicator.setScaling(Scaling.fit);
+        table.add(actionIndicator).bottom().right().size(100);
         table.debug();
         //textArea.setPosition(0, 0);
         //table.row();
@@ -173,7 +155,6 @@ public class GameScreen extends ScreenAdapter {
 		sb.begin();
 		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
 		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
-		System.out.println(gameCam.viewportWidth);
 		sb.draw(playerSprite, (uiCam.viewportWidth/2)-50,(uiCam.viewportHeight/2)-50, 100, 100);
 		sb.end();
 		
@@ -203,6 +184,11 @@ public class GameScreen extends ScreenAdapter {
 		}
 		
 		shapeRenderer.end();
+		if (model.isActionAvailable()) {
+			actionIndicator.setVisible(true);
+		} else {
+			actionIndicator.setVisible(false);
+		}
 		stage.draw();
 	    playerSprite.dispose();
 	    keySprite.dispose();	

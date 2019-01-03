@@ -98,8 +98,14 @@ public class GameTimer {
 	/**
 	 * @return the seconds on the timer
 	 */
-	public long getFormattedSeconds() {
-		return formattedSeconds;
+	public String getFormattedSeconds() {
+		String end;
+		if (formattedSeconds < 10) {
+			end = "0";
+		} else {
+			end = "";
+		}
+		return end + formattedSeconds;
 	}
 	
 	/**
