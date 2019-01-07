@@ -55,7 +55,6 @@ public class Box2dModel {
 		this.cam = cam;
 		this.gameScreen = gameScreen;
 		this.controller = controller;
-		this.bodyFactory = bodyFactory;
 		physicsObjects = new LinkedList<Body>();
 		multiLocks = new LinkedList<StorageBoxLock>();
 		this.inventory = new Inventory();
@@ -256,4 +255,8 @@ public class Box2dModel {
 		actionUnlock = null;
 	}
 
+	public void dispose() {	
+		//world.dispose();		
+	}
+	
 }

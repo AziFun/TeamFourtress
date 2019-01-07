@@ -77,11 +77,13 @@ public class GameScreen extends ScreenAdapter {
 	private int currentSeconds;
 	private PauseMenu pause;
 	private LevelFactory levelGen;
+	private float w;
+	private float h;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
+		w = Gdx.graphics.getWidth();
+		h = Gdx.graphics.getHeight();
 		
 		// Camera setup
 		cam = new OrthographicCamera(w / 10, h / 10);
@@ -97,19 +99,18 @@ public class GameScreen extends ScreenAdapter {
 		// Sprite setup
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(cam.combined);
-		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
-
+		
 		// Music setup
 		SoundManager.playMusic("audio/music/musicbox.mp3");
 
 		// Map setup
 		levelGen = LevelFactory.getInstance();
-		level = levelGen.makeLevel(0, model);
-		level = levelGen.makeLevel(1, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+        init(1);
 		shapeRenderer = new ShapeRenderer();
 		
 		//Text Area Setup
+        skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
+        
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
 		textArea.setPosition(20, 1800);
 		textArea.setHeight(200);
@@ -117,11 +118,23 @@ public class GameScreen extends ScreenAdapter {
         textArea.setColor(Color.BLACK);
         skin.getFont("default-font").getData().setScale(2f,2f);
         stage.addActor(textArea);
-       
         textArea.appendText(level.getInitialMessage() + "\n");
-        state = GameState.READY;      
-	}
+        
+        // Initial Game State 
+        state = GameState.READY; 
 
+	}
+	
+	public void init(int levelNum){
+	   level = levelGen.makeLevel(levelNum, model);
+	   mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+    }
+	 
+    public void reset(){
+    	model.dispose();
+    	model = new Box2dModel(cam, controller, this);
+    }
+    
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
@@ -194,10 +207,14 @@ public class GameScreen extends ScreenAdapter {
         case RESTART:
         	// Reset Level Functionality
         	this.state = GameState.READY;
-        	parent.changeScreen(ScreenType.GAME);
+        	//reset();
+        	//init(1);
+        	//parent.changeScreen(ScreenType.GAME);
         	break;
         case ENDGAME:
-        	// Reset Level Functionality then change screen to menu      	
+        	//this.state = GameState.READY;
+        	//reset();
+        	//parent.changeScreen(ScreenType.MENU);
         	break;
         default:
         	state = GameState.RUNNING;
