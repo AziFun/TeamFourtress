@@ -2,7 +2,13 @@ package com.fourtress.model;
 
 import java.util.HashMap;
 
-public class Inventory {
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+
+public class Inventory implements ObservableValue<Item>{
 
 	HashMap<Integer, Item> items;
 
@@ -102,5 +108,35 @@ public class Inventory {
 		inv.print();
 		inv.reset();
 		inv.print();
+	}
+
+	@Override
+	public void addListener(ChangeListener<? super Item> listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Item getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeListener(ChangeListener<? super Item> listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addListener(InvalidationListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeListener(InvalidationListener listener) {
+		// TODO Auto-generated method stub
+		
 	}
 }

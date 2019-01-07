@@ -55,6 +55,7 @@ public class GameScreen extends ScreenAdapter {
 	private Level level;
 	public TextArea textArea;
 	public Label timerLabel;
+	public Label inventoryDisplay;
 	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
@@ -106,7 +107,7 @@ public class GameScreen extends ScreenAdapter {
         textArea.setColor(Color.BLACK);
         skin.getFont("default-font").getData().scale(0.2f);
         table.add(textArea).grow().pad(10);
-        timerLabel = new Label("Time :", skin);
+        timerLabel = new Label("", skin);
         timerLabel.setFontScale(2);;
         table.add(timerLabel).top().expandX();
         table.add().grow();
@@ -115,7 +116,8 @@ public class GameScreen extends ScreenAdapter {
         table.row();
         table.add().grow();
         table.row();
-        table.add().grow();
+        inventoryDisplay = new Label("", skin);
+        table.add(inventoryDisplay).grow();
         table.add().grow();
         actionIndicator = new Image(new Texture(Gdx.files.internal("hand-icon.png")));
         actionIndicator.setScaling(Scaling.fit);
