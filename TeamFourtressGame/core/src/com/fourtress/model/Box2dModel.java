@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.controller.MyTextInputListener;
+import com.fourtress.exceptions.InventoryFullException;
 import com.fourtress.views.GameScreen;
 
 public class Box2dModel {
@@ -40,7 +41,7 @@ public class Box2dModel {
 	private Dialog actionDialog;
 	private Skin skin;
 	public String inputText;
-	public List<StorageBoxLock> multiLocks;
+	public List<StorageBoxSwitch> multiLocks;
 	public Joint jointToDestroy;
 	private Body finishLine;
 	public List<Body> physicsObjects;
@@ -51,7 +52,7 @@ public class Box2dModel {
 		this.controller = controller;
 		this.bodyFactory = bodyFactory;
 		physicsObjects = new LinkedList<Body>();
-		multiLocks = new LinkedList<StorageBoxLock>();
+		multiLocks = new LinkedList<StorageBoxSwitch>();
 		this.inventory = new Inventory();
 		this.world = new World(new Vector2(), true);
 		listener = new ContactListener(this);
@@ -105,22 +106,52 @@ public class Box2dModel {
 		if (!controller.up && !controller.down) {
 			slowPlayerY();
 		}
-		if (controller.playerAction) {
-			controller.playerAction = false;
+		if (isStorageAvailable()) {
+			if (actionUnlock.item == null) {
+				if (controller.num1) {
+					actionUnlock.item = inventory.remove(1);
+				} else if (controller.num2) {
+					actionUnlock.item = inventory.remove(2);
+				} else if (controller.num3) {
+					actionUnlock.item = inventory.remove(3);
+				} else if (controller.num4) {
+					actionUnlock.item = inventory.remove(4);
+				} else if (controller.num5) {
+					actionUnlock.item = inventory.remove(5);
+				} else if (controller.num6) {
+					actionUnlock.item = inventory.remove(6);
+				} else if (controller.num7) {
+					actionUnlock.item = inventory.remove(7);
+				} else if (controller.num8) {
+					actionUnlock.item = inventory.remove(8);
+				} else if (controller.num9) {
+					actionUnlock.item = inventory.remove(9);
+				}
+			} else if (controller.enter) {
+				try {
+					inventory.addItem(actionUnlock.item);
+					actionUnlock.item = null;
+				} catch (Exception e) {
+					gameScreen.textArea.appendText("You are carrying too much\n");
+				}
+				
+			}
+		} else if (controller.enter) {
+			controller.enter = false;
 			playerAction();
 		}
 
 		world.step(delta, 3, 3);
 	}
-	
+
 	public void slowPlayerX() {
 		player.setLinearVelocity(player.getLinearVelocity().scl(0.75f, 1f));
 	}
-	
+
 	public void slowPlayerY() {
 		player.setLinearVelocity(player.getLinearVelocity().scl(1f, 0.75f));
 	}
-	
+
 	public void slowPlayerSprint() {
 		if (player.getLinearVelocity().y > minV) {
 			player.applyForceToCenter(0, -50, true);
@@ -164,7 +195,7 @@ public class Box2dModel {
 		if (iEntity instanceof Lock) {
 			actionUnlock = iEntity;
 		}
-		if (iEntity instanceof StorageBoxLock) {
+		if (iEntity instanceof StorageBoxSwitch) {
 			actionUnlock = iEntity;
 		}
 	}
@@ -189,20 +220,7 @@ public class Box2dModel {
 						world.destroyJoint(lockJoints.remove(((CombinationLock) actionUnlock).getName()));
 					}
 				}
-			} else if (actionUnlock instanceof StorageBoxLock) {
-				if (inputText == null) {
-					actionText = "Please enter the number of the item you want to insert. ";
-					actionText += inventory.toString();
-					MyTextInputListener listener = new MyTextInputListener(this);
-					Gdx.input.getTextInput(listener, "Please Enter Slot Number or R to remove item", "", "Slot Number");
-				} else {
-					if (inputText.equals("R")) {
-						inventory.addItem(actionUnlock.getItem());
-					} else {
-						actionUnlock.item = inventory.remove(inputText);
-					}
-				}
-			}
+			} 
 		}
 		if (actionText != null) {
 			// Text Area set for actions
@@ -210,22 +228,26 @@ public class Box2dModel {
 			System.out.println(actionText);
 		}
 		if (actionItem != null) {
-			inventory.addItem(actionItem);
+			try {
+				inventory.addItem(actionItem);
+			} catch (InventoryFullException e) {
+				gameScreen.textArea.appendText("You are carrying too much\n");
+			}
 		}
 	}
 
 	public void endPlayerAction() {
-		if (actionUnlock != null && actionUnlock instanceof StorageBoxLock) {
+		if (actionUnlock != null && actionUnlock instanceof StorageBox) {
 			boolean atLeastOneLocked = false;
-			for (StorageBoxLock lock : multiLocks) {
-				if (!lock.checkLock()) {
+			for (StorageBoxSwitch zwich : multiLocks) {
+				if (!zwich.checkSwitch()) {
 					atLeastOneLocked = true;
 					break;
 				}
 			}
 			if (atLeastOneLocked == false) {
-				if (lockJoints.containsKey(((StorageBoxLock) actionUnlock).getLockName())) {
-					jointToDestroy = lockJoints.remove(((StorageBoxLock) actionUnlock).getLockName());
+				if (lockJoints.containsKey(((StorageBoxSwitch) actionUnlock).getLockName())) {
+					jointToDestroy = lockJoints.remove(((StorageBoxSwitch) actionUnlock).getLockName());
 				}
 			}
 		}
@@ -234,9 +256,12 @@ public class Box2dModel {
 		actionUnlock = null;
 		actionText = null;
 	}
-	
+
 	public boolean isActionAvailable() {
 		return actionText != null;
 	}
 
+	public boolean isStorageAvailable() {
+		return actionUnlock instanceof StorageBoxSwitch;
+	}
 }

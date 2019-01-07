@@ -1,6 +1,12 @@
 package com.fourtress.views;
 
+import java.util.List;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -32,6 +38,7 @@ import com.fourtress.model.BodyFactory;
 import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
 import com.fourtress.model.GameTimer;
+import com.fourtress.model.Item;
 import com.fourtress.model.Level;
 import com.fourtress.model.LevelFactory;
 import com.fourtress.model.SoundManager;
@@ -97,12 +104,6 @@ public class GameScreen extends ScreenAdapter {
 		table.setFillParent(true);
 		table.left().top();
 		//table.debugAll();
-		//table.setFillParent(true);
-		//FreeTypeFontGenerator ftfg = new FreeTypeFontGenerator(Gdx.files.internal("assets/slkscreb.ttf"));
-		//FreeTypeFontParameter param =new FreeTypeFontParameter();
-		//param.size = 56;
-		//BitmapFont font = ftfg.generateFont(param);
-		//font.getData().setScale(1/16f, 1/16f);
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
         textArea.setColor(Color.BLACK);
         skin.getFont("default-font").getData().scale(0.2f);
@@ -117,18 +118,21 @@ public class GameScreen extends ScreenAdapter {
         table.add().grow();
         table.row();
         inventoryDisplay = new Label("", skin);
+        model.inventory.addListener(new ChangeListener<Map<Integer, Item>>() {
+			@Override
+			public void changed(ObservableValue<? extends Map<Integer, Item>> observable, Map<Integer, Item> oldValue, Map<Integer, Item> newValue) {
+				inventoryDisplay.setText(formatInventory(newValue));
+			}
+        });
         table.add(inventoryDisplay).grow();
         table.add().grow();
         actionIndicator = new Image(new Texture(Gdx.files.internal("hand-icon.png")));
         actionIndicator.setScaling(Scaling.fit);
         table.add(actionIndicator).bottom().right().size(100);
         table.debug();
-        //textArea.setPosition(0, 0);
-        //table.row();
-        //table.add(textArea).expand();
         stage.addActor(table);
        
-        //textArea.appendText(level.getInitialMessage() + "\n");
+        textArea.appendText(level.getInitialMessage() + "\n");
 	}
 
 	@Override
@@ -188,6 +192,11 @@ public class GameScreen extends ScreenAdapter {
 		shapeRenderer.end();
 		if (model.isActionAvailable()) {
 			actionIndicator.setVisible(true);
+			if (model.isStorageAvailable()) {
+				//do something to highlight
+			} else {
+				//stop doing the thing
+			}
 		} else {
 			actionIndicator.setVisible(false);
 		}
@@ -231,6 +240,14 @@ public class GameScreen extends ScreenAdapter {
 
 	public Skin getSkin() {
 		return skin;
+	}
+	
+	private String formatInventory(Map<Integer, Item> inventory) {
+		String formatted = "";
+		for (int i = 1; i < 11; i++) {
+			formatted += i + ": " + (inventory.get(i) != null ? inventory.get(i).name : "") + "\n";
+		}
+		return formatted;
 	}
 
 }

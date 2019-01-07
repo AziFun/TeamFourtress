@@ -131,11 +131,11 @@ public class BodyFactory {
 		body.setUserData(new InteractableEntity(message, item));
 	}
 
-	public StorageBoxLock makeBodyMultiLockSensor(Body body, String message, Item correctItem, String lockName) {
+	public StorageBoxSwitch makeBodyMultiLockSensor(Body body, String message, Item correctItem, String lockName) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
 		}
-		StorageBoxLock sbl = new StorageBoxLock(message, correctItem, lockName);
+		StorageBoxSwitch sbl = new StorageBoxSwitch(message, correctItem, lockName);
 		body.setUserData(sbl);
 		return sbl;
 	}
