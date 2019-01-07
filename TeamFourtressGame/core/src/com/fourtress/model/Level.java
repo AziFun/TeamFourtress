@@ -207,7 +207,6 @@ public class Level {
 	
 	private void setLastLevel() {
 		lastLevel = (Boolean) tiledMap.getProperties().get("Last Level");
-		System.out.println("Test: " + lastLevel);
 	}
 	
 	public Boolean isLastLevel() {
