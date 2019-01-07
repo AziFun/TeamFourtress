@@ -611,12 +611,6 @@
    <ellipse/>
   </object>
   <object id="188" x="102" y="258" width="61" height="37" visible="0"/>
-  <object id="189" name="Initial Message" x="135" y="269">
-   <properties>
-    <property name="Message" value="Hint.. Speak to the teacher in the lecture room ;)"/>
-   </properties>
-  </object>
-  <object id="190" x="179" y="245"/>
  </objectgroup>
  <objectgroup id="32" name="End Layer">
   <object id="186" name="Player End" x="1900.5" y="481.833" width="400" height="400">

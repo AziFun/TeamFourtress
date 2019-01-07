@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="328">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="340">
  <properties>
-  <property name="Initial Message" value="Hint.. blah blah"/>
+  <property name="Initial Message" value="Why don't you see what's for lunch in the canteen?"/>
   <property name="Last Level" type="bool" value="false"/>
  </properties>
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
@@ -94,8 +94,6 @@
   <object id="322" x="0.500167" y="507.167" width="312" height="7"/>
   <object id="323" x="1.50017" y="865.167" width="312" height="7"/>
   <object id="325" x="-26" y="506" width="28" height="373"/>
-  <object id="326" x="-63" y="733"/>
-  <object id="327" x="-197" y="824"/>
  </objectgroup>
  <objectgroup id="28" name="Interaction Layer">
   <object id="239" name="Document2" type="Information" x="602" y="311.333" width="72" height="72.3333">
@@ -111,9 +109,15 @@
    <ellipse/>
   </object>
   <object id="245" name="Plant" type="Information" x="1705" y="509" width="70" height="70">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="246" name="Plant" x="1707" y="791" width="70" height="70">
+  <object id="246" name="Plant" type="Information" x="1707" y="791" width="70" height="70">
+   <properties>
+    <property name="Message" value="Why don't you make like a tree and leaf?"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="247" name="Sign2" type="Information" x="1003" y="793" width="70" height="70">
@@ -129,27 +133,115 @@
    <ellipse/>
   </object>
   <object id="251" name="Crates1" type="Information" x="1333" y="873" width="70" height="70">
+   <properties>
+    <property name="Message" value="Fish, Potatoes, Tomatos and Salad. Yummy! :)"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="252" name="Crates2" type="Information" x="1659" y="875" width="70" height="70">
    <ellipse/>
   </object>
-  <object id="256" name="Cooker1" type="Information" x="391" y="961" width="70" height="70">
+  <object id="256" name="Ingredients 1" type="Information" x="565.5" y="955" width="61.5" height="65.5">
+   <properties>
+    <property name="Message" value="We need some tomatoes for this dish!"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="258" name="Cooker2" type="Information" x="635" y="1141" width="70" height="70">
+  <object id="258" name="Cooker2" type="Information" x="635" y="1147.5" width="70" height="85">
+   <properties>
+    <property name="Message" value="Smells good!"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="259" name="Food stand" type="Information" x="1497" y="1041" width="70" height="70">
+  <object id="259" name="Food stand" type="Information" x="1495" y="1028" width="70" height="70">
    <ellipse/>
   </object>
   <object id="282" name="Bottles" type="Information" x="1255" y="986" width="70" height="70">
+   <properties>
+    <property name="Message" value="Hmmm what to drink?"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="290" name="Baskets" type="Information" x="1726" y="880" width="70" height="70">
+   <properties>
+    <property name="Message" value="Please throw any rubbish away here"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="318" x="1095" y="505" width="14" height="7"/>
+  <object id="328" name="Coffee Stand" type="Information" x="1663" y="1006" width="70" height="70">
+   <properties>
+    <property name="Message" value="Coffee Anyone?"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="329" name="Macbeth M" type="Information" x="1465" y="310" width="41" height="38">
+   <properties>
+    <property name="Message" value="M"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="330" name="Macbeth A" type="Information" x="1466.5" y="250" width="41" height="38">
+   <properties>
+    <property name="Message" value="A"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="331" name="Macbeth C" type="Information" x="1466.5" y="184" width="41" height="38">
+   <properties>
+    <property name="Message" value="C"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="332" name="Macbeth B" type="Information" x="1344.5" y="317" width="41" height="38">
+   <properties>
+    <property name="Message" value="B"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="333" name="Macbeth E" type="Information" x="1342.5" y="248" width="41" height="38">
+   <properties>
+    <property name="Message" value="E"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="334" name="Macbeth T" type="Information" x="1338.5" y="181" width="41" height="38">
+   <properties>
+    <property name="Message" value="T"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="335" name="Macbeth H" type="Information" x="1234.5" y="306" width="62" height="59">
+   <properties>
+    <property name="Message" value="H"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="336" name="Student Message" type="Information" x="1245.5" y="175" width="49" height="48">
+   <properties>
+    <property name="Message" value="Hmmm I wonder what Author we're studying Today? :D"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="337" name="Ingredients" type="Information" x="573.667" y="1148.33" width="36.6667" height="73.6667">
+   <properties>
+    <property name="Message" value="Lasagna Ingredients"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="338" name="Cooker1" type="Information" x="392.75" y="959.25" width="61.5" height="65.5">
+   <properties>
+    <property name="Message" value="This oven is empty..."/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="339" name="Library" type="ComboLock" x="571" y="495" width="70" height="70">
+   <properties>
+    <property name="Combination" value="shakespeare"/>
+    <property name="Message" value="You need a combination for this door"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup id="29" name="Spawn Layer">
   <object id="220" name="Player Spawn" x="158.333" y="674.667" width="35" height="35">
