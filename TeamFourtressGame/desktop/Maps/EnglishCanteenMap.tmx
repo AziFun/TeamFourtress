@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="340">
+ <properties>
+  <property name="Initial Message" value="Why don't you see what's for lunch in the canteen?"/>
+  <property name="Last Level" type="bool" value="false"/>
+ </properties>
+ <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="scorpio_internal_furniture" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="images/Skorpio's Pack/Interior-Furniture.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="Interior-Walls-Beige" tilewidth="32" tileheight="32" tilecount="100" columns="10">
+  <image source="images/Skorpio's Pack/Interior-Walls-Beige.png" width="320" height="320"/>
+ </tileset>
+ <tileset firstgid="613" name="Interior-Walls-Blue" tilewidth="32" tileheight="32" tilecount="100" columns="10">
+  <image source="images/Skorpio's Pack/Interior-Walls-Blue.png" width="320" height="320"/>
+ </tileset>
+ <tileset firstgid="713" name="rpg_maker_vx_rtp_tileset_by_telles0808" tilewidth="32" tileheight="32" tilecount="2016" columns="32">
+  <image source="images/rpg_maker_vx_rtp_tileset_by_telles0808.png" width="1024" height="2016"/>
+ </tileset>
+ <layer id="23" name="Floor" width="68" height="42">
+  <data encoding="base64" compression="zlib">
+   eJzt0skJgDAURdGIvbi3BG1BO0l/Ymm6cSGCY8SB8+DuAoHDD8HOrMjuq8mXpf6DBw8e//SIPNzHAY/Iw33w2PSIPNwHDx48knnEhz3KEPqpeqVqfPvl6pXKeTx48ODBgwcPHjx4vMZj79r8et2DpR4PHjx48ODBgwcPHjx48ODxZo8BzE4+Qw==
+  </data>
+ </layer>
+ <objectgroup id="26" name="Object Layer">
+  <object id="2" x="320" y="23" width="1543" height="10"/>
+  <object id="3" x="1855" y="24" width="8" height="488"/>
+  <object id="4" x="1440" y="506" width="414" height="7"/>
+  <object id="5" x="672" y="506" width="641" height="7"/>
+  <object id="6" x="1217" y="32" width="6" height="474"/>
+  <object id="7" x="1049" y="31" width="8" height="476"/>
+  <object id="8" x="311" y="505" width="232" height="8"/>
+  <object id="9" x="312" y="24" width="9" height="479"/>
+  <object id="10" x="311" y="864" width="11" height="481"/>
+  <object id="12" x="319" y="1334" width="1545" height="10"/>
+  <object id="13" x="1856" y="863" width="8" height="470"/>
+  <object id="14" x="1215" y="861" width="642" height="10"/>
+  <object id="129" x="1716" y="106" width="1"/>
+  <object id="130" x="1713" y="45" width="6" height="75.5"/>
+  <object id="139" x="1760" y="64.5" width="31" height="62"/>
+  <object id="157" x="960.5" y="63" width="31.5" height="64"/>
+  <object id="180" x="1790.5" y="1119.5" width="64" height="34"/>
+  <object id="181" x="1790.5" y="1246.5" width="65" height="35.5"/>
+  <object id="182" x="1663.5" y="1278.5" width="32.5" height="33"/>
+  <object id="183" x="1630.5" y="1150.5" width="33.5" height="32.5"/>
+  <object id="186" x="1471.5" y="1278.5" width="96" height="32.5"/>
+  <object id="187" x="1406.5" y="1151" width="32.5" height="35"/>
+  <object id="189" x="1341.5" y="1279" width="35" height="32.5"/>
+  <object id="190" x="1279" y="1149.5" width="32.5" height="35"/>
+  <object id="191" x="1182" y="1278.5" width="35.5" height="32.5"/>
+  <object id="192" x="1118.5" y="1152.5" width="64.5" height="34"/>
+  <object id="193" x="1118.5" y="990" width="64.5" height="34"/>
+  <object id="194" x="958" y="992.5" width="65.5" height="33"/>
+  <object id="195" x="959.5" y="1152" width="63.5" height="32.5"/>
+  <object id="197" x="416" y="1162.5" width="287.5" height="47.5"/>
+  <object id="198" x="416" y="1290.5" width="287" height="44.5"/>
+  <object id="199" x="415.5" y="970.5" width="289" height="46.5"/>
+  <object id="201" x="416" y="870" width="287.5" height="19"/>
+  <object id="206" x="1344" y="869" width="447.5" height="59"/>
+  <object id="207" x="312" y="864" width="549.333" height="6.66667"/>
+  <object id="209" x="857.5" y="864" width="6" height="384"/>
+  <object id="210" x="832.5" y="1240.5" width="31" height="8"/>
+  <object id="211" x="1024" y="863.5" width="193.5" height="7"/>
+  <object id="213" x="1024" y="830" width="31" height="33"/>
+  <object id="214" x="832" y="829" width="31" height="34"/>
+  <object id="216" x="385" y="515" width="30" height="27"/>
+  <object id="218" x="1729" y="512" width="31" height="31"/>
+  <object id="291" x="1154" y="480" width="28" height="24"/>
+  <object id="292" x="1121" y="318" width="30" height="32"/>
+  <object id="293" x="1185" y="223" width="29" height="30"/>
+  <object id="294" x="1059" y="161" width="29" height="30"/>
+  <object id="297" x="1193" y="51" width="13" height="33"/>
+  <object id="298" x="1478" y="996" width="117.5" height="87"/>
+  <object id="299" x="1664.5" y="1001" width="62" height="46"/>
+  <object id="300" x="1281.5" y="1002.5" width="123.5" height="44.5"/>
+  <object id="301" x="1728.5" y="831" width="29.5" height="29.5"/>
+  <object id="302" x="384.5" y="832" width="29.5" height="30"/>
+  <object id="303" x="1377.5" y="163.5" width="24" height="209.5"/>
+  <object id="304" x="1250.5" y="165.5" width="23" height="210.5"/>
+  <object id="305" x="1505.5" y="163.5" width="26" height="212.5"/>
+  <object id="306" x="1701.5" y="36" width="23.5" height="181"/>
+  <object id="307" x="1711.5" y="193" width="47.5" height="23.5"/>
+  <object id="308" x="902.5" y="35.5" width="23" height="179"/>
+  <object id="309" x="905" y="193.5" width="53.5" height="21.5"/>
+  <object id="310" x="738.5" y="163.5" width="24.5" height="213"/>
+  <object id="311" x="610" y="164" width="26" height="212"/>
+  <object id="312" x="482" y="163.5" width="25.5" height="213.5"/>
+  <object id="313" x="353" y="164" width="25.5" height="210"/>
+  <object id="319" x="1863.67" y="506.5" width="312" height="7"/>
+  <object id="320" x="1864.67" y="864.5" width="312" height="7"/>
+  <object id="321" x="2176.67" y="869.833" width="361.333" height="7" rotation="-90"/>
+  <object id="322" x="0.500167" y="507.167" width="312" height="7"/>
+  <object id="323" x="1.50017" y="865.167" width="312" height="7"/>
+  <object id="325" x="-26" y="506" width="28" height="373"/>
+ </objectgroup>
+ <objectgroup id="28" name="Interaction Layer">
+  <object id="239" name="Document2" type="Information" x="602" y="311.333" width="72" height="72.3333">
+   <ellipse/>
+  </object>
+  <object id="240" name="Document1" type="Information" x="869" y="44.3333" width="82" height="79.3333">
+   <ellipse/>
+  </object>
+  <object id="242" name="Chest" x="1149" y="39" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="244" name="Document3" type="Information" x="1677" y="75" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="245" name="Plant" type="Information" x="1705" y="509" width="70" height="70">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="246" name="Plant" type="Information" x="1707" y="791" width="70" height="70">
+   <properties>
+    <property name="Message" value="Why don't you make like a tree and leaf?"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="247" name="Sign2" type="Information" x="1003" y="793" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="248" name="Information" x="813" y="793" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="249" name="Plant" x="365" y="795" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="250" name="Plant" type="Information" x="363" y="511" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="251" name="Crates1" type="Information" x="1333" y="873" width="70" height="70">
+   <properties>
+    <property name="Message" value="Fish, Potatoes, Tomatos and Salad. Yummy! :)"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="252" name="Crates2" type="Information" x="1659" y="875" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="256" name="Ingredients 1" type="Information" x="565.5" y="955" width="61.5" height="65.5">
+   <properties>
+    <property name="Message" value="We need some tomatoes for this dish!"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="258" name="Cooker2" type="Information" x="635" y="1147.5" width="70" height="85">
+   <properties>
+    <property name="Message" value="Smells good!"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="259" name="Food stand" type="Information" x="1495" y="1028" width="70" height="70">
+   <ellipse/>
+  </object>
+  <object id="282" name="Bottles" type="Information" x="1255" y="986" width="70" height="70">
+   <properties>
+    <property name="Message" value="Hmmm what to drink?"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="290" name="Baskets" type="Information" x="1726" y="880" width="70" height="70">
+   <properties>
+    <property name="Message" value="Please throw any rubbish away here"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="318" x="1095" y="505" width="14" height="7"/>
+  <object id="328" name="Coffee Stand" type="Information" x="1663" y="1006" width="70" height="70">
+   <properties>
+    <property name="Message" value="Coffee Anyone?"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="329" name="Macbeth M" type="Information" x="1465" y="310" width="41" height="38">
+   <properties>
+    <property name="Message" value="M"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="330" name="Macbeth A" type="Information" x="1466.5" y="250" width="41" height="38">
+   <properties>
+    <property name="Message" value="A"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="331" name="Macbeth C" type="Information" x="1466.5" y="184" width="41" height="38">
+   <properties>
+    <property name="Message" value="C"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="332" name="Macbeth B" type="Information" x="1344.5" y="317" width="41" height="38">
+   <properties>
+    <property name="Message" value="B"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="333" name="Macbeth E" type="Information" x="1342.5" y="248" width="41" height="38">
+   <properties>
+    <property name="Message" value="E"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="334" name="Macbeth T" type="Information" x="1338.5" y="181" width="41" height="38">
+   <properties>
+    <property name="Message" value="T"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="335" name="Macbeth H" type="Information" x="1234.5" y="306" width="62" height="59">
+   <properties>
+    <property name="Message" value="H"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="336" name="Student Message" type="Information" x="1245.5" y="175" width="49" height="48">
+   <properties>
+    <property name="Message" value="Hmmm I wonder what Author we're studying Today? :D"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="337" name="Ingredients" type="Information" x="573.667" y="1148.33" width="36.6667" height="73.6667">
+   <properties>
+    <property name="Message" value="Lasagna Ingredients"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="338" name="Cooker1" type="Information" x="392.75" y="959.25" width="61.5" height="65.5">
+   <properties>
+    <property name="Message" value="This oven is empty..."/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="339" name="Library" type="ComboLock" x="571" y="495" width="70" height="70">
+   <properties>
+    <property name="Combination" value="shakespeare"/>
+    <property name="Message" value="You need a combination for this door"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="29" name="Spawn Layer">
+  <object id="220" name="Player Spawn" x="158.333" y="674.667" width="35" height="35">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="38" name="Door Layer">
+  <object id="155" name="Library" x="549.333" y="504" width="117.334" height="10.6667"/>
+  <object id="156" name="Office" x="1324.67" y="506.667" width="93.334" height="9.33333"/>
+  <object id="157" name="Theatre 1" x="877.007" y="861.333" width="128.667" height="10.6667"/>
+  <object id="163" name="End 1" x="1852" y="520" width="13.3333" height="147.333"/>
+  <object id="164" name="End 2" x="1853.33" y="704.333" width="13.3333" height="154.333"/>
+  <object id="168" name="Secret" x="1089.58" y="408.25" width="9.33333" height="94.5" rotation="-90"/>
+ </objectgroup>
+ <objectgroup id="39" name="Hinge Layer">
+  <object id="169" name="Secret" x="1078.17" y="398.417" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="171" name="Office" x="1312.67" y="506" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="172" name="End 1" x="1854.33" y="513.667" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="174" name="Theatre 1" x="1010.67" y="862.333" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="177" name="Library" x="541.667" y="504" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="181" name="End 2" x="1860.5" y="855" width="10" height="10">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="31" name="Lock Layer">
+  <object id="182" name="End 1" x="1857" y="672.5" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="173" name="End 2" x="1855.33" y="688.667" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="178" name="Library" x="668.5" y="504" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="179" name="Secret" x="1191.58" y="398.167" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="180" name="Office" x="1423.67" y="506.5" width="10" height="10">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="46" name="End Layer">
+  <object id="186" name="Player End" x="1900.5" y="481.833" width="400" height="400">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <layer id="25" name="Walls" width="68" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztmrENwjAQRe0sAj0zgZgg2YA0tJCSDlaJWINlMEWKCxgd5Ds5W/9Jv7Gik/OVb8u+OKej9m5/CDoHXYPqTDTMWfmaKhqPrCZZV5/HN5Hxf+m861G12gL8aIF+dAX40QD9YF4kzIuEeXmrlQzmRcK8SJgXCfMiYV4kzIuEeZHkmpdVFdeYb8+OtYuMb0H1ByHzQgghhBBCCLHL63x7qqapj5zPptbV6mbsfHsEn1d/BekH4j6oJD8Q90El+cG8SJgXSQl5sXZ/urQf1voNS/thrd9wSeTHQzk3a/tLKj+0INcPRF7uBa0fKftzc4FcP1L25+YCvb/k/j+u9vt4AldhrUI=
+  </data>
+ </layer>
+ <layer id="24" name="Furniture" width="68" height="42">
+  <data encoding="base64" compression="zlib">
+   eJztl8lOwzAQhsMpDreWXqDlyp32xNK+A/TEeuUZ2EFC4sIrsFTiNVjFayCegXNb4LcaS5HjkMWOayv+pF+1p5Zn7IwmE89zTJNLkr7mIMMaWR+mMAhj/QyS11xLnieLD1NgsY5LjFWHD1UMNOSyDh+UKyI3p+SJtcj+eX0UpYfceyTF54w32N4zxFt0/zw+ZOH9552X7U8nqvKjLH/TwIT8WJpRt78MpuQHuw8T8uODyM3L9udwOMxmZME3AWWoKc7WrB4/sjQtidPhcDgcDocjL7r6Pll09dG076vhO7seio03w985qC/4Dr9JiC/JLovOPnoZ522Hio6pOqFU8+t73hc0j70XoCbUgrZg24Z2oF2oC/V89f5NY4wz/kAruINVaA1ahw5hO4KOoRNoD9qvwH2YTJ+rFXS8wdWTNBaDidJsNtDhakVbUE/SGJKJ0mysbte5ez7F+Aw6hy5IfL1tdIOJ0mxt7r4ZtxjfQffQA4mvrxpPOPMz9AK9VvD8RbGlJmWtpw3JZy+qSaqpRfpR9j5h75ek/jRLnCLbtx+fi+6I2kT/iWqSalT0p1nrKX++//JFNpeqgC31Qxc66gffI4lUlEYYfzT3RbUhaR1v01E/+B5JJFv5A9gEdvY=
+  </data>
+ </layer>
+ <layer id="27" name="Decorations" width="68" height="42">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKwjAQBdBoBeuRepCewfvqwqXdeQrFCC6kFBuhJcG8B1kE2pAMmU9CgHJ0h9w7qM9RzamQew/10O8AAAAA5LJtQ9i1uXdRjk2sRaMe/LnH6I7f4nyI4xrHZT//fx+/u+sTYAHnhMwpxTg7X4aZLPx2vqn1gN+snSGn9/r9R7+mvJVSpebA1DllyLKeGK0SPQ==
+  </data>
+ </layer>
+</map>

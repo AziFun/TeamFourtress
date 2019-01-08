@@ -40,10 +40,19 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 		if (fa.getBody().getUserData() != null && fb.getBody().getUserData() != null) {
 			if ((fa.getBody().getUserData() == "finish" && fb.getBody().getUserData().equals("Player"))
 					|| (fb.getBody().getUserData() == "finish" && fa.getBody().getUserData().equals("Player"))) {
+				//parent.gameScreen.parent.changeScreen(ScreenType.FINISH);
+				System.out.println(parent.gameScreen.getLevel().isLastLevel());
+				
+				if (parent.gameScreen.getLevel().isLastLevel()) {
 				parent.gameScreen.parent.changeScreen(ScreenType.FINISH);
 			}
+				else {
+					parent.gameScreen.setupNextLevel();
+				}
+				
 		}
-	}
+	
+		}}
 
 	@Override
 	public void endContact(Contact contact) {

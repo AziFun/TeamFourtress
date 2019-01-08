@@ -31,6 +31,7 @@ public class Level {
 	private TiledMap tiledMap;
 	private Box2dModel model;
 	private HashMap<String, Item> requiredItems;
+	private Boolean lastLevel;
 
 	public Level(TiledMap tiledMap, Box2dModel model, HashMap<String, Item> requiredItems) {
 		this.tiledMap = tiledMap;
@@ -41,6 +42,7 @@ public class Level {
 		setPlayerSpawn();
 		setPlayerFinish();
 		createDoors();
+		setLastLevel();
 	}
 
 	private void createWalls() {
@@ -180,7 +182,7 @@ public class Level {
 				DistanceJointDef dDef = new DistanceJointDef();
 				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				//model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
 				break;
 			}
 		}
@@ -203,10 +205,17 @@ public class Level {
 		}
 	}
 	
+	private void setLastLevel() {
+		lastLevel = (Boolean) tiledMap.getProperties().get("Last Level");
+		System.out.println("Test: " + lastLevel);
+	}
+	
+	public Boolean isLastLevel() {
+		return lastLevel;
+	}
+	
 	public String getInitialMessage() {
-		MapObjects objects = tiledMap.getLayers().get("Spawn Layer").getObjects();
-		return (String) objects.get("Initial Message").getProperties().get("Message");
-
+		return (String) tiledMap.getProperties().get("Initial Message");
 	}
 	
 
