@@ -32,6 +32,7 @@ import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
 import com.fourtress.model.Item;
 import com.fourtress.model.Level;
+import com.fourtress.utils.AssetManager;
 import com.fourtress.utils.BodyFactory;
 import com.fourtress.utils.GameTimer;
 import com.fourtress.utils.LevelFactory;
@@ -47,6 +48,7 @@ public class GameScreen extends ScreenAdapter {
 	private OrthographicCamera uiCam;
 	private Box2DDebugRenderer debugRenderer;
 	public TeamFourtressGame parent;
+	private AssetManager assets;
 	private KeyboardController controller;
 	private SpriteBatch sb;
 	private Stage stage;
@@ -70,6 +72,9 @@ public class GameScreen extends ScreenAdapter {
 		float w = 60;
 		float h = 34;
 		
+		assets = AssetManager.getInstance();
+
+		
 		// Camera setup
 		gameCam = new OrthographicCamera(w, h);
 		uiCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -80,12 +85,14 @@ public class GameScreen extends ScreenAdapter {
 		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(controller, this);
-		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		
+		// Debug for when required
+		//debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
 
 		// Sprite setup
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(uiCam.combined);
-		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
+		skin = assets.getGameSkin();
 
 		// Music setup
 		SoundManager.playMusic("audio/music/musicbox.mp3");
@@ -100,6 +107,7 @@ public class GameScreen extends ScreenAdapter {
 		Table table = new Table();
 		table.setFillParent(true);
 		table.left().top();
+		// Table debug for when required
 		//table.debugAll();
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
         textArea.setColor(Color.BLACK);
@@ -123,10 +131,12 @@ public class GameScreen extends ScreenAdapter {
         });
         table.add(inventoryDisplay).grow();
         table.add().grow();
-        actionIndicator = new Image(new Texture(Gdx.files.internal("hand-icon.png")));
+        actionIndicator = new Image(new Texture(Gdx.files.internal("img/hand-icon.png")));
         actionIndicator.setScaling(Scaling.fit);
         table.add(actionIndicator).bottom().right().size(100);
-        table.debug();
+       
+        // Table debug for when required
+        //table.debug();
         stage.addActor(table);
        
         textArea.appendText(level.getInitialMessage() + "\n");
@@ -154,10 +164,10 @@ public class GameScreen extends ScreenAdapter {
 		gameCam.update();
 		mapRenderer.setView(gameCam);
 		mapRenderer.render();
-		debugRenderer.render(model.world, gameCam.combined);
+		// Debug Renderer for when required
+		//debugRenderer.render(model.world, gameCam.combined);
 		sb.begin();
-		Texture playerSprite = new Texture(Gdx.files.internal("witek.png"));
-		Texture keySprite = new Texture(Gdx.files.internal("assets/key.png"));
+		Texture playerSprite = new Texture(Gdx.files.internal("img/sprite/witek.png"));
 		sb.draw(playerSprite, (uiCam.viewportWidth/2)-50,(uiCam.viewportHeight/2)-50, 100, 100);
 		sb.end();
 		
@@ -199,7 +209,6 @@ public class GameScreen extends ScreenAdapter {
 		}
 		stage.draw();
 	    playerSprite.dispose();
-	    keySprite.dispose();	
 	}
 
 	@Override

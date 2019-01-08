@@ -87,17 +87,18 @@ public class GameControls implements Screen {
 		interactionLabel = new Label("OBJECT INTERACTION CONTROLS", skin);
 		
 		// Keyboard Icons/Label setup
-		texKeyW = new Texture("images/KeyBoardMouseIcons/Keyboard_White_W.png");
-		texKeyA = new Texture("images/KeyBoardMouseIcons/Keyboard_White_A.png");
-		texKeyS = new Texture("images/KeyBoardMouseIcons/Keyboard_White_S.png");
-		texKeyD = new Texture("images/KeyBoardMouseIcons/Keyboard_White_D.png");
-		texArrowUp = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Up.png");
-		texArrowLeft = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Left.png");
-		texArrowDown = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Down.png");
-		texArrowRight = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Right.png");
-		texShift = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Shift.png");
-		texKeyE = new Texture("images/KeyBoardMouseIcons/Keyboard_White_E.png");
-		texEnter = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Enter.png");
+		
+     	texKeyW = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_W.png"));
+		texKeyA = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_A.png"));
+		texKeyS = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_S.png"));
+		texKeyD = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_D.png"));
+		texArrowUp = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Up.png"));
+		texArrowLeft = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Left.png"));
+		texArrowDown = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Down.png"));
+		texArrowRight = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Right.png"));
+		texShift = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Shift.png"));
+		texKeyE = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_E.png"));
+		texEnter = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Enter.png"));
 	
 		keyW = new Image(texKeyW);
 		keyA = new Image(texKeyA);
