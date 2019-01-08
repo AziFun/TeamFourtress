@@ -1,4 +1,4 @@
-package com.fourtress.model;
+package com.fourtress.utils;
 
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.fourtress.ScreenType;
+import com.fourtress.model.Box2dModel;
+import com.fourtress.model.InteractableEntity;
 
 public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
 

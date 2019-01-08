@@ -1,4 +1,4 @@
-package com.fourtress.model;
+package com.fourtress.utils;
 
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -8,6 +8,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.fourtress.model.CombinationLock;
+import com.fourtress.model.InteractableEntity;
+import com.fourtress.model.Item;
+import com.fourtress.model.Key;
+import com.fourtress.model.Lock;
+import com.fourtress.model.Material;
+import com.fourtress.model.StorageBoxSwitch;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;

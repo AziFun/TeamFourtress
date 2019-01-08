@@ -1,4 +1,4 @@
-package com.fourtress.model;
+package com.fourtress.utils;
 
 import java.util.Timer;
 import java.util.TimerTask;

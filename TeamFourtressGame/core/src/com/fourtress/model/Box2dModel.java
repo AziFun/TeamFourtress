@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.World;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.exceptions.InventoryFullException;
+import com.fourtress.utils.BodyFactory;
+import com.fourtress.utils.ContactListener;
 import com.fourtress.views.GameScreen;
 
 public class Box2dModel {

@@ -1,4 +1,4 @@
-package com.fourtress.model;
+package com.fourtress.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

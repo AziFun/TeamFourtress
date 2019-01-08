@@ -28,14 +28,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
-import com.fourtress.model.BodyFactory;
 import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
-import com.fourtress.model.GameTimer;
 import com.fourtress.model.Item;
 import com.fourtress.model.Level;
-import com.fourtress.model.LevelFactory;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.BodyFactory;
+import com.fourtress.utils.GameTimer;
+import com.fourtress.utils.LevelFactory;
+import com.fourtress.utils.SoundManager;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -62,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
 	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
-	private int levelNo = 3;
+	private int levelNo = 1;
 	
 
 	public GameScreen(TeamFourtressGame parent) {

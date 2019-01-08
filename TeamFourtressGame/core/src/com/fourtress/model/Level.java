@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.fourtress.utils.BodyFactory;
 
 public class Level {
 
@@ -173,7 +174,7 @@ public class Level {
 				DistanceJointDef dDef = new DistanceJointDef();
 				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				//model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
 				break;
 			}
 		}
@@ -198,7 +199,6 @@ public class Level {
 	
 	private void setLastLevel() {
 		lastLevel = (Boolean) tiledMap.getProperties().get("Last Level");
-		System.out.println("Test: " + lastLevel);
 	}
 	
 	public Boolean isLastLevel() {
