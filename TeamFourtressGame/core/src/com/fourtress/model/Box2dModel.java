@@ -108,6 +108,7 @@ public class Box2dModel {
 		if (recievingCode) {
 			if (inputCode == null) {
 				inputCode = "";
+				gameScreen.textArea.appendText("> ");
 			}
 			if (controller.enter) {
 				gameScreen.textArea.appendText("\n");
@@ -157,6 +158,7 @@ public class Box2dModel {
 			} else if (controller.backspace) {
 				inputCode.substring(0, inputCode.length() - 2);
 				controller.backspace = false;
+				gameScreen.textArea.appendText(" X\n> " + inputCode);
 			}
 		} else if (isStorageAvailable()) {
 			if (currentInteractable.item == null) {
