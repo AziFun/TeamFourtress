@@ -31,11 +31,11 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 
 		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof InteractableEntity
 				&& fb.getBody().getUserData() != null && fb.getBody().getUserData().equals("Player")) {
-			parent.setPlayerAction((InteractableEntity) fa.getBody().getUserData());
+			parent.setInteractable((InteractableEntity) fa.getBody().getUserData());
 		}
 		if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof InteractableEntity
 				&& fa.getBody().getUserData() != null && fa.getBody().getUserData().equals("Player")) {
-			parent.setPlayerAction((InteractableEntity) fa.getBody().getUserData());
+			parent.setInteractable((InteractableEntity) fa.getBody().getUserData());
 		}
 		if (fa.getBody().getUserData() != null && fb.getBody().getUserData() != null) {
 			if ((fa.getBody().getUserData() == "finish" && fb.getBody().getUserData().equals("Player"))
@@ -52,10 +52,10 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 		Fixture fb = contact.getFixtureB();
 
 		if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof InteractableEntity) {
-			parent.endPlayerAction();
+			parent.endInteraction();
 		}
 		if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof InteractableEntity) {
-			parent.endPlayerAction();
+			parent.endInteraction();
 		}
 	}
 

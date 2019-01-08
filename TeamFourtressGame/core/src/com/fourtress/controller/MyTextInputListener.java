@@ -13,7 +13,7 @@ public class MyTextInputListener implements TextInputListener {
 
 	@Override
 	public void input(String text) {
-		model.inputText = text;
+		model.inputCode = text;
 	}
 
 	@Override

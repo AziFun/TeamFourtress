@@ -35,12 +35,12 @@ public class Box2dModel {
 	public KeyboardController controller;
 	private ContactListener listener;
 	private String actionText;
-	private Item actionItem;
 	private HashMap<String, Joint> lockJoints;
-	private InteractableEntity actionUnlock;
+	private InteractableEntity currentInteractable;
 	private Dialog actionDialog;
 	private Skin skin;
-	public String inputText;
+	public boolean recievingCode = false;
+	public String inputCode;
 	public List<StorageBoxSwitch> multiLocks;
 	public Joint jointToDestroy;
 	private Body finishLine;
@@ -50,7 +50,6 @@ public class Box2dModel {
 		this.cam = cam;
 		this.gameScreen = gameScreen;
 		this.controller = controller;
-		this.bodyFactory = bodyFactory;
 		physicsObjects = new LinkedList<Body>();
 		multiLocks = new LinkedList<StorageBoxSwitch>();
 		this.inventory = new Inventory();
@@ -106,42 +105,116 @@ public class Box2dModel {
 		if (!controller.up && !controller.down) {
 			slowPlayerY();
 		}
-		if (isStorageAvailable()) {
-			if (actionUnlock.item == null) {
+		if (recievingCode) {
+			if (inputCode == null) {
+				inputCode = "";
+			}
+			if (controller.enter) {
+				gameScreen.textArea.appendText("\n");
+				inputCode();
+				recievingCode = false;
+				controller.enter = false;
+			} else if (controller.num0) {
+				inputCode += "0";
+				controller.num0 = false;
+				gameScreen.textArea.appendText("0");
+			} else if (controller.num1) {
+				inputCode += "1";
+				controller.num1 = false;
+				gameScreen.textArea.appendText("1");
+			} else if (controller.num2) {
+				inputCode += "2";
+				controller.num2 = false;
+				gameScreen.textArea.appendText("2");
+			} else if (controller.num3) {
+				inputCode += "3";
+				controller.num3 = false;
+				gameScreen.textArea.appendText("3");
+			} else if (controller.num4) {
+				inputCode += "4";
+				controller.num4 = false;
+				gameScreen.textArea.appendText("4");
+			} else if (controller.num5) {
+				inputCode += "5";
+				controller.num5 = false;
+				gameScreen.textArea.appendText("5");
+			} else if (controller.num6) {
+				inputCode += "6";
+				controller.num6 = false;
+				gameScreen.textArea.appendText("6");
+			} else if (controller.num7) {
+				inputCode += "7";
+				controller.num7 = false;
+				gameScreen.textArea.appendText("7");
+			} else if (controller.num8) {
+				inputCode += "8";
+				controller.num8 = false;
+				gameScreen.textArea.appendText("8");
+			} else if (controller.num9) {
+				inputCode += "9";
+				controller.num9 = false;
+				gameScreen.textArea.appendText("9");
+			} else if (controller.backspace) {
+				inputCode.substring(0, inputCode.length() - 2);
+				controller.backspace = false;
+			}
+		} else if (isStorageAvailable()) {
+			if (currentInteractable.item == null) {
 				if (controller.num1) {
-					actionUnlock.item = inventory.remove(1);
+					currentInteractable.item = inventory.remove(1);
+					controller.num1 = false;
 				} else if (controller.num2) {
-					actionUnlock.item = inventory.remove(2);
+					currentInteractable.item = inventory.remove(2);
+					controller.num2 = false;
 				} else if (controller.num3) {
-					actionUnlock.item = inventory.remove(3);
+					currentInteractable.item = inventory.remove(3);
+					controller.num3 = false;
 				} else if (controller.num4) {
-					actionUnlock.item = inventory.remove(4);
+					currentInteractable.item = inventory.remove(4);
+					controller.num4 = false;
 				} else if (controller.num5) {
-					actionUnlock.item = inventory.remove(5);
+					currentInteractable.item = inventory.remove(5);
+					controller.num5 = false;
 				} else if (controller.num6) {
-					actionUnlock.item = inventory.remove(6);
+					currentInteractable.item = inventory.remove(6);
+					controller.num6 = false;
 				} else if (controller.num7) {
-					actionUnlock.item = inventory.remove(7);
+					currentInteractable.item = inventory.remove(7);
+					controller.num7 = false;
 				} else if (controller.num8) {
-					actionUnlock.item = inventory.remove(8);
+					currentInteractable.item = inventory.remove(8);
+					controller.num8 = false;
 				} else if (controller.num9) {
-					actionUnlock.item = inventory.remove(9);
+					currentInteractable.item = inventory.remove(9);
+					controller.num9 = false;
 				}
 			} else if (controller.enter) {
 				try {
-					inventory.addItem(actionUnlock.item);
-					actionUnlock.item = null;
+					inventory.addItem(currentInteractable.item);
+					currentInteractable.item = null;
 				} catch (Exception e) {
 					gameScreen.textArea.appendText("You are carrying too much\n");
 				}
-				
+				controller.enter = false;
 			}
 		} else if (controller.enter) {
 			controller.enter = false;
-			playerAction();
+			interact();
 		}
 
 		world.step(delta, 3, 3);
+	}
+
+	private void inputCode() {
+		if (currentInteractable instanceof CombinationLock) {
+			if (((CombinationLock) currentInteractable).attemptUnlock(inputCode)) {
+				if (lockJoints.containsKey(((CombinationLock) currentInteractable).getName())) {
+					world.destroyJoint(lockJoints.remove(((CombinationLock) currentInteractable).getName()));
+					gameScreen.textArea.appendText("Door unlocked\n");
+				}
+			}
+			inputCode = null;
+		}
 	}
 
 	public void slowPlayerX() {
@@ -182,62 +255,46 @@ public class Box2dModel {
 		finishLine.setUserData("finish");
 	}
 
-	public void setPlayerAction(InteractableEntity iEntity) {
+	public void setInteractable(InteractableEntity iEntity) {
 		actionText = iEntity.getMessage();
-		if (iEntity.isContainer()) {
-			actionItem = iEntity.getItem();
-		} else {
-			actionItem = null;
-		}
-		if (iEntity instanceof CombinationLock) {
-			actionUnlock = iEntity;
-		}
-		if (iEntity instanceof Lock) {
-			actionUnlock = iEntity;
-		}
-		if (iEntity instanceof StorageBoxSwitch) {
-			actionUnlock = iEntity;
-		}
+		currentInteractable = iEntity;
+
 	}
 
-	public void playerAction() {
-		if (actionUnlock != null) {
-			if (actionUnlock instanceof Lock) {
-				if (((Lock) actionUnlock).attemptUnlock(inventory)) {
-					if (lockJoints.containsKey(((Lock) actionUnlock).getName())) {
-						world.destroyJoint(lockJoints.remove(((Lock) actionUnlock).getName()));
-					} else if (((Lock) actionUnlock).getName().equals("End")) {
+	public void interact() {
+		if (currentInteractable != null) {
+			if (currentInteractable instanceof Lock) {
+				if (((Lock) currentInteractable).attemptUnlock(inventory)) {
+					actionText = "Door unlocked";
+					if (lockJoints.containsKey(((Lock) currentInteractable).getName())) {
+						world.destroyJoint(lockJoints.remove(((Lock) currentInteractable).getName()));
+					} else if (((Lock) currentInteractable).getName().equals("End")) {
 						world.destroyJoint(lockJoints.remove("End 1"));
 						world.destroyJoint(lockJoints.remove("End 2"));
 					}
 				}
-			} else if (actionUnlock instanceof CombinationLock) {
-				if (inputText == null) {
-					MyTextInputListener listener = new MyTextInputListener(this);
-					Gdx.input.getTextInput(listener, "Please Enter Combo Code", "", "Combo Code");
-				} else if (((CombinationLock) actionUnlock).attemptUnlock(inputText)) {
-					if (lockJoints.containsKey(((CombinationLock) actionUnlock).getName())) {
-						world.destroyJoint(lockJoints.remove(((CombinationLock) actionUnlock).getName()));
-					}
+			} else if (currentInteractable instanceof CombinationLock) {
+				recievingCode = true;
+				gameScreen.textArea.appendText("Please enter the combination\n");
+			}
+
+			if (currentInteractable.item != null) {
+				try {
+					inventory.addItem(currentInteractable.getItem());
+				} catch (InventoryFullException e) {
+					gameScreen.textArea.appendText("You are carrying too much\n");
 				}
-			} 
+			}
 		}
-		if (actionText != null) {
+		if (actionText != null && !(currentInteractable instanceof CombinationLock)) {
 			// Text Area set for actions
 			gameScreen.textArea.appendText(actionText + "\n");
 			System.out.println(actionText);
 		}
-		if (actionItem != null) {
-			try {
-				inventory.addItem(actionItem);
-			} catch (InventoryFullException e) {
-				gameScreen.textArea.appendText("You are carrying too much\n");
-			}
-		}
 	}
 
-	public void endPlayerAction() {
-		if (actionUnlock != null && actionUnlock instanceof StorageBox) {
+	public void endInteraction() {
+		if (currentInteractable != null && currentInteractable instanceof StorageBox) {
 			boolean atLeastOneLocked = false;
 			for (StorageBoxSwitch zwich : multiLocks) {
 				if (!zwich.checkSwitch()) {
@@ -246,14 +303,17 @@ public class Box2dModel {
 				}
 			}
 			if (atLeastOneLocked == false) {
-				if (lockJoints.containsKey(((StorageBoxSwitch) actionUnlock).getLockName())) {
-					jointToDestroy = lockJoints.remove(((StorageBoxSwitch) actionUnlock).getLockName());
+				if (lockJoints.containsKey(((StorageBoxSwitch) currentInteractable).getLockName())) {
+					jointToDestroy = lockJoints.remove(((StorageBoxSwitch) currentInteractable).getLockName());
 				}
 			}
 		}
-
-		inputText = null;
-		actionUnlock = null;
+		if (recievingCode) {
+			recievingCode = false;
+			gameScreen.textArea.appendText("\n");
+		}
+		inputCode = null;
+		currentInteractable = null;
 		actionText = null;
 	}
 
@@ -262,6 +322,6 @@ public class Box2dModel {
 	}
 
 	public boolean isStorageAvailable() {
-		return actionUnlock instanceof StorageBoxSwitch;
+		return currentInteractable instanceof StorageBoxSwitch;
 	}
 }

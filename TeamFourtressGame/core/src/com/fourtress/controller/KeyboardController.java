@@ -22,6 +22,7 @@ public class KeyboardController implements InputProcessor {
 	public boolean num8;
 	public boolean num9;
 	public boolean num0;
+	public boolean backspace;
 
 	public void KeyPressedCheck() {
 		right = false;
@@ -111,6 +112,10 @@ public class KeyboardController implements InputProcessor {
 		case Keys.NUM_0:
 		case Keys.NUMPAD_0:
 			num0 = true;
+			keyProcessed = true;
+			break;
+		case Keys.BACKSPACE:
+			backspace = true;
 			keyProcessed = true;
 		}
 		return keyProcessed;
