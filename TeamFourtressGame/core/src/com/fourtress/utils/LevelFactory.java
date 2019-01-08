@@ -1,11 +1,15 @@
-package com.fourtress.model;
+package com.fourtress.utils;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.fourtress.model.Book;
+import com.fourtress.model.Box2dModel;
+import com.fourtress.model.Item;
+import com.fourtress.model.ItemPile;
+import com.fourtress.model.Key;
+import com.fourtress.model.Level;
 
 public class LevelFactory {
 

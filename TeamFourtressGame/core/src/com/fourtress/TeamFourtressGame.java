@@ -1,7 +1,7 @@
 package com.fourtress;
 
 import com.badlogic.gdx.Game;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.SoundManager;
 import com.fourtress.views.FinishScreen;
 import com.fourtress.views.GameControls;
 import com.fourtress.views.GameOverScreen;
