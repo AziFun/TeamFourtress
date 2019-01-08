@@ -196,7 +196,7 @@ public class GameScreen extends ScreenAdapter {
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f); */
 	}
-	
+		
 
 	@Override
 	public void pause() {
