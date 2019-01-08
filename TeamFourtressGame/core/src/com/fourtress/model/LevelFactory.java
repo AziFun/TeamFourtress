@@ -3,8 +3,6 @@ package com.fourtress.model;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class LevelFactory {

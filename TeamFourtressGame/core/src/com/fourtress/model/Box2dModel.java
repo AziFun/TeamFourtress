@@ -3,19 +3,13 @@ package com.fourtress.model;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.fourtress.controller.KeyboardController;
-import com.fourtress.controller.MyTextInputListener;
 import com.fourtress.exceptions.InventoryFullException;
 import com.fourtress.views.GameScreen;
 
@@ -27,18 +21,14 @@ public class Box2dModel {
 	public final float minI = 5;
 	public World world;
 	public GameScreen gameScreen;
-	private OrthographicCamera cam;
 	public Body player;
 	public Inventory inventory;
 	private BodyFactory bodyFactory;
-	private Room room;
 	public KeyboardController controller;
 	private ContactListener listener;
 	private String actionText;
 	private HashMap<String, Joint> lockJoints;
 	private InteractableEntity currentInteractable;
-	private Dialog actionDialog;
-	private Skin skin;
 	public boolean recievingCode = false;
 	public String inputCode;
 	public List<StorageBoxSwitch> multiLocks;
@@ -46,8 +36,7 @@ public class Box2dModel {
 	private Body finishLine;
 	public List<Body> physicsObjects;
 
-	public Box2dModel(OrthographicCamera cam, KeyboardController controller, GameScreen gameScreen) {
-		this.cam = cam;
+	public Box2dModel(KeyboardController controller, GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		this.controller = controller;
 		physicsObjects = new LinkedList<Body>();
@@ -58,9 +47,6 @@ public class Box2dModel {
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
 		lockJoints = new HashMap<String, Joint>();
-		skin = new Skin(Gdx.files.internal("assets/visui/assets/uiskin.json"));
-		actionDialog = new Dialog("", skin);
-
 	}
 
 	public void logicStep(float delta) {

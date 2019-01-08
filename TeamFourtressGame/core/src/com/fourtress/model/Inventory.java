@@ -1,18 +1,13 @@
 package com.fourtress.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import com.fourtress.exceptions.InventoryFullException;
 
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 
 public class Inventory implements ObservableValue<Map<Integer, Item>> {
 
@@ -30,6 +25,7 @@ public class Inventory implements ObservableValue<Map<Integer, Item>> {
 	public Item remove(Integer slotNumber) {
 		Item removed;
 		if (listener != null) {
+			@SuppressWarnings("unchecked")
 			HashMap<Integer, Item> oldValue = (HashMap<Integer, Item>) items.clone();
 			removed = items.remove(slotNumber);
 			listener.changed(this, oldValue, items);
@@ -41,6 +37,7 @@ public class Inventory implements ObservableValue<Map<Integer, Item>> {
 
 	public void addItem(Item item) throws InventoryFullException {
 		if (listener != null) {
+			@SuppressWarnings("unchecked")
 			HashMap<Integer, Item> oldValue = (HashMap<Integer, Item>) items.clone();
 			addItemLogic(item);
 			listener.changed(this, oldValue, items);
@@ -49,6 +46,7 @@ public class Inventory implements ObservableValue<Map<Integer, Item>> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void addItemLogic(Item item) throws InventoryFullException {
 		if (item != null) {
 			if (item instanceof ItemPile) {

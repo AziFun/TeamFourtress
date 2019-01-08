@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputProcessor;
 
 public class KeyboardController implements InputProcessor {
 
-	private static final boolean KeyProcessed = false;
 	public boolean left;
 	public boolean right;
 	public boolean up;
