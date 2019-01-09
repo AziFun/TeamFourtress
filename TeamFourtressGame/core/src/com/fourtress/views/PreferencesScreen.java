@@ -13,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.model.AssetManager;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.AssetManager;
+import com.fourtress.utils.SoundManager;
 
 public class PreferencesScreen implements Screen {
 
