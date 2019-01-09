@@ -11,6 +11,8 @@ public class AssetManager {
 	
 	private BitmapFont font;
 	private Skin skin;
+	private Skin gameSkin;
+
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
 	
@@ -28,6 +30,8 @@ public class AssetManager {
 		font.setColor(skin.get("white",Color.class));
 		
 		lblStyle = new Label.LabelStyle(font, null);
+		
+		gameSkin = new Skin(Gdx.files.internal("skins/visui/assets/uiskin.json"));
 	
 	}
 	
@@ -41,6 +45,10 @@ public class AssetManager {
 	
 	public Skin getSkin() {
 		return skin;
+	}
+	
+	public Skin getGameSkin() {
+		return gameSkin;
 	}
 	
 	public TextButtonStyle getTextButtonStyle() {
