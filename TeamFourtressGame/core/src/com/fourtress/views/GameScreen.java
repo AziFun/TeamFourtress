@@ -171,8 +171,6 @@ public class GameScreen extends ScreenAdapter {
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
 
-		// Gdx.input.setInputProcessor(stage);
-
 		// Music setup
 		SoundManager.playMusic(assets);
 
@@ -250,13 +248,6 @@ public class GameScreen extends ScreenAdapter {
 		levelNo++;
 		setup();
 		nextLevelReady = false;
-
-		System.out.println("Setup Next Level Here...");
-		/*
-		 * LevelFactory levelGen = LevelFactory.getInstance(); levelNo++; level =
-		 * levelGen.makeLevel(levelNo, model); mapRenderer = new
-		 * OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
-		 */
 	}
 
 	public void tearDown() {
