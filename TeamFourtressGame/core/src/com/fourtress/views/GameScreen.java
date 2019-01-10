@@ -35,6 +35,7 @@ import com.fourtress.model.DoorData;
 import com.fourtress.model.Item;
 import com.fourtress.model.Level;
 import com.fourtress.utils.MyAssetManager;
+import com.fourtress.utils.Sfx;
 import com.fourtress.utils.SoundManager;
 import com.fourtress.utils.BodyFactory;
 import com.fourtress.utils.GameTimer;
@@ -60,7 +61,8 @@ public class GameScreen extends ScreenAdapter {
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private ShapeRenderer shapeRenderer;
 	private Level level;
-	public TextArea textArea;
+	private TextArea textArea;
+	public String textAreaBuffer;
 	public Label timerLabel;
 	public Label inventoryDisplay;
 	public Image actionIndicator;
@@ -73,6 +75,8 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerLeftAnimation;
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
+	private boolean typeSoundReady;
+	private boolean paused = false;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
@@ -103,6 +107,7 @@ public class GameScreen extends ScreenAdapter {
 
 		// Music setup
 		SoundManager.playMusic(assets);
+		typeSoundReady = true;
 
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
@@ -146,8 +151,12 @@ public class GameScreen extends ScreenAdapter {
 		// Table debug for when required
 		// table.debug();
 		stage.addActor(table);
+		textAreaBuffer = "";
+		write(level.getInitialMessage() + "\n");
+	}
 
-		textArea.appendText(level.getInitialMessage() + "\n");
+	public void write(String string) {
+		textAreaBuffer += string;
 	}
 
 	/*
@@ -221,7 +230,7 @@ public class GameScreen extends ScreenAdapter {
 		mapRenderer.setView(gameCam);
 		mapRenderer.render();
 		// Debug Renderer for when required
-		 debugRenderer.render(model.world, gameCam.combined);
+		debugRenderer.render(model.world, gameCam.combined);
 		TextureRegion currentFrame = getFrame(delta);
 		sb.begin();
 		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
@@ -232,6 +241,9 @@ public class GameScreen extends ScreenAdapter {
 
 		if (elapsed >= 0.99f) {
 			timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
+			if (timer.getFormattedMinutes() < 1 && timer.getSeconds() == 10) {
+				SoundManager.playSFX(Sfx.Tick, assets);
+			}
 			elapsed = 0f;
 
 			if (timer.getTimeUp() == true) {
@@ -261,7 +273,20 @@ public class GameScreen extends ScreenAdapter {
 		} else {
 			actionIndicator.setVisible(false);
 		}
+		if (textAreaBuffer.length() > 0) {
+			textArea.appendText(textAreaBuffer.substring(0, 1));
+			textAreaBuffer = textAreaBuffer.substring(1);
+			if (typeSoundReady) {
+			SoundManager.playSFX(Sfx.Typewriter, assets);
+			typeSoundReady = false;
+			} else {
+				typeSoundReady = true;
+			}
+		}
 		stage.draw();
+		if (!paused) {
+            Gdx.graphics.requestRendering();
+        }
 	}
 
 	public TextureRegion getFrame(float delta) {
@@ -300,16 +325,17 @@ public class GameScreen extends ScreenAdapter {
 		level.dispose();
 		mapRenderer.dispose();
 		assets.disposeLevel(levelNo);
+		inventoryDisplay = null;
 	}
 
 	@Override
 	public void pause() {
-
+		paused  = true;
 	}
 
 	@Override
 	public void resume() {
-
+		paused = false;
 	}
 
 	@Override

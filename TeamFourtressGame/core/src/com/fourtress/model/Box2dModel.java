@@ -96,57 +96,57 @@ public class Box2dModel {
 		if (recievingCode) {
 			if (inputCode == null) {
 				inputCode = "";
-				gameScreen.textArea.appendText("> ");
+				gameScreen.write("> ");
 			}
 			if (controller.enter) {
-				gameScreen.textArea.appendText("\n");
+				gameScreen.write("\n");
 				inputCode();
 				recievingCode = false;
 				controller.enter = false;
 			} else if (controller.num0) {
 				inputCode += "0";
 				controller.num0 = false;
-				gameScreen.textArea.appendText("0");
+				gameScreen.write("0");
 			} else if (controller.num1) {
 				inputCode += "1";
 				controller.num1 = false;
-				gameScreen.textArea.appendText("1");
+				gameScreen.write("1");
 			} else if (controller.num2) {
 				inputCode += "2";
 				controller.num2 = false;
-				gameScreen.textArea.appendText("2");
+				gameScreen.write("2");
 			} else if (controller.num3) {
 				inputCode += "3";
 				controller.num3 = false;
-				gameScreen.textArea.appendText("3");
+				gameScreen.write("3");
 			} else if (controller.num4) {
 				inputCode += "4";
 				controller.num4 = false;
-				gameScreen.textArea.appendText("4");
+				gameScreen.write("4");
 			} else if (controller.num5) {
 				inputCode += "5";
 				controller.num5 = false;
-				gameScreen.textArea.appendText("5");
+				gameScreen.write("5");
 			} else if (controller.num6) {
 				inputCode += "6";
 				controller.num6 = false;
-				gameScreen.textArea.appendText("6");
+				gameScreen.write("6");
 			} else if (controller.num7) {
 				inputCode += "7";
 				controller.num7 = false;
-				gameScreen.textArea.appendText("7");
+				gameScreen.write("7");
 			} else if (controller.num8) {
 				inputCode += "8";
 				controller.num8 = false;
-				gameScreen.textArea.appendText("8");
+				gameScreen.write("8");
 			} else if (controller.num9) {
 				inputCode += "9";
 				controller.num9 = false;
-				gameScreen.textArea.appendText("9");
+				gameScreen.write("9");
 			} else if (controller.backspace) {
 				inputCode.substring(0, inputCode.length() - 2);
 				controller.backspace = false;
-				gameScreen.textArea.appendText(" X\n> " + inputCode);
+				gameScreen.write(" X\n> " + inputCode);
 			}
 		} else if (isStorageAvailable()) {
 			if (currentInteractable.item == null) {
@@ -183,7 +183,7 @@ public class Box2dModel {
 					inventory.addItem(currentInteractable.item);
 					currentInteractable.item = null;
 				} catch (Exception e) {
-					gameScreen.textArea.appendText("You are carrying too much\n");
+					gameScreen.write("You are carrying too much\n");
 				}
 				controller.enter = false;
 			}
@@ -200,7 +200,7 @@ public class Box2dModel {
 			if (((CombinationLock) currentInteractable).attemptUnlock(inputCode)) {
 				if (lockJoints.containsKey(((CombinationLock) currentInteractable).getName())) {
 					world.destroyJoint(lockJoints.remove(((CombinationLock) currentInteractable).getName()));
-					gameScreen.textArea.appendText("Door unlocked\n");
+					gameScreen.write("Door unlocked\n");
 				}
 			}
 			inputCode = null;
@@ -265,20 +265,20 @@ public class Box2dModel {
 				}
 			} else if (currentInteractable instanceof CombinationLock) {
 				recievingCode = true;
-				gameScreen.textArea.appendText("Please enter the combination\n");
+				gameScreen.write("Please enter the combination\n");
 			}
 
 			if (currentInteractable.item != null) {
 				try {
 					inventory.addItem(currentInteractable.getItem());
 				} catch (InventoryFullException e) {
-					gameScreen.textArea.appendText("You are carrying too much\n");
+					gameScreen.write("You are carrying too much\n");
 				}
 			}
 		}
 		if (actionText != null && !(currentInteractable instanceof CombinationLock)) {
 			// Text Area set for actions
-			gameScreen.textArea.appendText(actionText + "\n");
+			gameScreen.write(actionText + "\n");
 			System.out.println(actionText);
 			}
 	}
@@ -300,7 +300,7 @@ public class Box2dModel {
 		}
 		if (recievingCode) {
 			recievingCode = false;
-			gameScreen.textArea.appendText("\n");
+			gameScreen.write("\n");
 		}
 		inputCode = null;
 		currentInteractable = null;

@@ -30,10 +30,10 @@ public class SoundManager {
 	}
 
 	// Audio for Sound Effects
-	public static void playSFX(String filePath) {
+	public static void playSFX(Sfx sound, MyAssetManager assMan) {
 		// Check to see if SFX has been turned off by the player
 		if (sfxStatus == true) {
-			sfx = Gdx.audio.newSound(Gdx.files.internal(filePath));
+			sfx = assMan.getSfx(sound);
 			sfx.play(sfxVolume);
 		}
 	}
