@@ -94,7 +94,7 @@ public class GameScreen extends ScreenAdapter {
 		model = new Box2dModel(controller, this);
 
 		// Debug for when required
-		// debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
 
 		// Sprite setup
 		sb = new SpriteBatch();
@@ -221,10 +221,10 @@ public class GameScreen extends ScreenAdapter {
 		mapRenderer.setView(gameCam);
 		mapRenderer.render();
 		// Debug Renderer for when required
-		// debugRenderer.render(model.world, gameCam.combined);
+		 debugRenderer.render(model.world, gameCam.combined);
 		TextureRegion currentFrame = getFrame(delta);
 		sb.begin();
-		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 50, 100, 100);
+		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
 		sb.end();
 
 		// Display the time remaining for the player to complete the level
