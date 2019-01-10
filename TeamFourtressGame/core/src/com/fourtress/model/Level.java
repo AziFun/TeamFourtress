@@ -174,7 +174,7 @@ public class Level {
 				DistanceJointDef dDef = new DistanceJointDef();
 				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				//model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
 				break;
 			}
 		}
@@ -212,5 +212,9 @@ public class Level {
 
 	public TiledMap getTiledMap() {
 		return tiledMap;
+	}
+	
+	public void dispose() {
+		tiledMap.dispose();
 	}
 }

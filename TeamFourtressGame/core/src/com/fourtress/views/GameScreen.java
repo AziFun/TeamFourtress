@@ -32,11 +32,11 @@ import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
 import com.fourtress.model.Item;
 import com.fourtress.model.Level;
-import com.fourtress.utils.AssetManager;
+import com.fourtress.utils.MyAssetManager;
+import com.fourtress.utils.SoundManager;
 import com.fourtress.utils.BodyFactory;
 import com.fourtress.utils.GameTimer;
 import com.fourtress.utils.LevelFactory;
-import com.fourtress.utils.SoundManager;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,7 +48,7 @@ public class GameScreen extends ScreenAdapter {
 	private OrthographicCamera uiCam;
 	private Box2DDebugRenderer debugRenderer;
 	public TeamFourtressGame parent;
-	private AssetManager assets;
+	private MyAssetManager assets;
 	private KeyboardController controller;
 	private SpriteBatch sb;
 	private Stage stage;
@@ -65,29 +65,29 @@ public class GameScreen extends ScreenAdapter {
 	public GameTimer timer;
 	private float elapsed;
 	private int levelNo = 1;
-	
+	private boolean nextLevelReady = false;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
 		float w = 60;
 		float h = 34;
-		
-		assets = AssetManager.getInstance();
 
-		
+		assets = MyAssetManager.getInstance();
+		loadAssets();
+
 		// Camera setup
 		gameCam = new OrthographicCamera(w, h);
 		uiCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), uiCam));
 		gameCam.zoom = 0.7f;
 		gameCam.update();
-    
+
 		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(controller, this);
-		
+
 		// Debug for when required
-		//debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		// debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
 
 		// Sprite setup
 		sb = new SpriteBatch();
@@ -95,68 +95,96 @@ public class GameScreen extends ScreenAdapter {
 		skin = assets.getGameSkin();
 
 		// Music setup
-		SoundManager.playMusic("audio/music/musicbox.mp3");
+		SoundManager.playMusic(assets);
 
 		// Map setup
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(levelNo, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1/BodyFactory.ppt);
-		shapeRenderer = new ShapeRenderer();	
-        	
-		//Text Area Setup
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
+		shapeRenderer = new ShapeRenderer();
+
+		// Text Area Setup
 		Table table = new Table();
 		table.setFillParent(true);
 		table.left().top();
 		// Table debug for when required
-		//table.debugAll();
+		// table.debugAll();
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
-        textArea.setColor(Color.BLACK);
-        skin.getFont("default-font").getData().scale(0.2f);
-        table.add(textArea).grow().pad(10);
-        timerLabel = new Label("", skin);
-        timerLabel.setFontScale(2);;
-        table.add(timerLabel).top().expandX();
-        table.add().grow();
-        table.row();
-        table.add().grow();
-        table.row();
-        table.add().grow();
-        table.row();
-        inventoryDisplay = new Label("", skin);
-        model.inventory.addListener(new ChangeListener<Map<Integer, Item>>() {
+		textArea.setColor(Color.BLACK);
+		skin.getFont("default-font").getData().scale(0.2f);
+		table.add(textArea).grow().pad(10);
+		timerLabel = new Label("", skin);
+		timerLabel.setFontScale(2);
+		;
+		table.add(timerLabel).top().expandX();
+		table.add().grow();
+		table.row();
+		table.add().grow();
+		table.row();
+		table.add().grow();
+		table.row();
+		inventoryDisplay = new Label("", skin);
+		model.inventory.addListener(new ChangeListener<Map<Integer, Item>>() {
 			@Override
 			public void changed(ObservableValue<? extends Map<Integer, Item>> observable, Map<Integer, Item> oldValue, Map<Integer, Item> newValue) {
 				inventoryDisplay.setText(formatInventory(newValue));
 			}
-        });
-        table.add(inventoryDisplay).grow();
-        table.add().grow();
-        actionIndicator = new Image(new Texture(Gdx.files.internal("img/hand-icon.png")));
-        actionIndicator.setScaling(Scaling.fit);
-        table.add(actionIndicator).bottom().right().size(100);
-       
-        // Table debug for when required
-        //table.debug();
-        stage.addActor(table);
-       
-        textArea.appendText(level.getInitialMessage() + "\n");
+		});
+		table.add(inventoryDisplay).grow();
+		table.add().grow();
+		actionIndicator = new Image(assets.getActionIndicator());
+		actionIndicator.setScaling(Scaling.fit);
+		table.add(actionIndicator).bottom().right().size(100);
+
+		// Table debug for when required
+		// table.debug();
+		stage.addActor(table);
+
+		textArea.appendText(level.getInitialMessage() + "\n");
+	}
+
+	/*
+	 * Things here are reloaded each level
+	 */
+	public void setup() {
+		assets.loadLevel(levelNo);
+		model = new Box2dModel(controller, this);
+		LevelFactory levelGen = LevelFactory.getInstance();
+		level = levelGen.makeLevel(levelNo, model);
+		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
+	}
+
+	private void loadAssets() {
+		switch (levelNo) {
+		case 1:
+			assets.loadLevel1();
+			break;
+		case 2:
+			assets.loadLevel2();
+			break;
+		case 3:
+			assets.loadLevel3();
+		}
 	}
 
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
 
-		//Gdx.input.setInputProcessor(stage);
-		
+		// Gdx.input.setInputProcessor(stage);
+
 		// Music setup
-		SoundManager.playMusic("audio/music/musicbox.mp3");	
-		
+		SoundManager.playMusic(assets);
+
 		// Timer setup
 		timer = new GameTimer();
 	}
 
 	@Override
-	public void render(float delta) {		
+	public void render(float delta) {
+		if (nextLevelReady) {
+			nextLevel();
+		}
 		model.logicStep(delta);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -165,50 +193,46 @@ public class GameScreen extends ScreenAdapter {
 		mapRenderer.setView(gameCam);
 		mapRenderer.render();
 		// Debug Renderer for when required
-		//debugRenderer.render(model.world, gameCam.combined);
+		// debugRenderer.render(model.world, gameCam.combined);
 		sb.begin();
-		Texture playerSprite = new Texture(Gdx.files.internal("img/sprite/witek.png"));
-		sb.draw(playerSprite, (uiCam.viewportWidth/2)-50,(uiCam.viewportHeight/2)-50, 100, 100);
+		sb.draw(assets.getPlayerSprite(), (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 50, 100, 100);
 		sb.end();
-		
+
 		// Display the time remaining for the player to complete the level
 		elapsed += delta;
-	
+
 		if (elapsed >= 0.99f) {
-		   timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
-		   elapsed = 0f;
-		   
-		   if(timer.getTimeUp() == true) {
-			   parent.changeScreen(ScreenType.GAMEOVER);
-		   }
+			timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
+			elapsed = 0f;
+
+			if (timer.getTimeUp() == true) {
+				parent.changeScreen(ScreenType.GAMEOVER);
+			}
 		}
-		
+
 		shapeRenderer.setAutoShapeType(true);
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setProjectionMatrix(gameCam.combined);
 		shapeRenderer.setColor(Color.CYAN);
-		
+
 		for (Body door : model.physicsObjects) {
 			DoorData doorData = (DoorData) door.getUserData();
-			shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt,
-					doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
-					doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1,
-					door.getAngle() * MathUtils.radiansToDegrees);
+			shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt, doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
+					doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1, door.getAngle() * MathUtils.radiansToDegrees);
 		}
-		
+
 		shapeRenderer.end();
 		if (model.isActionAvailable()) {
 			actionIndicator.setVisible(true);
 			if (model.isStorageAvailable()) {
-				//do something to highlight
+				// do something to highlight
 			} else {
-				//stop doing the thing
+				// stop doing the thing
 			}
 		} else {
 			actionIndicator.setVisible(false);
 		}
 		stage.draw();
-	    playerSprite.dispose();
 	}
 
 	@Override
@@ -217,16 +241,30 @@ public class GameScreen extends ScreenAdapter {
 		uiCam.update();
 	}
 
-	public void setupNextLevel() {
-		
+	public void readyNextLevel() {
+		nextLevelReady = true;
+	}
+
+	public void nextLevel() {
+		tearDown();
+		levelNo++;
+		setup();
+		nextLevelReady = false;
+
 		System.out.println("Setup Next Level Here...");
 		/*
-		LevelFactory levelGen = LevelFactory.getInstance();
-		levelNo++;
-		level = levelGen.makeLevel(levelNo, model);
-		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f); */
+		 * LevelFactory levelGen = LevelFactory.getInstance(); levelNo++; level =
+		 * levelGen.makeLevel(levelNo, model); mapRenderer = new
+		 * OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / 32f);
+		 */
 	}
-	
+
+	public void tearDown() {
+		model.dispose();
+		level.dispose();
+		mapRenderer.dispose();
+		assets.disposeLevel(levelNo);
+	}
 
 	@Override
 	public void pause() {
@@ -240,12 +278,12 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void hide() {
-    
+
 	}
 
 	@Override
 	public void dispose() {
-		SoundManager.dispose();
+		// SoundManager.dispose();
 
 	}
 
@@ -260,7 +298,7 @@ public class GameScreen extends ScreenAdapter {
 	public Skin getSkin() {
 		return skin;
 	}
-	
+
 	private String formatInventory(Map<Integer, Item> inventory) {
 		String formatted = "";
 		for (int i = 1; i < 11; i++) {
@@ -270,4 +308,3 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 }
-

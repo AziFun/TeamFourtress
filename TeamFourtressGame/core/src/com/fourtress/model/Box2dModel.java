@@ -280,7 +280,7 @@ public class Box2dModel {
 			// Text Area set for actions
 			gameScreen.textArea.appendText(actionText + "\n");
 			System.out.println(actionText);
-		}
+			}
 	}
 
 	public void endInteraction() {
@@ -313,5 +313,9 @@ public class Box2dModel {
 
 	public boolean isStorageAvailable() {
 		return currentInteractable instanceof StorageBoxSwitch;
+	}
+	
+	public void dispose() {
+		world.dispose();
 	}
 }

@@ -24,7 +24,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class BodyFactory {
 
-	private World world;
+	private static World world;
 	private static BodyFactory thisInstance;
 	public static float ppt = 32f;
 
@@ -34,6 +34,8 @@ public class BodyFactory {
 
 	public static BodyFactory getInstance(World world) {
 		if (thisInstance == null) {
+			thisInstance = new BodyFactory(world);
+		} else if (BodyFactory.world != world) {
 			thisInstance = new BodyFactory(world);
 		}
 		return thisInstance;
