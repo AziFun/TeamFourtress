@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -66,6 +68,11 @@ public class GameScreen extends ScreenAdapter {
 	private float elapsed;
 	private int levelNo = 1;
 	private boolean nextLevelReady = false;
+	private Animation<TextureRegion> playerUpAnimation;
+	private Animation<TextureRegion> playerDownAnimation;
+	private Animation<TextureRegion> playerLeftAnimation;
+	private Animation<TextureRegion> playerRightAnimation;
+	private float animationTime = 0;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
@@ -165,6 +172,29 @@ public class GameScreen extends ScreenAdapter {
 		case 3:
 			assets.loadLevel3();
 		}
+		Texture walkSheet = assets.getPlayerSpriteSet();
+		TextureRegion[][] region = TextureRegion.split(walkSheet, walkSheet.getWidth() / 3, walkSheet.getHeight() / 4);
+		TextureRegion[] upFrames = new TextureRegion[3];
+		upFrames[0] = region[2][1];
+		upFrames[1] = region[2][0];
+		upFrames[2] = region[2][2];
+		TextureRegion[] downFrames = new TextureRegion[3];
+		downFrames[0] = region[0][1];
+		downFrames[1] = region[0][0];
+		downFrames[2] = region[0][2];
+		TextureRegion[] leftFrames = new TextureRegion[3];
+		leftFrames[0] = region[3][1];
+		leftFrames[1] = region[3][0];
+		leftFrames[2] = region[3][2];
+		TextureRegion[] rightFrames = new TextureRegion[3];
+		rightFrames[0] = region[1][1];
+		rightFrames[1] = region[1][0];
+		rightFrames[2] = region[1][2];
+
+		playerUpAnimation = new Animation<TextureRegion>(0.25f, upFrames);
+		playerDownAnimation = new Animation<TextureRegion>(0.25f, downFrames);
+		playerLeftAnimation = new Animation<TextureRegion>(0.25f, leftFrames);
+		playerRightAnimation = new Animation<TextureRegion>(0.25f, rightFrames);
 	}
 
 	@Override
@@ -192,8 +222,9 @@ public class GameScreen extends ScreenAdapter {
 		mapRenderer.render();
 		// Debug Renderer for when required
 		// debugRenderer.render(model.world, gameCam.combined);
+		TextureRegion currentFrame = getFrame(delta);
 		sb.begin();
-		sb.draw(assets.getPlayerSprite(), (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 50, 100, 100);
+		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 50, 100, 100);
 		sb.end();
 
 		// Display the time remaining for the player to complete the level
@@ -231,6 +262,20 @@ public class GameScreen extends ScreenAdapter {
 			actionIndicator.setVisible(false);
 		}
 		stage.draw();
+	}
+
+	public TextureRegion getFrame(float delta) {
+		animationTime += delta;
+		if (controller.left) {
+			return playerLeftAnimation.getKeyFrame(animationTime, true);
+		} else if (controller.right) {
+			return playerRightAnimation.getKeyFrame(animationTime, true);
+		} else if (controller.up) {
+			return playerUpAnimation.getKeyFrame(animationTime, true);
+		} else if (controller.down) {
+			return playerDownAnimation.getKeyFrame(animationTime, true);
+		}
+		return playerDownAnimation.getKeyFrame(0);
 	}
 
 	@Override

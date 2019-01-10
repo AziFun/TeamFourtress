@@ -19,6 +19,7 @@ public class MyAssetManager {
 	private final String actionIndicatorPath = "img/hand-icon.png";
 	private final String playerSpritePath = "img/sprite/witek.png";
 	private final String musicPath = "audio/music/musicbox.mp3";
+	private final String playerSpriteSetPath = "img/player/MainGuySpriteSheet.png";
 	
 
 	private TextButtonStyle style;
@@ -72,13 +73,12 @@ public class MyAssetManager {
 		assMan.load(actionIndicatorPath, Texture.class);
 		assMan.load(playerSpritePath, Texture.class);
 		assMan.load(musicPath, Music.class);
+		assMan.load(playerSpriteSetPath, Texture.class);
 		
 		assMan.finishLoading();
 	}
 	
 	private void disposeLevel1() {
-		assMan.unload(actionIndicatorPath);
-		assMan.unload(playerSpritePath);
 		assMan.unload(musicPath);
 	}
 	
@@ -115,8 +115,7 @@ public class MyAssetManager {
 	}
 
 	public void loadLevel2() {
-		// TODO Auto-generated method stub
-		loadLevel1();
+		
 	}
 	
 	public void loadLevel3() {
@@ -125,5 +124,9 @@ public class MyAssetManager {
 	
 	public Music getMusic() {
 		return assMan.get(musicPath);
+	}
+	
+	public Texture getPlayerSpriteSet() {
+		return assMan.get(playerSpriteSetPath);
 	}
 }
