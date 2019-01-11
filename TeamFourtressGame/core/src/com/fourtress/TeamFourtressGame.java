@@ -1,6 +1,7 @@
 package com.fourtress;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.fourtress.utils.SoundManager;
 import com.fourtress.views.FinishScreen;
 import com.fourtress.views.GameControls;
@@ -23,6 +24,8 @@ public class TeamFourtressGame extends Game {
 	
 	@Override
 	public void create () {
+		Gdx.graphics.setContinuousRendering(false);
+		Gdx.graphics.requestRendering(); 
 		preferences = new ApplicationPreferences();
 		menuScreen = new MenuScreen(this);
 		if(preferences.isMusicEnabled() == true) {
