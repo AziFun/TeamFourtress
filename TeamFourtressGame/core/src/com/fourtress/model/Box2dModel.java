@@ -255,7 +255,7 @@ public class Box2dModel {
 		if (currentInteractable != null) {
 			if (currentInteractable instanceof Lock) {
 				if (((Lock) currentInteractable).attemptUnlock(inventory)) {
-					actionText = "Door unlocked";
+					actionText = currentInteractable.message;
 					if (lockJoints.containsKey(((Lock) currentInteractable).getName())) {
 						world.destroyJoint(lockJoints.remove(((Lock) currentInteractable).getName()));
 					} else if (((Lock) currentInteractable).getName().equals("End")) {

@@ -72,18 +72,7 @@ public class MyAssetManager {
 		return lblStyle;
 	}
 
-	public void loadLevel1() {
-		assMan.load(actionIndicatorPath, Texture.class);
-		assMan.load(playerSpritePath, Texture.class);
-		assMan.load(musicPath, Music.class);
-		assMan.load(playerSpriteSetPath, Texture.class);
-		assMan.load(sfxTypewriter, Sound.class);
-		assMan.load(sfxTrombone, Sound.class);
-		assMan.load(sfxTick, Sound.class);
-
-		assMan.finishLoading();
-	}
-
+	
 	private void disposeLevel1() {
 		assMan.unload(musicPath);
 	}
@@ -98,6 +87,7 @@ public class MyAssetManager {
 			break;
 		case 3:
 			loadLevel3();
+			break;
 		}
 	}
 
@@ -105,6 +95,13 @@ public class MyAssetManager {
 		switch (levelNo) {
 		case 1:
 			disposeLevel1();
+			break;
+		case 2:
+			disposeLevel2();
+			break;
+		case 3:
+			disposeLevel3();
+			break;
 		}
 	}
 
@@ -119,12 +116,35 @@ public class MyAssetManager {
 	public Texture getPlayerSprite() {
 		return assMan.get(playerSpritePath);
 	}
+	
+	
+	public void loadLevel1() {
+		assMan.load(actionIndicatorPath, Texture.class);
+		assMan.load(playerSpritePath, Texture.class);
+		assMan.load(musicPath, Music.class);
+		assMan.load(playerSpriteSetPath, Texture.class);
+		assMan.load(sfxTypewriter, Sound.class);
+		assMan.load(sfxTrombone, Sound.class);
+		assMan.load(sfxTick, Sound.class);
+
+		assMan.finishLoading();
+	}
+
 
 	public void loadLevel2() {
 
 	}
 
 	public void loadLevel3() {
+		assMan.load(actionIndicatorPath, Texture.class);
+		assMan.load(playerSpritePath, Texture.class);
+		assMan.load(musicPath, Music.class);
+		assMan.load(playerSpriteSetPath, Texture.class);
+		assMan.load(sfxTypewriter, Sound.class);
+		assMan.load(sfxTrombone, Sound.class);
+		assMan.load(sfxTick, Sound.class);
+
+		assMan.finishLoading();
 
 	}
 

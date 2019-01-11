@@ -93,6 +93,7 @@ public class Level {
 				} else if (object.getProperties().get("type").equals("Lock")) {
 					BodyFactory.getInstance(model.world).makeBodyLockSensor(body,
 							(String) object.getProperties().get("Message"),
+							(String) object.getProperties().get("Success Message"),
 							(Key) requiredItems.get(object.getProperties().get("KeyID")), object.getName());
 				} else if (object.getProperties().get("type").equals("ComboLock")) {
 					BodyFactory.getInstance(model.world).makeBodyComboLockSensor(body,
