@@ -17,14 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.utils.AssetManager;
+import com.fourtress.utils.MyAssetManager;
 
 public class GameControls implements Screen {
 
 	private TeamFourtressGame parent;
 	private Stage stage;
 	
-	private AssetManager assets;
+	private MyAssetManager assets;
 	private Skin skin;
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
@@ -73,7 +73,7 @@ public class GameControls implements Screen {
 	
 	public GameControls(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = AssetManager.getInstance();
+		assets = MyAssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup

@@ -49,7 +49,7 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 				parent.gameScreen.parent.changeScreen(ScreenType.FINISH);
 			}
 				else {
-					parent.gameScreen.setupNextLevel();
+					parent.gameScreen.readyNextLevel();
 				}
 				
 		}

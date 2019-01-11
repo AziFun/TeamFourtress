@@ -213,4 +213,8 @@ public class Level {
 	public TiledMap getTiledMap() {
 		return tiledMap;
 	}
+	
+	public void dispose() {
+		tiledMap.dispose();
+	}
 }
