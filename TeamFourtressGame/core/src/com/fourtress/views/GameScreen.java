@@ -78,8 +78,7 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
-	private boolean paused = false;
-		
+	private boolean paused = false;	
 	private GameState state;
 	private int currentSeconds;
 	private PauseMenu pause;
@@ -329,6 +328,7 @@ public class GameScreen extends ScreenAdapter {
         	//parent.changeScreen(ScreenType.GAME);
         	break;
         case ENDGAME:
+        	// Reset Level and return to Menu
         	//this.state = GameState.READY;
         	//reset();
         	//parent.changeScreen(ScreenType.MENU);
@@ -390,7 +390,7 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void resume() {		
 		super.resume();
-		timer.setIntSeconds(currentSeconds);
+		timer.setIntSeconds(currentSeconds + 1);
 		timer.startTimer();
 		this.state = GameState.RUNNING;	
 	}
@@ -402,7 +402,6 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		//SoundManager.dispose();
 
 	}
 
