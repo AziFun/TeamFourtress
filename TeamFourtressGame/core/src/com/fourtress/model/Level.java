@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
@@ -177,7 +178,8 @@ public class Level {
 				DistanceJointDef dDef = new DistanceJointDef();
 				dDef.initialize(doorBody, lockBody, doorBody.getWorldCenter(), lockBody.getWorldCenter());
 				dDef.collideConnected = false;
-				model.addLockJoint(lock.getName(), model.world.createJoint(dDef));
+				Joint j = model.world.createJoint(dDef);
+				model.addLockJoint(lock.getName(), lockBody);
 				break;
 			}
 		}

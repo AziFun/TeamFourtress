@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="193">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="194">
  <properties>
   <property name="Initial Message" value="Hint.. Speak to the teacher in the lecture room ;)"/>
   <property name="Last Level" type="bool" value="false"/>
@@ -93,7 +93,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="23" name="Books7" type="MultiLock" x="356" y="398" width="70" height="103">
+  <object id="23" name="Books7" type="MultiLock" x="862.75" y="314.75" width="70" height="70">
    <properties>
     <property name="LockName" value="Secret"/>
     <property name="Message" value="There is a space for a book here. This looks like the Z section"/>
@@ -464,7 +464,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="154" name="Pile of books" type="Item" x="877" y="399" width="70" height="70">
+  <object id="154" name="Pile of books" type="Item" x="363" y="398.667" width="70" height="70">
    <properties>
     <property name="Item" value="Books"/>
     <property name="Message" value="Its a pile of unsorted books"/>
@@ -545,7 +545,7 @@
   <object id="133" x="321" y="33" width="574.5" height="62"/>
   <object id="134" x="321.5" y="183.5" width="477.5" height="38.5"/>
   <object id="135" x="353.5" y="304" width="348" height="44.5"/>
-  <object id="136" x="353" y="436" width="158.5" height="29.5"/>
+  <object id="136" x="865.25" y="308.75" width="158.5" height="43.5"/>
   <object id="137" x="962" y="99" width="29.5" height="25.5"/>
   <object id="138" x="1126" y="322.5" width="20" height="24"/>
   <object id="139" x="1190" y="226.5" width="20" height="23.5"/>
@@ -559,54 +559,54 @@
   <object id="148" x="1" y="502" width="309" height="10"/>
   <object id="149" x="0.5" y="513.5" width="14" height="349.5"/>
   <object id="150" x="-0.5" y="863.5" width="313" height="13"/>
-  <object id="153" x="898" y="416.667" width="28.6667" height="30.6667"/>
+  <object id="153" x="385" y="417" width="28.6667" height="30.6667"/>
  </objectgroup>
  <objectgroup id="29" name="Door Layer">
-  <object id="155" name="Library" x="549.333" y="504" width="117.334" height="10.6667"/>
-  <object id="156" name="Office" x="1316" y="504" width="117.334" height="9.33333"/>
-  <object id="157" name="Theatre 1" x="1028" y="861.333" width="94.6667" height="10.6667"/>
-  <object id="158" name="Theatre 2" x="1128" y="860.667" width="82.6666" height="10.6666"/>
-  <object id="163" name="End 1" x="1852" y="520" width="13.3333" height="165.333"/>
-  <object id="164" name="End 2" x="1853.33" y="693.333" width="13.3333" height="165.333"/>
-  <object id="168" name="Secret" x="1048" y="417.333" width="9.33333" height="83.6667"/>
+  <object id="155" name="Library" x="548.969" y="504" width="118.698" height="8.03034"/>
+  <object id="156" name="Office" x="1316.7" y="504.091" width="118.122" height="9.33333"/>
+  <object id="157" name="Theatre 1" x="1028" y="863.969" width="94.6667" height="8.03034"/>
+  <object id="158" name="Theatre 2" x="1128" y="864.122" width="82.6666" height="7.84842"/>
+  <object id="163" name="End 1" x="1856" y="514.273" width="7.87875" height="172.333"/>
+  <object id="164" name="End 2" x="1856.06" y="688.878" width="7.78785" height="171.788"/>
+  <object id="168" name="Secret" x="1048" y="418.833" width="8.0606" height="81.2576"/>
  </objectgroup>
  <objectgroup id="30" name="Hinge Layer">
-  <object id="169" name="Secret" x="1050" y="493.333" width="10" height="10">
+  <object id="169" name="Secret" x="1046.75" y="494.583" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="171" name="Office" x="1308.67" y="505.667" width="10" height="10">
+  <object id="171" name="Office" x="1303.67" y="503.644" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="172" name="End 1" x="1854.33" y="513.667" width="10" height="10">
+  <object id="172" name="End 1" x="1855.24" y="510.303" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="174" name="Theatre 2" x="1207" y="861" width="10" height="10">
+  <object id="174" name="Theatre 2" x="1207.36" y="862.545" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="175" name="Theatre 1" x="1023.33" y="862.333" width="10" height="10">
+  <object id="175" name="Theatre 1" x="1021.15" y="862.969" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="177" name="Library" x="541.667" y="504" width="10" height="10">
+  <object id="177" name="Library" x="533.849" y="503.273" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="181" name="End 2" x="1860.5" y="855" width="10" height="10">
+  <object id="181" name="End 2" x="1855.05" y="856.909" width="10" height="10">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup id="31" name="Lock Layer">
-  <object id="182" name="End 1" x="1857" y="672.5" width="10" height="10">
+  <object id="182" name="End 1" x="1855.45" y="674.955" width="10" height="10">
    <ellipse/>
   </object>
   <object id="173" name="End 2" x="1855.33" y="688.667" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="178" name="Library" x="668.5" y="504" width="10" height="10">
+  <object id="178" name="Library" x="667.045" y="503" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="179" name="Secret" x="1051" y="406.5" width="10" height="10">
+  <object id="179" name="Secret" x="1048" y="408.318" width="10" height="10">
    <ellipse/>
   </object>
-  <object id="180" name="Office" x="1434" y="503.5" width="10" height="10">
+  <object id="180" name="Office" x="1435.67" y="503.5" width="10" height="10">
    <ellipse/>
   </object>
  </objectgroup>
@@ -623,12 +623,12 @@
  </objectgroup>
  <layer id="24" name="Furniture" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJzt2c1qwkAQB/DtKR83ay4tvoZob76EVB/Dvkl78OJj6L0PoRdB8BlsvQg9OCHZkh0SOnE/MPT/gyE7g0w26xoiUQpu8RUp9RYVxzy+Kc7leE2xYTU9XlCcKrnEZ+z3Wlx4pDl+RMUxjz5FVo63VN9FZk2P36neq+QSx5rPjVKlxhQvqdvr6qpXWocZxRzrAQAAAAAOrYT/YQAAAAAAAAB8yB7M/BC7zZu07bMP9G4vXw+9JstEqZ/KeW3zJrf0uZT50PN7q+p65Pg8bPMmbfvo9ZgGWA+tC/vDN37/uPf94VtX9scT1Z6Tv3vb4vePATunbd7EVR/X+O/lv+PrQd/LxGUurUn6hFDz/PE7D9tcWpP0CaXm+cOYh20urUn6hID9YcL+MNU8f0xc5dLaPe0P7sDmYZtLa5I+Nq7KC7eE
+   eJzt2cFqwkAQBuD1lOhN68XS1xD1lpcotY9R36Q99NLHqHcfQi9CwGew9SL04ASzsjskdJLdLAn+HwzZGWSyWdcQiVJQx0+k1Cq6HrP4pTjl42+KNavp8RvF0cglNnGz1+LDiOb4EV2PWTxQjPPxluq7yK7p8TvVh0YucSj43Gyg1JxiMfB7XV31QuuwpHjFegAAAACA4Uv4HwQAAAAAAACgjcY9O09jv3mZqn32gd7tZeuh1+Szr9SfcV7XvEydPuc8nzb83spcjwyfh2tepmofvR7PAdZD68L+aBq/f7R9fzStK/tjQrXH/v+9XfH7xxM7p2texlcf3/jv5d7x9aDvJfGZS2uSPiEUPH/c5uGaS2uSPqEUPH9Y83DNpTVJnxCwP2zYH7aC54/EVy6ttWl/cCmbh2surUn6uLgA8ou3hA==
   </data>
  </layer>
  <layer id="25" name="Walls" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmktOwzAQhp1sEhU2vNawZ89J2II4QSsVNjxETwCV2hUPwSlg3T1r2HAKCgdgQuJiR3bkJOPQMfNJo1iOazt/+4+TuEK40Y/E0SXENcQDRJ9IyDk7XqYTgwizN52d2Fy/a6lvyjgSM6y+RgHoMULUY+xBj0GaH7H1eOoJ8dwzjIeoByW/vIIWbwY9sP1ynAjxkeTHIcQnxFdRniv1so08n5WrcNFjBX5LqxAvyW+5wTXM6n/KTOaXKcxlLc2PE4gNKG+meXldqZdt5Pkpgh4Y/Fe/2Ahtfdkr5rDVcC4+1hc1byxyRpqXhzVyhgplv6h5Y5EzivKkRs5QYb/o8P2YDmW/qPlhXuSOtlD2i5offnIGIT2w/bId26NMVdtyHFrqD5D6l4HpFxOnhmeEMhcObdpwZun/3PO4Jm4cxrz3PK9bS/93f6AHwzAMwzBhsM/3ERonS6pH9nx7FfsJG9jjPBJ5H9QVmHr4fB/UFZh6+Nxv6Ar2iw77RYf9okNlv6ErqOw3+ET9HqnsZ7flvWJuqh68vujzxswfIfgFM38ss1+q8JU/QvAL9vpC/f+4rr+Pb9UA1Wg=
+   eJztmktOwzAQhp1sEpVuCLCGNd1zErYgTtBKhQ0P0RNApXbFQ3AKWHfPGjacgsIBmJCYOpEdhnScxOl80qiW49jOn/zjPCoEjr4nji4hriEeIPqOhJwz8jBRDDzK3rLs+Pr6nqG+LGNPzKj6GpXUIwr/blOVHiNCPcYWro9BqhW1Hk8dIZ47mvEI9XDJL6+gxZtGD2q/HAdCfATJ7xDiE+IrLc+VetlGbo/LRWD0WINrqQvxEizKJY5h9v+99MR+mcJc1sPkdwKxAeXNMClHSr1sI7dPCfSgYFX9YqIJ6wsGrB576Ry2Ss7Fxvqi5o3fnBEm5SEiZ6jb5+m+LvtF5o0oVHJGWp4gcoa6/WefCvVom1+Wpen3YxKX/WID9ksWV/2y7ZsjT1HbfBwa6g+I+pdB6Rcdp5pnhDwXiDbLcGbo/9zyuDpuEGPeW57XraH/uxr0YBiGYRimHezzfUSGk4bqET/fXvl2wgT1OI+OPN9WBaUeNt8HUbNrqKfUg+J9kGmeVcF+ybKqfjHRNL/UjSvvT6vCle8NNlHPo+3vDXWvF5L3gnOl6sHrS3belPmjDX6hzB+uri+28kcb/EK9vrj+f1zs9fENodnV/g==
   </data>
  </layer>
 </map>
