@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="356">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="357">
  <properties>
   <property name="Initial Message" value="Why don't you see what's for lunch in the canteen?"/>
   <property name="Last Level" type="bool" value="true"/>
+  <property name="Name" value="English / Canteen"/>
  </properties>
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
@@ -37,18 +38,19 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="242" name="Chest" x="1149" y="39" width="70" height="70">
+  <object id="242" name="Chest" type="Item" x="1149" y="39" width="70" height="70">
+   <properties>
+    <property name="Item" value="EndKey"/>
+    <property name="Message" value="You found a key for the exit to the computing floor!"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="244" name="Document3" type="Information" x="1677" y="75" width="70" height="70">
    <properties>
     <property name="Message">Authors:
-
-Shakespeare: 1
-
-Roald Dahl:4
-
-Charles Dickens:5</property>
+Shakespeare: 2845
+Roald Dahl:4571
+Charles Dickens:5467</property>
    </properties>
    <ellipse/>
   </object>
@@ -102,7 +104,7 @@ Charles Dickens:5</property>
   </object>
   <object id="259" name="Food stand" type="Information" x="1441.67" y="1001.33" width="88" height="70">
    <properties>
-    <property name="Message" value="Test Message"/>
+    <property name="Message" value="Potatoes. Yummy..."/>
    </properties>
    <ellipse/>
   </object>
@@ -125,37 +127,37 @@ Charles Dickens:5</property>
    </properties>
    <ellipse/>
   </object>
-  <object id="329" name="Macbeth M" type="Information" x="1465" y="310" width="41" height="38">
+  <object id="329" name="Macbeth M" type="Information" x="1455" y="310" width="51" height="38">
    <properties>
     <property name="Message" value="M"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="330" name="Macbeth A" type="Information" x="1466.5" y="250" width="41" height="38">
+  <object id="330" name="Macbeth A" type="Information" x="1455.5" y="250" width="52" height="38">
    <properties>
     <property name="Message" value="A"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="331" name="Macbeth C" type="Information" x="1466.5" y="184" width="41" height="38">
+  <object id="331" name="Macbeth C" type="Information" x="1452.5" y="184" width="55" height="38">
    <properties>
     <property name="Message" value="C"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="332" name="Macbeth B" type="Information" x="1344.5" y="317" width="41" height="38">
+  <object id="332" name="Macbeth B" type="Information" x="1329.5" y="317" width="56" height="38">
    <properties>
     <property name="Message" value="B"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="333" name="Macbeth E" type="Information" x="1342.5" y="248" width="41" height="38">
+  <object id="333" name="Macbeth E" type="Information" x="1327.5" y="248" width="56" height="38">
    <properties>
     <property name="Message" value="E"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="334" name="Macbeth T" type="Information" x="1338.5" y="181" width="41" height="38">
+  <object id="334" name="Macbeth T" type="Information" x="1328.5" y="181" width="51" height="38">
    <properties>
     <property name="Message" value="T"/>
    </properties>
@@ -169,7 +171,7 @@ Charles Dickens:5</property>
   </object>
   <object id="336" name="Student Message" type="Information" x="1245.5" y="175" width="49" height="48">
    <properties>
-    <property name="Message" value="Hmmm I wonder what Author we're studying Today? :D"/>
+    <property name="Message" value="Hmmm I wonder which Author we're studying Today? :D"/>
    </properties>
    <ellipse/>
   </object>
@@ -188,7 +190,7 @@ Charles Dickens:5</property>
   <object id="339" name="Library" type="ComboLock" x="571" y="495" width="70" height="70">
    <properties>
     <property name="Combination" value="2845"/>
-    <property name="Message" value="You need a password for this door. (Hint. It's an author mentioned in the lecture)"/>
+    <property name="Message" value="You need a password for this door. (Hint. It's a code for an author mentioned in the lecture)"/>
    </properties>
    <ellipse/>
   </object>
@@ -201,7 +203,7 @@ Charles Dickens:5</property>
   </object>
   <object id="346" name="Document2" type="Information" x="326" y="170.167" width="76.6666" height="49">
    <properties>
-    <property name="Message" value="I think I saw the key to the secret room somewhere in the kitchen"/>
+    <property name="Message" value="I think I saw the key to the secret room somewhere in the canteen"/>
    </properties>
    <ellipse/>
   </object>
@@ -249,6 +251,13 @@ Charles Dickens:5</property>
   <object id="354" name="Sign2" type="Information" x="682" y="509" width="70" height="55">
    <properties>
     <property name="Message" value="Library"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="356" name="End" type="Lock" x="1777" y="592" width="70" height="160">
+   <properties>
+    <property name="KeyID" value="EndKey"/>
+    <property name="Message" value="You need a key for this door"/>
    </properties>
    <ellipse/>
   </object>
@@ -320,7 +329,7 @@ Charles Dickens:5</property>
  </layer>
  <layer id="27" name="Decorations" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQBdBoBeuRepCewfvqwqXdeQrFCC6kFBuhJcG8B1kE2pAMmU9CgHJ0h9w7qM9RzamQew/10O8AAAAA5LJtQ9i1uXdRjk2sRaMe/LnH6I7f4nyI4xrHZT//fx+/u+sTYAHnhMwpxTg7X4aZLPx2vqn1gN+snSGn9/r9R7+mvJVSpebA1DllyLKeGK0SPQ==
+   eJzt1k0KwjAQBtD4A9YjeZCewfvqwqXdeQrFEVxIKTZCNcG+B1kU2pAMMx9NCeqx25Y+wfzs1ZwK/LoP9T3Mh3kHAAAAoJRlk9K6KX2KeiyiFiv14M/dej1+iecu1jnWaTP+fRvvXc0JMIFjRubUop+dD91IFr6739B+wGe+nSGH5/7ty7zm/Cvlys2BoXvKkGndAcJUEq0=
   </data>
  </layer>
  <objectgroup id="26" name="Object Layer">

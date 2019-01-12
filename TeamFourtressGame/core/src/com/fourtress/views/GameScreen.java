@@ -65,6 +65,7 @@ public class GameScreen extends ScreenAdapter {
 	private TextArea textArea;
 	public String textAreaBuffer;
 	public Label timerLabel;
+	public Label levelLabel;
 	public Label inventoryDisplay;
 	public Image actionIndicator;
 	public GameTimer timer;
@@ -77,6 +78,7 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
+	private boolean debug = false;
 	private GameState state;
 	private int currentSeconds;
 	private float w;
@@ -103,7 +105,8 @@ public class GameScreen extends ScreenAdapter {
 		model = new Box2dModel(controller, this);
 
 		// Debug for when required
-		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		if (debug) {
+		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);}
 
 		// Sprite setup
 		sb = new SpriteBatch();
@@ -119,21 +122,29 @@ public class GameScreen extends ScreenAdapter {
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
 		shapeRenderer = new ShapeRenderer();
+
 		
 		// Text Area Setup
 		Table table = new Table();
 		table.setFillParent(true);
 		table.left().top();
 		// Table debug for when required
-		// table.debugAll();
+		
+		if (debug) {
+		table.debugAll();
+		}
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
 		textArea.setColor(Color.BLACK);
 		skin.getFont("default-font").getData().scale(0.2f);
 		table.add(textArea).grow().pad(10);
 		timerLabel = new Label("", skin);
 		timerLabel.setFontScale(2);
-		;
-		table.add(timerLabel).top().expandX();
+		levelLabel = new Label(level.levelName, skin);
+		levelLabel.setFontScale(2);
+
+
+		table.add(timerLabel).top();
+		table.add(levelLabel).top().expandX();
 		table.add().grow();
 		table.row();
 		table.add().grow();
@@ -153,8 +164,7 @@ public class GameScreen extends ScreenAdapter {
 		actionIndicator.setScaling(Scaling.fit);
 		table.add(actionIndicator).bottom().right().size(100);
 
-		// Table debug for when required
-		// table.debug();
+	
 		stage.addActor(table);
 		textAreaBuffer = "";
 		write(level.getInitialMessage() + "\n");
@@ -183,9 +193,11 @@ public class GameScreen extends ScreenAdapter {
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
+		
 	}
 	
 	private void loadAssets() {
+
 		switch (levelNo) {
 		case 1:
 			assets.loadLevel1();
@@ -254,7 +266,9 @@ public class GameScreen extends ScreenAdapter {
     		mapRenderer.setView(gameCam);
     		mapRenderer.render();
     		// Debug Renderer for when required
+    		if (debug) {
     		debugRenderer.render(model.world, gameCam.combined);
+    		}
     		TextureRegion currentFrame = getFrame(delta);
     		sb.begin();
     		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
@@ -363,6 +377,7 @@ public class GameScreen extends ScreenAdapter {
 		tearDown();
 		levelNo++;
 		setup();
+		levelLabel.setText(level.levelName);
 		nextLevelReady = false;
 	}
 
