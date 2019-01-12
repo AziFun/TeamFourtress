@@ -169,8 +169,9 @@ public class GameScreen extends ScreenAdapter {
 	}
 		 
     public void reset(){
-    	//model.dispose();
-    	//model = new Box2dModel(controller, this);
+    	model.dispose();
+    	loadAssets();
+    	setup();
     }
     
 	public void write(String string) {
@@ -322,9 +323,8 @@ public class GameScreen extends ScreenAdapter {
         	break;
         case RESTART:
         	// Reset Level Functionality
-        	this.state = GameState.READY;
+        	//this.state = GameState.READY;
         	//reset();
-        	//init(1);
         	//parent.changeScreen(ScreenType.GAME);
         	break;
         case ENDGAME:
