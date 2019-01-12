@@ -7,26 +7,25 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
-import com.fourtress.model.AssetManager;
+import com.fourtress.utils.MyAssetManager;
 
 public class GameControls implements Screen {
 
 	private TeamFourtressGame parent;
 	private Stage stage;
 	
-	private AssetManager assets;
+	private MyAssetManager assets;
 	private Skin skin;
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
@@ -78,7 +77,7 @@ public class GameControls implements Screen {
 	
 	public GameControls(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = AssetManager.getInstance();
+		assets = MyAssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup
@@ -104,6 +103,18 @@ public class GameControls implements Screen {
 		texShift = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Shift.png");
 		texKeyE = new Texture("images/KeyBoardMouseIcons/Keyboard_White_E.png");
 		texEnter = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Enter.png");
+		
+     	texKeyW = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_W.png"));
+		texKeyA = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_A.png"));
+		texKeyS = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_S.png"));
+		texKeyD = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_D.png"));
+		texArrowUp = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Up.png"));
+		texArrowLeft = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Left.png"));
+		texArrowDown = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Down.png"));
+		texArrowRight = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Right.png"));
+		texShift = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Shift.png"));
+		texKeyE = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_E.png"));
+		texEnter = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Enter.png"));
 	
 		keyW = new Image(texKeyW);
 		keyA = new Image(texKeyA);

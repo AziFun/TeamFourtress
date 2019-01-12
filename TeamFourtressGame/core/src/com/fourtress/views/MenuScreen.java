@@ -13,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.model.AssetManager;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.MyAssetManager;
+import com.fourtress.utils.SoundManager;
 
 public class MenuScreen implements Screen {
 	
 	private TeamFourtressGame parent;
-	private AssetManager assets;
+	private MyAssetManager assets;
 	private Stage stage;
 	
 	private Label.LabelStyle lblStyle;
@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
 	
 	public MenuScreen(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = AssetManager.getInstance();
+		assets = MyAssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup
@@ -70,7 +70,7 @@ public class MenuScreen implements Screen {
 		table.add(exit).fillX().uniformX();
 		
 		// Music setup
-		SoundManager.playMusic("audio/music/CatMouse.mp3");
+		//SoundManager.playMusic("audio/music/CatMouse.mp3");
 	}
 
 	@Override

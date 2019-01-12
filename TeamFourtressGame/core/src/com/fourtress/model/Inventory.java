@@ -1,10 +1,18 @@
 package com.fourtress.model;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class Inventory {
+import com.fourtress.exceptions.InventoryFullException;
 
-	HashMap<Integer, Item> items;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+public class Inventory implements ObservableValue<Map<Integer, Item>> {
+
+	private HashMap<Integer, Item> items;
+	private ChangeListener<? super Map<Integer, Item>> listener;
 
 	public Inventory() {
 		reset();
@@ -13,31 +21,54 @@ public class Inventory {
 	public int getInventorySize() {
 		return items.size();
 	}
-	
-	public Item remove(String slotNumber) {
-		return items.remove(Integer.parseInt(slotNumber));
+
+	public Item remove(Integer slotNumber) {
+		Item removed;
+		if (listener != null) {
+			@SuppressWarnings("unchecked")
+			HashMap<Integer, Item> oldValue = (HashMap<Integer, Item>) items.clone();
+			removed = items.remove(slotNumber);
+			listener.changed(this, oldValue, items);
+		} else {
+			removed = items.remove(slotNumber);
+		}
+		return removed;
 	}
 
-	public void addItem(Item item) {
+	public void addItem(Item item) throws InventoryFullException {
+		if (listener != null) {
+			@SuppressWarnings("unchecked")
+			HashMap<Integer, Item> oldValue = (HashMap<Integer, Item>) items.clone();
+			addItemLogic(item);
+			listener.changed(this, oldValue, items);
+		} else {
+			addItemLogic(item);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void addItemLogic(Item item) throws InventoryFullException {
 		if (item != null) {
 			if (item instanceof ItemPile) {
 				for (Item i : ((ItemPile<? extends Item>) item).getContents()) {
-					addItem(i);
+					addItemLogic(i);
 				}
 			} else {
-				// Retrieve the current inventory size
-				int invSize = getInventorySize();
-
-				// Check in the inventory is full (Maximum slots is 10)
-				if (invSize >= 10) {
-
+				int slotNum = findSpace();
+				if (slotNum == -1) {
+					throw new InventoryFullException("InventoryFull");
 				} else {
-					// Inventory is not full, so add the item to the inventory and use invSize as
-					// the ID
-					items.put(invSize, item);
+					items.put(slotNum, item);
 				}
 			}
 		}
+	}
+	
+	public int findSpace() {
+		for (int i = 1; i < 11; i++) {
+			if (!items.containsKey(i)) return i;
+		}
+		return -1;
 	}
 
 	public String toString() {
@@ -74,33 +105,30 @@ public class Inventory {
 		System.out.println("*****************");
 	}
 
-	// Main Method for Testing Hashmap Structure
-	public static void main(String[] arg) {
-		Inventory inv = new Inventory();
-		Key key = new Key("Room 0 Key", "Key", "key.png", "Yellow");
-		Key key1 = new Key("Room 1 Key", "Key1", "key1.png", "Yellow");
-		Key key2 = new Key("Room 2 Key", "Key2", "key2.png", "Brown");
-		Key key3 = new Key("Room 3 Key", "Key3", "key3.png", "Yellow");
-		Key key4 = new Key("Room 4 Key", "Key4", "key4.png", "Pink");
-		Key key5 = new Key("Room 5 Key", "Key5", "key5.png", "Yellow");
-		Key key6 = new Key("Room 6 Key", "Key6", "key6.png", "Yellow");
-		Key key7 = new Key("Room 7 Key", "Key7", "key7.png", "Blue");
-		Key key8 = new Key("Room 8 Key", "Key8", "key8.png", "Red");
-		Key key9 = new Key("Room 9 Key", "Key9", "key9.png", "Green");
-		// Key key10 = new Key("Room 10 Key","Key","key.png","Green");
-		inv.addItem(key);
-		inv.addItem(key1);
-		inv.addItem(key2);
-		inv.addItem(key3);
-		inv.addItem(key4);
-		inv.addItem(key5);
-		inv.addItem(key6);
-		inv.addItem(key7);
-		inv.addItem(key8);
-		inv.addItem(key9);
-		// inv.addItem(key10);
-		inv.print();
-		inv.reset();
-		inv.print();
+	@Override
+	public void addListener(InvalidationListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void removeListener(InvalidationListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void addListener(ChangeListener<? super Map<Integer, Item>> listener) {
+		this.listener = listener;
+	}
+
+	@Override
+	public Map<Integer, Item> getValue() {
+		return items;
+	}
+
+	@Override
+	public void removeListener(ChangeListener<? super Map<Integer, Item>> listener) {
+		this.listener = null;
 	}
 }

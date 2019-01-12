@@ -13,14 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.model.AssetManager;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.MyAssetManager;
+import com.fourtress.utils.SoundManager;
 
 
 public class FinishScreen implements Screen {
 	
 	private TeamFourtressGame parent;
-	private AssetManager assets;
+	private MyAssetManager assets;
 	private Stage stage;
 	private Label.LabelStyle lblStyle;
 	private TextButtonStyle style;
@@ -29,7 +29,7 @@ public class FinishScreen implements Screen {
 
 	public FinishScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		assets = AssetManager.getInstance();
+		assets = MyAssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		
 		// UI Setup
@@ -53,7 +53,7 @@ public class FinishScreen implements Screen {
 		table.add(returnToMenu).padTop(15);
 		
 		// Music setup
-		SoundManager.playMusic("audio/music/FunkCity.mp3");
+		//SoundManager.playMusic("audio/music/FunkCity.mp3");
 	}
 
 	@Override

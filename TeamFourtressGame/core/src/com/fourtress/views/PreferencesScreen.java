@@ -13,18 +13,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.model.AssetManager;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.MyAssetManager;
+import com.fourtress.utils.SoundManager;
 
 public class PreferencesScreen implements Screen {
 
 	private TeamFourtressGame parent;
-	private AssetManager assets;	
+	private MyAssetManager assets;	
 	private Skin skin;
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
@@ -42,7 +42,7 @@ public class PreferencesScreen implements Screen {
 
 	public PreferencesScreen(TeamFourtressGame tfg) {
 		parent = tfg;
-		assets = AssetManager.getInstance();
+		assets = MyAssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 		

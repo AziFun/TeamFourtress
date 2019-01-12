@@ -2,11 +2,9 @@ package com.fourtress.views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -14,15 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
-import com.fourtress.model.AssetManager;
 import com.fourtress.model.GameState;
-import com.fourtress.model.SoundManager;
+import com.fourtress.utils.SoundManager;
+import com.fourtress.utils.MyAssetManager;
 
 public class PauseMenu implements Screen {
 	
 	private TeamFourtressGame parent;
 	private Stage stage;
-	private AssetManager assets;
+	private MyAssetManager assets;
 	private TextButtonStyle style;
 	private TextButton restartGame;
 	private TextButton continueGame;
@@ -35,7 +33,7 @@ public class PauseMenu implements Screen {
 		parent = tfg;
 		stage = new Stage(new ScreenViewport());
 		this.screen = screen;
-		assets = AssetManager.getInstance();
+		assets = MyAssetManager.getInstance();
 		style = assets.getTextButtonStyle();
 		restartGame = new TextButton("Restart Game", style);
 		continueGame = new TextButton("Continue Game", style);
