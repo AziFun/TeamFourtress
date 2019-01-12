@@ -261,11 +261,19 @@ public class KeyboardController implements InputProcessor {
 	}
 	
 	public void setPause(Boolean status) {
+		// Ensures we aren't moving when we resume the game until key press
 		this.p = status;
 		left = false;
 		right = false;
 		up = false;
 		down = false;
 	}
-
+	
+	public void gameOver() {
+		// Ensures we aren't moving when we reset the game until key press
+		left = false;
+		right = false;
+		up = false;
+		down = false;
+	}
 }

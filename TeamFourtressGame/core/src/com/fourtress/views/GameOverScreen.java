@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fourtress.ScreenType;
 import com.fourtress.TeamFourtressGame;
+import com.fourtress.model.GameState;
 import com.fourtress.utils.MyAssetManager;
 import com.fourtress.utils.SoundManager;
 
@@ -30,12 +31,14 @@ public class GameOverScreen implements Screen {
 	private Label gameOverMsg;
 	private TextButton returnToMenu;
 	private TextButton retryGame;
+	private GameScreen screen;
 
 	
-	public GameOverScreen(TeamFourtressGame parent) {
+	public GameOverScreen(TeamFourtressGame parent, GameScreen screen) {
 		this.parent = parent;
 		assets = MyAssetManager.getInstance();
 		stage = new Stage(new ScreenViewport());
+		this.screen = screen;
 		
 		// UI Setup
 		skin = assets.getSkin();
@@ -112,7 +115,7 @@ public class GameOverScreen implements Screen {
 			
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				SoundManager.dispose();
+				screen.setState(GameState.RESTART);
 				parent.changeScreen(ScreenType.GAME);
 			}
 		});
@@ -121,7 +124,7 @@ public class GameOverScreen implements Screen {
 	
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				SoundManager.dispose();
+				screen.setState(GameState.ENDGAME);
 				parent.changeScreen(ScreenType.MENU);
 			}
 		});

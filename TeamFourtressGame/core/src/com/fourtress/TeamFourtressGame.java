@@ -66,14 +66,7 @@ public class TeamFourtressGame extends Game {
 		case GAME:
 			if (gameScreen == null) gameScreen = new GameScreen(this);
 			this.setScreen(gameScreen);
-			menuScreen.dispose();
-			
-			if(gameScreen != null) {
-				if(gameScreen.getState() == GameState.ENDGAME) {
-					gameScreen.setState(GameState.READY);
-					gameScreen = new GameScreen(this);
-				}
-			}
+			menuScreen.dispose();			
 			break;
 		case PAUSE: 
 			if (pauseMenu == null) pauseMenu = new PauseMenu(this, gameScreen);
@@ -92,7 +85,7 @@ public class TeamFourtressGame extends Game {
 			this.setScreen(preferencesScreen);
 			break;
 		case GAMEOVER:
-			if (gameOverScreen == null) gameOverScreen = new GameOverScreen(this);
+			if (gameOverScreen == null) gameOverScreen = new GameOverScreen(this, gameScreen);
 			this.setScreen(gameOverScreen);
 			break;
 		case CONTROLS:
