@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="387">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="392">
  <properties>
   <property name="Initial Message" value="Test Message"/>
   <property name="Last Level" type="bool" value="false"/>
+  <property name="Name" value="Computing"/>
  </properties>
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
@@ -143,7 +144,34 @@
   <object id="381" x="1101.33" y="889.167" width="72" height="72.3333">
    <ellipse/>
   </object>
-  <object id="385" name="Bin" x="1166.67" y="241.167" width="72" height="72.3333">
+  <object id="387" name="Toilet 1" type="Information" x="1082.5" y="35.5" width="39.5" height="38.5">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="388" name="Toilet 3" type="Information" x="1309" y="33" width="33.5" height="36.5">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="389" name="Toilet 2" type="Information" x="1180.5" y="35" width="37.5" height="34">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="390" name="Bin 1" type="Information" x="1181.75" y="381.25" width="39.5" height="38.5">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="391" name="Bin 2" type="Information" x="1181.25" y="252.75" width="39.5" height="38.5">
+   <properties>
+    <property name="Message" value="What do you want? I'm a plant"/>
+   </properties>
    <ellipse/>
   </object>
  </objectgroup>
@@ -185,19 +213,10 @@
   </object>
  </objectgroup>
  <objectgroup id="31" name="Lock Layer">
-  <object id="182" name="End 1" x="1857" y="672.5" width="10" height="10">
-   <ellipse/>
-  </object>
-  <object id="173" name="End 2" x="1855.33" y="688.667" width="10" height="10">
-   <ellipse/>
-  </object>
   <object id="178" name="Library" x="668.5" y="504" width="10" height="10">
    <ellipse/>
   </object>
   <object id="179" name="Secret" x="1686.25" y="503.5" width="10" height="10">
-   <ellipse/>
-  </object>
-  <object id="180" name="Office" x="1277" y="503.5" width="10" height="10">
    <ellipse/>
   </object>
  </objectgroup>

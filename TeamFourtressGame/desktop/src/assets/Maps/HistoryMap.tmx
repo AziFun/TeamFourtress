@@ -3,6 +3,7 @@
  <properties>
   <property name="Initial Message" value="Hint.. Speak to the teacher in the lecture room ;)"/>
   <property name="Last Level" type="bool" value="false"/>
+  <property name="Name" value="History"/>
  </properties>
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
@@ -47,6 +48,9 @@
    <ellipse/>
   </object>
   <object id="17" name="Crown" type="Information" x="943" y="70" width="70" height="70">
+   <properties>
+    <property name="Message" value=""/>
+   </properties>
    <ellipse/>
   </object>
   <object id="18" name="Books1" type="MultiLock" x="449" y="42" width="70" height="70">
@@ -89,7 +93,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="23" name="Books7" type="MultiLock" x="356" y="431" width="70" height="70">
+  <object id="23" name="Books7" type="MultiLock" x="356" y="398" width="70" height="103">
    <properties>
     <property name="LockName" value="Secret"/>
     <property name="Message" value="There is a space for a book here. This looks like the Z section"/>
@@ -541,7 +545,7 @@
   <object id="133" x="321" y="33" width="574.5" height="62"/>
   <object id="134" x="321.5" y="183.5" width="477.5" height="38.5"/>
   <object id="135" x="353.5" y="304" width="348" height="44.5"/>
-  <object id="136" x="353" y="436" width="158.5" height="43.5"/>
+  <object id="136" x="353" y="436" width="158.5" height="29.5"/>
   <object id="137" x="962" y="99" width="29.5" height="25.5"/>
   <object id="138" x="1126" y="322.5" width="20" height="24"/>
   <object id="139" x="1190" y="226.5" width="20" height="23.5"/>
