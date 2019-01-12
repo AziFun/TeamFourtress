@@ -102,6 +102,7 @@ public class GameControls implements Screen {
 		texShift = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Shift.png"));
 		texKeyE = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_E.png"));
 		texEnter = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Enter.png"));
+		texKeyP =  new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_P.png"));
 	
 		keyW = new Image(texKeyW);
 		keyA = new Image(texKeyA);

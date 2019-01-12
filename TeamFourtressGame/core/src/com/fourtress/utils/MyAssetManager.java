@@ -76,6 +76,14 @@ public class MyAssetManager {
 	private void disposeLevel1() {
 		assMan.unload(musicPath);
 	}
+	
+	private void disposeLevel2() {
+		assMan.unload(musicPath);
+	}
+	
+	private void disposeLevel3() {
+		assMan.unload(musicPath);
+	}
 
 	public void loadLevel(int levelNo) {
 		switch (levelNo) {
@@ -119,23 +127,19 @@ public class MyAssetManager {
 	
 	
 	public void loadLevel1() {
-		assMan.load(actionIndicatorPath, Texture.class);
-		assMan.load(playerSpritePath, Texture.class);
-		assMan.load(musicPath, Music.class);
-		assMan.load(playerSpriteSetPath, Texture.class);
-		assMan.load(sfxTypewriter, Sound.class);
-		assMan.load(sfxTrombone, Sound.class);
-		assMan.load(sfxTick, Sound.class);
-
-		assMan.finishLoading();
+		levelSetup();
 	}
 
 
 	public void loadLevel2() {
-
+		levelSetup();
 	}
 
 	public void loadLevel3() {
+		levelSetup();
+	}
+	
+	private void levelSetup() {
 		assMan.load(actionIndicatorPath, Texture.class);
 		assMan.load(playerSpritePath, Texture.class);
 		assMan.load(musicPath, Music.class);
@@ -145,7 +149,6 @@ public class MyAssetManager {
 		assMan.load(sfxTick, Sound.class);
 
 		assMan.finishLoading();
-
 	}
 
 	public Music getMusic() {
