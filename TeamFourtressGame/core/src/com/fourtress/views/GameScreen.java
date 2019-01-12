@@ -41,7 +41,6 @@ import com.fourtress.utils.SoundManager;
 import com.fourtress.utils.BodyFactory;
 import com.fourtress.utils.GameTimer;
 import com.fourtress.utils.LevelFactory;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
@@ -79,12 +78,9 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
-	private boolean paused = false;
 	private boolean debug = false;
-		
 	private GameState state;
 	private int currentSeconds;
-	private PauseMenu pause;
 	private float w;
 	private float h;
 
@@ -178,10 +174,10 @@ public class GameScreen extends ScreenAdapter {
 
 	}
 		 
-    public void reset(){
+    public void resetLevel(){
     	model.dispose();
     	loadAssets();
-    	setup();
+    	setup(); 	
     }
     
 	public void write(String string) {
@@ -289,6 +285,7 @@ public class GameScreen extends ScreenAdapter {
     			elapsed = 0f;
 
     			if (timer.getTimeUp() == true) {
+    				controller.gameOver();
     				parent.changeScreen(ScreenType.GAMEOVER);
     			}
     		}
@@ -326,9 +323,7 @@ public class GameScreen extends ScreenAdapter {
     			}
     		}
     		stage.draw();
-    		if (!paused) {
-                Gdx.graphics.requestRendering();
-            }
+            Gdx.graphics.requestRendering();
             break;
         case PAUSED:
             pause();
@@ -338,14 +333,15 @@ public class GameScreen extends ScreenAdapter {
         	break;
         case RESTART:
         	// Reset Level Functionality
-        	//this.state = GameState.READY;
-        	//reset();
-        	//parent.changeScreen(ScreenType.GAME);
+        	this.state = GameState.READY;
+        	resetLevel();
+        	parent.changeScreen(ScreenType.GAME);
         	break;
         case ENDGAME:
-        	//this.state = GameState.READY;
-        	//reset();
-        	//parent.changeScreen(ScreenType.MENU);
+        	// Reset Level and return to Menu
+        	this.state = GameState.READY;
+        	resetLevel();
+        	parent.changeScreen(ScreenType.MENU);
         	break;
         default:
         	state = GameState.RUNNING;
@@ -395,17 +391,16 @@ public class GameScreen extends ScreenAdapter {
 	
 	@Override
 	public void pause() {
-		pause = new PauseMenu(parent, this);
 		currentSeconds = timer.getIntSeconds();
 		timer.stopTimer();
 		super.pause();
-		parent.setScreen(pause);
+		parent.changeScreen(ScreenType.PAUSE);
 	}
 
 	@Override
 	public void resume() {		
 		super.resume();
-		timer.setIntSeconds(currentSeconds);
+		timer.setIntSeconds(currentSeconds + 1);
 		timer.startTimer();
 		this.state = GameState.RUNNING;	
 	}
@@ -417,7 +412,6 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		//SoundManager.dispose();
 
 	}
 
