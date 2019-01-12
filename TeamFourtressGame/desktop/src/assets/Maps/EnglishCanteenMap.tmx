@@ -2,7 +2,7 @@
 <map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="356">
  <properties>
   <property name="Initial Message" value="Why don't you see what's for lunch in the canteen?"/>
-  <property name="Last Level" type="bool" value="false"/>
+  <property name="Last Level" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" name="LPC_House_Interior" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="images/LPC_house_interior/interior.png" width="512" height="512"/>
