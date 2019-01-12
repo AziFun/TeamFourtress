@@ -66,11 +66,12 @@ public class GameScreen extends ScreenAdapter {
 	private TextArea textArea;
 	public String textAreaBuffer;
 	public Label timerLabel;
+	public Label levelLabel;
 	public Label inventoryDisplay;
 	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
-	private int levelNo = 3;
+	private int levelNo = 1;
 	private boolean nextLevelReady = false;
 	private Animation<TextureRegion> playerUpAnimation;
 	private Animation<TextureRegion> playerDownAnimation;
@@ -79,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
 	private float animationTime = 0;
 	private boolean typeSoundReady;
 	private boolean paused = false;
-	private boolean debug = true;
+	private boolean debug = false;
 		
 	private GameState state;
 	private int currentSeconds;
@@ -125,6 +126,7 @@ public class GameScreen extends ScreenAdapter {
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
 		shapeRenderer = new ShapeRenderer();
+
 		
 		// Text Area Setup
 		Table table = new Table();
@@ -141,8 +143,12 @@ public class GameScreen extends ScreenAdapter {
 		table.add(textArea).grow().pad(10);
 		timerLabel = new Label("", skin);
 		timerLabel.setFontScale(2);
-		;
-		table.add(timerLabel).top().expandX();
+		levelLabel = new Label(level.levelName, skin);
+		levelLabel.setFontScale(2);
+
+
+		table.add(timerLabel).top();
+		table.add(levelLabel).top().expandX();
 		table.add().grow();
 		table.row();
 		table.add().grow();
@@ -191,9 +197,11 @@ public class GameScreen extends ScreenAdapter {
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
+		
 	}
 	
 	private void loadAssets() {
+
 		switch (levelNo) {
 		case 1:
 			assets.loadLevel1();
@@ -373,6 +381,7 @@ public class GameScreen extends ScreenAdapter {
 		tearDown();
 		levelNo++;
 		setup();
+		levelLabel.setText(level.levelName);
 		nextLevelReady = false;
 	}
 

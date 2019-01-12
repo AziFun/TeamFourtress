@@ -24,6 +24,7 @@ public class Level {
 	private Box2dModel model;
 	private HashMap<String, Item> requiredItems;
 	private Boolean lastLevel;
+	public String levelName;
 
 	public Level(TiledMap tiledMap, Box2dModel model, HashMap<String, Item> requiredItems) {
 		this.tiledMap = tiledMap;
@@ -35,6 +36,7 @@ public class Level {
 		setPlayerFinish();
 		createDoors();
 		setLastLevel();
+		setLevelName();
 	}
 
 	private void createWalls() {
@@ -200,6 +202,10 @@ public class Level {
 	
 	private void setLastLevel() {
 		lastLevel = (Boolean) tiledMap.getProperties().get("Last Level");
+	}
+	
+	private void setLevelName() {
+		levelName =  (String) tiledMap.getProperties().get("Name");
 	}
 	
 	public Boolean isLastLevel() {
