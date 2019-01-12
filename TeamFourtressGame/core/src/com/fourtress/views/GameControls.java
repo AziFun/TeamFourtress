@@ -90,20 +90,7 @@ public class GameControls implements Screen {
 		movementLabel = new Label("PLAYER MOVEMENT CONTROLS", skin);
 		interactionLabel = new Label("OBJECT INTERACTION CONTROLS", skin);
 		
-		// Keyboard Icons/Label setup
-		texKeyW = new Texture("images/KeyBoardMouseIcons/Keyboard_White_W.png");
-		texKeyA = new Texture("images/KeyBoardMouseIcons/Keyboard_White_A.png");
-		texKeyS = new Texture("images/KeyBoardMouseIcons/Keyboard_White_S.png");
-		texKeyD = new Texture("images/KeyBoardMouseIcons/Keyboard_White_D.png");
-		texKeyP = new Texture("images/KeyBoardMouseIcons/Keyboard_White_P.png");
-		texArrowUp = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Up.png");
-		texArrowLeft = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Left.png");
-		texArrowDown = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Down.png");
-		texArrowRight = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Arrow_Right.png");
-		texShift = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Shift.png");
-		texKeyE = new Texture("images/KeyBoardMouseIcons/Keyboard_White_E.png");
-		texEnter = new Texture("images/KeyBoardMouseIcons/Keyboard_White_Enter.png");
-		
+		// Keyboard Icons/Label setup	
      	texKeyW = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_W.png"));
 		texKeyA = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_A.png"));
 		texKeyS = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_S.png"));
