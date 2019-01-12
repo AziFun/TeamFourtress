@@ -292,7 +292,6 @@ public class Box2dModel {
 		if (actionText != null && !(currentInteractable instanceof CombinationLock)) {
 			// Text Area set for actions
 			gameScreen.write(actionText + "\n");
-			System.out.println(actionText);
 			}
 	}
 
