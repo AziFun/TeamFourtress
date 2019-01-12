@@ -68,7 +68,7 @@ public class GameScreen extends ScreenAdapter {
 	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
-	private int levelNo = 1;
+	private int levelNo = 3;
 	private boolean nextLevelReady = false;
 	private Animation<TextureRegion> playerUpAnimation;
 	private Animation<TextureRegion> playerDownAnimation;
@@ -180,6 +180,7 @@ public class GameScreen extends ScreenAdapter {
 			break;
 		case 3:
 			assets.loadLevel3();
+			break;
 		}
 		Texture walkSheet = assets.getPlayerSpriteSet();
 		TextureRegion[][] region = TextureRegion.split(walkSheet, walkSheet.getWidth() / 3, walkSheet.getHeight() / 4);

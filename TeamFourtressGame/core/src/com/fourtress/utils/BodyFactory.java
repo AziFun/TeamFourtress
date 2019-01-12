@@ -149,11 +149,11 @@ public class BodyFactory {
 		return sbl;
 	}
 
-	public void makeBodyLockSensor(Body body, String message, Key key, String lockName) {
+	public void makeBodyLockSensor(Body body, String message, String successMessage, Key key, String lockName) {
 		for (Fixture f : body.getFixtureList()) {
 			f.setSensor(true);
 		}
-		body.setUserData(new Lock(message, key, lockName));
+		body.setUserData(new Lock(message, successMessage, key, lockName));
 	}
 
 	public void makeBodyComboLockSensor(Body body, String message, String combination, String lockName) {

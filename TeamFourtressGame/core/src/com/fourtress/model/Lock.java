@@ -4,11 +4,13 @@ public class Lock extends InteractableEntity{
 
 	private Key correctKey;
 	public String name;
+	public String successMessage;
 	
-	public Lock(String message, Key key, String name) {
+	public Lock(String message,String successMessage, Key key, String name) {
 		super(message);
 		correctKey = key;
 		this.name = name;
+		this.successMessage = successMessage;
 	}
 
 	@Override
@@ -18,7 +20,11 @@ public class Lock extends InteractableEntity{
 	
 	public boolean attemptUnlock(Inventory inventory) {
 		if (inventory.contains(correctKey)) {
-			message = "You unlocked the door";
+			if (successMessage != null) {
+				message = successMessage;
+						return true;}
+			else {
+			message = "You unlocked the door";}
 			return true;
 		} else {
 			return false;
