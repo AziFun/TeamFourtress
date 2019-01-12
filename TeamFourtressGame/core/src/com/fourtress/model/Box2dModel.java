@@ -56,9 +56,18 @@ public class Box2dModel {
 			world.destroyJoint(jointToDestroy);
 			jointToDestroy = null;
 		}
+		
+		if(controller.p == true) {			
+			if(gameScreen.getState() == GameState.RUNNING) {
+				// Game is currently running so pause the game
+				controller.setPause(false);
+				gameScreen.setState(GameState.PAUSED);
+			}
+		}
 
 		float playerV;
 		float playerI;
+		
 		if (controller.shift) {
 			playerV = maxV;
 			playerI = maxI;
@@ -67,6 +76,7 @@ public class Box2dModel {
 			playerI = minI;
 			slowPlayerSprint();
 		}
+
 		if (controller.left) {
 			if (player.getLinearVelocity().x >= -playerV) {
 				player.applyLinearImpulse(new Vector2(-playerI, 0), player.getWorldCenter(), true);

@@ -32,6 +32,7 @@ import com.fourtress.TeamFourtressGame;
 import com.fourtress.controller.KeyboardController;
 import com.fourtress.model.Box2dModel;
 import com.fourtress.model.DoorData;
+import com.fourtress.model.GameState;
 import com.fourtress.model.Item;
 import com.fourtress.model.Level;
 import com.fourtress.utils.MyAssetManager;
@@ -43,6 +44,7 @@ import com.fourtress.utils.LevelFactory;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
 
 public class GameScreen extends ScreenAdapter {
 
@@ -77,22 +79,29 @@ public class GameScreen extends ScreenAdapter {
 	private float animationTime = 0;
 	private boolean typeSoundReady;
 	private boolean paused = false;
+		
+	private GameState state;
+	private int currentSeconds;
+	private PauseMenu pause;
+	private float w;
+	private float h;
 
 	public GameScreen(TeamFourtressGame parent) {
 		this.parent = parent;
-		float w = 60;
-		float h = 34;
-
+		this.parent = parent;
+		w = 60;
+		h = 34;
+		
 		assets = MyAssetManager.getInstance();
 		loadAssets();
-
+		
 		// Camera setup
 		gameCam = new OrthographicCamera(w, h);
 		uiCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), uiCam));
 		gameCam.zoom = 0.7f;
 		gameCam.update();
-
+    
 		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(controller, this);
@@ -104,7 +113,7 @@ public class GameScreen extends ScreenAdapter {
 		sb = new SpriteBatch();
 		sb.setProjectionMatrix(uiCam.combined);
 		skin = assets.getGameSkin();
-
+		
 		// Music setup
 		SoundManager.playMusic(assets);
 		typeSoundReady = true;
@@ -114,7 +123,7 @@ public class GameScreen extends ScreenAdapter {
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
 		shapeRenderer = new ShapeRenderer();
-
+		
 		// Text Area Setup
 		Table table = new Table();
 		table.setFillParent(true);
@@ -153,8 +162,18 @@ public class GameScreen extends ScreenAdapter {
 		stage.addActor(table);
 		textAreaBuffer = "";
 		write(level.getInitialMessage() + "\n");
-	}
+        
+        // Initial Game State 
+        state = GameState.READY; 
 
+	}
+		 
+    public void reset(){
+    	model.dispose();
+    	loadAssets();
+    	setup();
+    }
+    
 	public void write(String string) {
 		textAreaBuffer += string;
 	}
@@ -169,7 +188,7 @@ public class GameScreen extends ScreenAdapter {
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
 	}
-
+	
 	private void loadAssets() {
 		switch (levelNo) {
 		case 1:
@@ -210,12 +229,15 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
-
+		
 		// Music setup
-		SoundManager.playMusic(assets);
-
+		SoundManager.playMusic(assets);	
+		
 		// Timer setup
-		timer = new GameTimer();
+		if(state == GameState.READY) {
+			timer = new GameTimer();
+			state = GameState.RUNNING;
+		}	
 	}
 
 	@Override
@@ -223,73 +245,99 @@ public class GameScreen extends ScreenAdapter {
 		if (nextLevelReady) {
 			nextLevel();
 		}
-		model.logicStep(delta);
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		gameCam.position.set(model.player.getPosition(), gameCam.position.z);
-		gameCam.update();
-		mapRenderer.setView(gameCam);
-		mapRenderer.render();
-		// Debug Renderer for when required
-		debugRenderer.render(model.world, gameCam.combined);
-		TextureRegion currentFrame = getFrame(delta);
-		sb.begin();
-		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
-		sb.end();
+		switch(state){
+        case RUNNING:
+    		if (nextLevelReady) {
+    			nextLevel();
+    		}
+    		model.logicStep(delta);
+    		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+    		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    		gameCam.position.set(model.player.getPosition(), gameCam.position.z);
+    		gameCam.update();
+    		mapRenderer.setView(gameCam);
+    		mapRenderer.render();
+    		// Debug Renderer for when required
+    		debugRenderer.render(model.world, gameCam.combined);
+    		TextureRegion currentFrame = getFrame(delta);
+    		sb.begin();
+    		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
+    		sb.end();
 
-		// Display the time remaining for the player to complete the level
-		elapsed += delta;
+    		// Display the time remaining for the player to complete the level
+    		elapsed += delta;
 
-		if (elapsed >= 0.99f) {
-			timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
-			if (timer.getFormattedMinutes() < 1 && timer.getSeconds() == 10) {
-				SoundManager.playSFX(Sfx.Tick, assets);
-			}
-			elapsed = 0f;
+    		if (elapsed >= 0.99f) {
+    			timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
+    			if (timer.getFormattedMinutes() < 1 && timer.getSeconds() == 10) {
+    				SoundManager.playSFX(Sfx.Tick, assets);
+    			}
+    			elapsed = 0f;
 
-			if (timer.getTimeUp() == true) {
-				parent.changeScreen(ScreenType.GAMEOVER);
-			}
-		}
+    			if (timer.getTimeUp() == true) {
+    				parent.changeScreen(ScreenType.GAMEOVER);
+    			}
+    		}
 
-		shapeRenderer.setAutoShapeType(true);
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setProjectionMatrix(gameCam.combined);
-		shapeRenderer.setColor(Color.CYAN);
+    		shapeRenderer.setAutoShapeType(true);
+    		shapeRenderer.begin(ShapeType.Filled);
+    		shapeRenderer.setProjectionMatrix(gameCam.combined);
+    		shapeRenderer.setColor(Color.CYAN);
 
-		for (Body door : model.physicsObjects) {
-			DoorData doorData = (DoorData) door.getUserData();
-			shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt, doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
-					doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1, door.getAngle() * MathUtils.radiansToDegrees);
-		}
+    		for (Body door : model.physicsObjects) {
+    			DoorData doorData = (DoorData) door.getUserData();
+    			shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt, doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
+    					doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1, door.getAngle() * MathUtils.radiansToDegrees);
+    		}
 
-		shapeRenderer.end();
-		if (model.isActionAvailable()) {
-			actionIndicator.setVisible(true);
-			if (model.isStorageAvailable()) {
-				// do something to highlight
-			} else {
-				// stop doing the thing
-			}
-		} else {
-			actionIndicator.setVisible(false);
-		}
-		if (textAreaBuffer.length() > 0) {
-			textArea.appendText(textAreaBuffer.substring(0, 1));
-			textAreaBuffer = textAreaBuffer.substring(1);
-			if (typeSoundReady) {
-			SoundManager.playSFX(Sfx.Typewriter, assets);
-			typeSoundReady = false;
-			} else {
-				typeSoundReady = true;
-			}
-		}
-		stage.draw();
-		if (!paused) {
-            Gdx.graphics.requestRendering();
-        }
+    		shapeRenderer.end();
+    		if (model.isActionAvailable()) {
+    			actionIndicator.setVisible(true);
+    			if (model.isStorageAvailable()) {
+    				// do something to highlight
+    			} else {
+    				// stop doing the thing
+    			}
+    		} else {
+    			actionIndicator.setVisible(false);
+    		}
+    		if (textAreaBuffer.length() > 0) {
+    			textArea.appendText(textAreaBuffer.substring(0, 1));
+    			textAreaBuffer = textAreaBuffer.substring(1);
+    			if (typeSoundReady) {
+    			SoundManager.playSFX(Sfx.Typewriter, assets);
+    			typeSoundReady = false;
+    			} else {
+    				typeSoundReady = true;
+    			}
+    		}
+    		stage.draw();
+    		if (!paused) {
+                Gdx.graphics.requestRendering();
+            }
+            break;
+        case PAUSED:
+            pause();
+            break;
+        case RESUME:
+        	resume();
+        	break;
+        case RESTART:
+        	// Reset Level Functionality
+        	//this.state = GameState.READY;
+        	//reset();
+        	//parent.changeScreen(ScreenType.GAME);
+        	break;
+        case ENDGAME:
+        	//this.state = GameState.READY;
+        	//reset();
+        	//parent.changeScreen(ScreenType.MENU);
+        	break;
+        default:
+        	state = GameState.RUNNING;
+		}	
 	}
-
+	
 	public TextureRegion getFrame(float delta) {
 		animationTime += delta;
 		if (controller.left) {
@@ -303,11 +351,12 @@ public class GameScreen extends ScreenAdapter {
 		}
 		return playerDownAnimation.getKeyFrame(0);
 	}
-
+	
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
 		uiCam.update();
+
 	}
 
 	public void readyNextLevel() {
@@ -328,25 +377,32 @@ public class GameScreen extends ScreenAdapter {
 		assets.disposeLevel(levelNo);
 		inventoryDisplay = null;
 	}
-
+	
 	@Override
 	public void pause() {
-		paused  = true;
+		pause = new PauseMenu(parent, this);
+		currentSeconds = timer.getIntSeconds();
+		timer.stopTimer();
+		super.pause();
+		parent.setScreen(pause);
 	}
 
 	@Override
-	public void resume() {
-		paused = false;
+	public void resume() {		
+		super.resume();
+		timer.setIntSeconds(currentSeconds);
+		timer.startTimer();
+		this.state = GameState.RUNNING;	
 	}
 
 	@Override
 	public void hide() {
-
+    
 	}
 
 	@Override
 	public void dispose() {
-		// SoundManager.dispose();
+		//SoundManager.dispose();
 
 	}
 
@@ -369,5 +425,13 @@ public class GameScreen extends ScreenAdapter {
 		}
 		return formatted;
 	}
-
+	
+	public void setState(GameState state) {
+		this.state = state;
+	}
+	
+	public GameState getState() {
+		return state;
+	}
 }
+

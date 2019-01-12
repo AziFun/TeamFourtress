@@ -95,6 +95,21 @@ public class GameTimer {
 		return formattedMinutes;
 	}
 	
+	
+	/**
+	 * Set the int seconds to work out time remaining for pause
+	 */
+	public void setIntSeconds (int seconds) {
+		this.seconds = seconds;		
+	}
+	
+	/**
+	 * @return the int seconds to work out time remaining for pause
+	 */
+	public int getIntSeconds () {
+		return seconds;		
+	}
+	
 	/**
 	 * @return the seconds on the timer
 	 */
