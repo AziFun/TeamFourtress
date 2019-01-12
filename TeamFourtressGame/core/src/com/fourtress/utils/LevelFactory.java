@@ -99,6 +99,8 @@ public class LevelFactory {
 		items.put("LibraryKey", new Key("LibraryKey", "Key", null, "red"));
 		items.put("VegetableKey", new Key("VegetableKey", "Key", null, "blue"));
 		items.put("SecretKey", new Key("SecretKey", "Key", null, "green"));
+		items.put("EndKey", new Key("EndKey", "Key", null, "green"));
+
 		return items;
 	}
 }

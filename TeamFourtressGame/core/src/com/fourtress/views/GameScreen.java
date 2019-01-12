@@ -79,6 +79,7 @@ public class GameScreen extends ScreenAdapter {
 	private float animationTime = 0;
 	private boolean typeSoundReady;
 	private boolean paused = false;
+	private boolean debug = true;
 		
 	private GameState state;
 	private int currentSeconds;
@@ -107,7 +108,8 @@ public class GameScreen extends ScreenAdapter {
 		model = new Box2dModel(controller, this);
 
 		// Debug for when required
-		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		if (debug) {
+		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);}
 
 		// Sprite setup
 		sb = new SpriteBatch();
@@ -129,7 +131,10 @@ public class GameScreen extends ScreenAdapter {
 		table.setFillParent(true);
 		table.left().top();
 		// Table debug for when required
-		// table.debugAll();
+		
+		if (debug) {
+		table.debugAll();
+		}
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
 		textArea.setColor(Color.BLACK);
 		skin.getFont("default-font").getData().scale(0.2f);
@@ -157,8 +162,7 @@ public class GameScreen extends ScreenAdapter {
 		actionIndicator.setScaling(Scaling.fit);
 		table.add(actionIndicator).bottom().right().size(100);
 
-		// Table debug for when required
-		// table.debug();
+	
 		stage.addActor(table);
 		textAreaBuffer = "";
 		write(level.getInitialMessage() + "\n");
@@ -258,7 +262,9 @@ public class GameScreen extends ScreenAdapter {
     		mapRenderer.setView(gameCam);
     		mapRenderer.render();
     		// Debug Renderer for when required
+    		if (debug) {
     		debugRenderer.render(model.world, gameCam.combined);
+    		}
     		TextureRegion currentFrame = getFrame(delta);
     		sb.begin();
     		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
