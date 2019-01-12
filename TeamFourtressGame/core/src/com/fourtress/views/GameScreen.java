@@ -70,7 +70,7 @@ public class GameScreen extends ScreenAdapter {
 	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
-	private int levelNo = 3;
+	private int levelNo = 1;
 	private boolean nextLevelReady = false;
 	private Animation<TextureRegion> playerUpAnimation;
 	private Animation<TextureRegion> playerDownAnimation;
@@ -79,7 +79,7 @@ public class GameScreen extends ScreenAdapter {
 	private float animationTime = 0;
 	private boolean typeSoundReady;
 	private boolean paused = false;
-	private boolean debug = true;
+	private boolean debug = false;
 		
 	private GameState state;
 	private int currentSeconds;
@@ -288,7 +288,7 @@ public class GameScreen extends ScreenAdapter {
     		shapeRenderer.setAutoShapeType(true);
     		shapeRenderer.begin(ShapeType.Filled);
     		shapeRenderer.setProjectionMatrix(gameCam.combined);
-    		shapeRenderer.setColor(Color.CYAN);
+    		shapeRenderer.setColor(Color.BROWN);
 
     		for (Body door : model.physicsObjects) {
     			DoorData doorData = (DoorData) door.getUserData();

@@ -29,12 +29,12 @@ public class Box2dModel {
 	public KeyboardController controller;
 	private ContactListener listener;
 	private String actionText;
-	private HashMap<String, Joint> lockJoints;
+	private HashMap<String, Body> lockJoints;
 	private InteractableEntity currentInteractable;
 	public boolean recievingCode = false;
 	public String inputCode;
 	public List<StorageBoxSwitch> multiLocks;
-	public Joint jointToDestroy;
+	public Body jointToDestroy;
 	private Body finishLine;
 	public List<Body> physicsObjects;
 
@@ -48,12 +48,12 @@ public class Box2dModel {
 		listener = new ContactListener(this);
 		world.setContactListener(listener);
 		bodyFactory = BodyFactory.getInstance(world);
-		lockJoints = new HashMap<String, Joint>();
+		lockJoints = new HashMap<String, Body>();
 	}
 
 	public void logicStep(float delta) {
 		if (jointToDestroy != null) {
-			world.destroyJoint(jointToDestroy);
+			world.destroyBody(jointToDestroy);
 			jointToDestroy = null;
 		}
 		
@@ -153,7 +153,7 @@ public class Box2dModel {
 				inputCode += "9";
 				controller.num9 = false;
 				gameScreen.write("9");
-			} else if (controller.backspace) {
+			} else if (controller.backspace && inputCode.length() > 0) {
 				inputCode.substring(0, inputCode.length() - 2);
 				controller.backspace = false;
 				gameScreen.write(" X\n> " + inputCode);
@@ -209,7 +209,7 @@ public class Box2dModel {
 		if (currentInteractable instanceof CombinationLock) {
 			if (((CombinationLock) currentInteractable).attemptUnlock(inputCode)) {
 				if (lockJoints.containsKey(((CombinationLock) currentInteractable).getName())) {
-					world.destroyJoint(lockJoints.remove(((CombinationLock) currentInteractable).getName()));
+					world.destroyBody(lockJoints.remove(((CombinationLock) currentInteractable).getName()));
 					gameScreen.write("Door unlocked\n");
 				}
 			}
@@ -240,8 +240,8 @@ public class Box2dModel {
 		}
 	}
 
-	public void addLockJoint(String name, Joint j) {
-		lockJoints.put(name, j);
+	public void addLockJoint(String name, Body b) {
+		lockJoints.put(name, b);
 	}
 
 	public void setSpawn(Ellipse spawn) {
@@ -267,10 +267,13 @@ public class Box2dModel {
 				if (((Lock) currentInteractable).attemptUnlock(inventory)) {
 					actionText = currentInteractable.message;
 					if (lockJoints.containsKey(((Lock) currentInteractable).getName())) {
-						world.destroyJoint(lockJoints.remove(((Lock) currentInteractable).getName()));
+						Body j = lockJoints.remove(((Lock) currentInteractable).getName());
+						world.destroyBody(j);
 					} else if (((Lock) currentInteractable).getName().equals("End")) {
-						world.destroyJoint(lockJoints.remove("End 1"));
-						world.destroyJoint(lockJoints.remove("End 2"));
+						Body j = lockJoints.remove("End 1");
+						world.destroyBody(j);
+						j = lockJoints.remove("End 2");
+						world.destroyBody(j);
 					}
 				}
 			} else if (currentInteractable instanceof CombinationLock) {

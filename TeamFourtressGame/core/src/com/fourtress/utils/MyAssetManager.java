@@ -17,9 +17,9 @@ public class MyAssetManager {
 	private final String glassyUiPath = "skins/glassy/skin/glassy-ui.json";
 	private final String fontPath = "skins/glassy/skin/font-big-export.fnt";
 	private final String visUiPath = "skins/visui/assets/uiskin.json";
-	private final String actionIndicatorPath = "img/hand-icon.png";
+	private final String actionIndicatorPath = "img/KeyboardMouseIcons/Keyboard_White_Enter.png";
 	private final String playerSpritePath = "img/sprite/witek.png";
-	private final String musicPath = "audio/music/musicbox.mp3";
+	private final String musicPath = "src/assets/audio/music/musicbox.mp3";
 	private final String playerSpriteSetPath = "img/player/MainGuySpriteSheet.png";
 	private final String sfxTypewriter = "audio/sfx/typewriter-key-1.mp3";
 	private final String sfxTrombone = "audio/sfx/sadtrombone.mp3";
