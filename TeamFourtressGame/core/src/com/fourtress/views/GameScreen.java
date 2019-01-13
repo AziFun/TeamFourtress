@@ -153,12 +153,10 @@ public class GameScreen extends ScreenAdapter {
 		
 		// Inventory GUI Setup
 		inventoryDisplay = new Label("", skin);
-		inventoryDisplay = new Label("", skin);
 		guiSetup();
 		table.add(inventoryDisplay).grow();
 		table.add().grow();
-		table.add(inventoryDisplay).grow();
-		table.add().grow();
+
 		
 		// Interaction Icon
 		actionIndicator = new Image(assets.getActionIndicator());
