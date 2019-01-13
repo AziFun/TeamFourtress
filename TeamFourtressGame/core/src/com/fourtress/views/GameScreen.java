@@ -179,6 +179,8 @@ public class GameScreen extends ScreenAdapter {
     	setup(); 
     	guiSetup();
     	textAreaReset();
+		levelLabel.setText(level.levelName);
+
 	}
 	
     public void guiSetup() {   	
