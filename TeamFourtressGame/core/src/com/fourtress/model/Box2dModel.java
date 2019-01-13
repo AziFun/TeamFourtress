@@ -313,7 +313,7 @@ public class Box2dModel {
 				if (lockJoints.containsKey(((StorageBoxSwitch) currentInteractable).getLockName())) {
 					jointToDestroy = lockJoints.remove(((StorageBoxSwitch) currentInteractable).getLockName());
 					SoundManager.playSFX(Sfx.DoorCreak, MyAssetManager.getInstance());
-					gameScreen.write("What was that? I heard a door unlock\n");
+					gameScreen.write("What was that? I heard a door unlock \n");
 				}
 			}
 		}
