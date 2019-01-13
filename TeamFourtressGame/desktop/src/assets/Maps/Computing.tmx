@@ -149,7 +149,7 @@ I think I need the toilet.....</property>
   </object>
   <object id="391" name="Bin 2" type="Information" x="1181.25" y="252.75" width="39.5" height="38.5">
    <properties>
-    <property name="Message" value="##############Password: 8############"/>
+    <property name="Message" value="Binary Password: 8  Binary"/>
    </properties>
    <ellipse/>
   </object>
