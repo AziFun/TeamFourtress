@@ -72,6 +72,8 @@ public class LevelFactory {
 		HashMap<String, Item> items = new HashMap<String, Item>();
 		items.put("ServerClosetKey", new Key("ServerClosetKey", "Key", null, "red"));
 		items.put("ComputingEndKey", new Key("ComputingEndKey", "Key", null, "green"));
+		items.put("LectureKey", new Key("LectureKey", "Key", null, "green"));
+
 		return items;
 	}
 	
