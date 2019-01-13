@@ -326,7 +326,7 @@ I think I need the toilet.....</property>
    </properties>
    <ellipse/>
   </object>
-  <object id="438" name="FilingCabinet" type="Item" x="1051" y="872.667" width="70" height="34">
+  <object id="438" name="FilingCabinet" type="Item" x="1034.33" y="876.667" width="57.3333" height="52.6667">
    <properties>
     <property name="Item" value="ServerClosetKey"/>
     <property name="Message" value="You found a key"/>
