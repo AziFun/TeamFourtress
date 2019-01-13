@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="195">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="201">
  <properties>
   <property name="Initial Message" value="Hint.. Speak to the teacher in the lecture room ;)"/>
   <property name="Last Level" type="bool" value="false"/>
@@ -28,7 +28,7 @@
  </tileset>
  <layer id="23" name="Floor" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJzt17sJgDAUQNGIu9g7gq7rEvZZShsLEeKHxB/nwe0CIYfXJARzZZqqXEO9LfcdPHjw+KdH5GE/TnhEHvaDx65H5GE/ePDgkc0jPuzRhjAu9Ym6+eyX6xO163jw4MGDBw8ePHjweI3H0Sn5f7mj3PP0e3jwuPpOHvaDBw8ePHi8Ix48ePAo7TEByycQSw==
+   eJzt1zEKgzAUgOFIhwr2HN09Qr2ul3DPpZpSOpRCFEnUyvfgB4eA5OMtCcGsmXtTr/HyW+l/8ODB45weccaja9OZ67vX9609t4f9yHtEHvaDx6xH5GE/ePDgUcwj7uzRhzB9GjI90tl/bsjUf8eDBw8ePHjw4MGDx2E8lk7N98sWlZ6978ODx9p78rAfPHjw4MHjGPHgwYNHbY8nh8sRZg==
   </data>
  </layer>
  <objectgroup id="27" name="Interaction Layer">
@@ -132,9 +132,11 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="29" name="Statue1" type="Information" x="429" y="539.333" width="70" height="70">
+  <object id="29" name="Statue1" type="Information" x="974.333" y="542" width="70" height="70">
    <properties>
-    <property name="Message" value="It is a statue of a woman"/>
+    <property name="Message">It is a statue of a woman crying. The engraving says...
+Edith of Merica mourning the death of her husband
+after he was killed in battle. -1066</property>
    </properties>
    <ellipse/>
   </object>
@@ -494,6 +496,36 @@ Reminder: The library code is the date of the battle we are studying.</property>
    </properties>
    <ellipse/>
   </object>
+  <object id="196" name="Library Sign" type="Information" x="487.5" y="518.833" width="45" height="45">
+   <properties>
+    <property name="Message" value="Library"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="197" name="Office sign" type="Information" x="1264.17" y="524.833" width="45" height="45">
+   <properties>
+    <property name="Message" value="Office of Mrs Curie"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="198" name="Theatre sign" type="Information" x="964.833" y="804.833" width="45" height="45">
+   <properties>
+    <property name="Message" value="History lecutre theatre"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="199" name="A section" type="Information" x="337.667" y="81.6667" width="70" height="70">
+   <properties>
+    <property name="Message" value="This looks like the A section"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="200" name="Z section" type="Information" x="957" y="338.333" width="70" height="70">
+   <properties>
+    <property name="Message" value="This looks like the Z section"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup id="26" name="Object Layer">
   <object id="2" x="320" y="23" width="1543" height="10"/>
@@ -517,7 +549,7 @@ Reminder: The library code is the date of the battle we are studying.</property>
   <object id="103" x="1667.5" y="126.5" width="60.5" height="30.5"/>
   <object id="104" x="1505.5" y="544" width="30" height="28.5"/>
   <object id="105" x="1697" y="543" width="30.5" height="29"/>
-  <object id="106" x="449.5" y="542" width="31" height="32"/>
+  <object id="106" x="991.5" y="544.667" width="31" height="32"/>
   <object id="107" x="738" y="544.5" width="32" height="31"/>
   <object id="108" x="1251.67" y="840" width="26.3333" height="22.5"/>
   <object id="109" x="1550.5" y="870.5" width="18" height="196"/>
@@ -625,12 +657,12 @@ Reminder: The library code is the date of the battle we are studying.</property>
  </objectgroup>
  <layer id="24" name="Furniture" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJzt2cFqwkAQBuD1lOhN68XS1xD1lpcotY9R36Q99NLHqHcfQi9CwGew9SL04ASzsjskdJLdLAn+HwzZGWSyWdcQiVJQx0+k1Cq6HrP4pTjl42+KNavp8RvF0cglNnGz1+LDiOb4EV2PWTxQjPPxluq7yK7p8TvVh0YucSj43Gyg1JxiMfB7XV31QuuwpHjFegAAAACA4Uv4HwQAAAAAAACgjcY9O09jv3mZqn32gd7tZeuh1+Szr9SfcV7XvEydPuc8nzb83spcjwyfh2tepmofvR7PAdZD68L+aBq/f7R9fzStK/tjQrXH/v+9XfH7xxM7p2texlcf3/jv5d7x9aDvJfGZS2uSPiEUPH/c5uGaS2uSPqEUPH9Y83DNpTVJnxCwP2zYH7aC54/EVy6ttWl/cCmbh2surUn6uLgA8ou3hA==
+   eJzt2TtOxDAQBmBT5dEF0oC4BtqlyyUQcAy4CRQ0FByC7TkE2yCtxBn20SBRMFFiFI8cMYkdJxH/J43iGa0mjtcbZRWloI9dpNR9VB3L2FMc6vErxYrV9PiOYtvIJd7iYa/Fh2Oa42NUHcs4ocjr8TvV15FZ0+MHqmeNXOLT8rlFqtSS4jL1e11zdU3rcENxi/UA5iUbewYAAAAwpmfhfxAAAAAAAACAKcqPzHwT+83bdO3zEejdXrkeek2eEqW+G+d1zdv06fNV5xcDv7dqrkeJz8M1b9O1j16PqwDroc1hfwyN3z+mvj+GNpf9cUq1s+Tv3q74/eOcndM1b+Orj2/89/Lf8fWg76XwmUtrkj4hWJ4/fufhmktrkj6hWJ4/jHm45tKapE8I2B8m7A+T5fmj8JVLa1PaH9yGzcM1l9YkfVz8AIpPuDQ=
   </data>
  </layer>
  <layer id="25" name="Walls" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmktOwzAQhp1sEpVuCLCGNd1zErYgTtBKhQ0P0RNApXbFQ3AKWHfPGjacgsIBmJCYOpEdhnScxOl80qiW49jOn/zjPCoEjr4nji4hriEeIPqOhJwz8jBRDDzK3rLs+Pr6nqG+LGNPzKj6GpXUIwr/blOVHiNCPcYWro9BqhW1Hk8dIZ47mvEI9XDJL6+gxZtGD2q/HAdCfATJ7xDiE+IrLc+VetlGbo/LRWD0WINrqQvxEizKJY5h9v+99MR+mcJc1sPkdwKxAeXNMClHSr1sI7dPCfSgYFX9YqIJ6wsGrB576Ry2Ss7Fxvqi5o3fnBEm5SEiZ6jb5+m+LvtF5o0oVHJGWp4gcoa6/WefCvVom1+Wpen3YxKX/WID9ksWV/2y7ZsjT1HbfBwa6g+I+pdB6Rcdp5pnhDwXiDbLcGbo/9zyuDpuEGPeW57XraH/uxr0YBiGYRimHezzfUSGk4bqET/fXvl2wgT1OI+OPN9WBaUeNt8HUbNrqKfUg+J9kGmeVcF+ybKqfjHRNL/UjSvvT6vCle8NNlHPo+3vDXWvF5L3gnOl6sHrS3belPmjDX6hzB+uri+28kcb/EK9vrj+f1zs9fENodnV/g==
+   eJztmktOwzAQhp1sanVHgDWsYc9J2CJxglYqbHiIngAqtSto1Z4C1lwCNpyCwgFwiY0clEmsZJx6kvmkUS07dpw/+cd5VAg3BpE4v1PxoGKpYkAkzJwdD9OJYYQ5WpbDOL/+GKivyiQSr1hjjSvqkcjybZrSY4yox8TD9THUWmHr8dwX4qWfsz9EPSj55U1p8Z6jB7ZfLnpCfPbS35GKLxXfury26s02pn1TLoKqX2bquHZk+jtVsavKezItJ1a92ca0zwLRo6t+gQhhfXHBVY8TPYf9inPxsb7YeeMvZ8i0PHLIGXb7Wvel7BeTNxJp5QxdnjrkDLv9t0+DerTNL3UJ/X7MQNkvTdJVv0CE7peDGI7/FG3rGmfI42P6pSq3Oc8RNlcl7WVcA/1vao7ri0XJvB5rzvsJ6D8PVA+GYRiGYcLnlO8jMlwGqsfm+fY+9hMQ2PtZEX++xQZTD5/vg7A5Auox9cB4HwTNsynYL1m66heI0Pyybai/P8WGyvcGn9jn0ff3hm2vF4aPgnNl68HrS3bemPmjDX7BzB9U1xdf+aMNfsFeX6j/H9f1+vgB/wvUWw==
   </data>
  </layer>
 </map>

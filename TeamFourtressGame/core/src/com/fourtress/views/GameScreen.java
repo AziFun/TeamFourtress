@@ -95,8 +95,8 @@ public class GameScreen extends ScreenAdapter {
 
 		// Camera setup
 		gameCam = new OrthographicCamera(w, h);
-		uiCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), uiCam));
+		uiCam = new OrthographicCamera(1920, 1080);
+		stage = new Stage(new FitViewport(1920, 1080, uiCam));
 		gameCam.zoom = 0.7f;
 		gameCam.update();
 
@@ -172,6 +172,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	public void resetLevel() {
+		levelNo = 1;
     	model.inventory.clearItems();
     	model.dispose();
     	loadAssets();

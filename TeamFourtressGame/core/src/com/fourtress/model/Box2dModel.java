@@ -13,6 +13,9 @@ import com.fourtress.controller.KeyboardController;
 import com.fourtress.exceptions.InventoryFullException;
 import com.fourtress.utils.BodyFactory;
 import com.fourtress.utils.ContactListener;
+import com.fourtress.utils.MyAssetManager;
+import com.fourtress.utils.Sfx;
+import com.fourtress.utils.SoundManager;
 import com.fourtress.views.GameScreen;
 
 public class Box2dModel {
@@ -212,6 +215,8 @@ public class Box2dModel {
 					world.destroyBody(lockJoints.remove(((CombinationLock) currentInteractable).getName()));
 					gameScreen.write("Door unlocked\n");
 				}
+			} else {
+				gameScreen.write("Incorrect code\n");
 			}
 			inputCode = null;
 		}
@@ -307,6 +312,8 @@ public class Box2dModel {
 			if (atLeastOneLocked == false) {
 				if (lockJoints.containsKey(((StorageBoxSwitch) currentInteractable).getLockName())) {
 					jointToDestroy = lockJoints.remove(((StorageBoxSwitch) currentInteractable).getLockName());
+					SoundManager.playSFX(Sfx.DoorCreak, MyAssetManager.getInstance());
+					gameScreen.write("What was that? I heard a door unlock");
 				}
 			}
 		}
