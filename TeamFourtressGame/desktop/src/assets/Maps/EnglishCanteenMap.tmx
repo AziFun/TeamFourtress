@@ -229,7 +229,7 @@ Charles Dickens:5467</property>
   </object>
   <object id="350" name="Worktop" type="Lock" x="429.917" y="873.917" width="61.5" height="41.5">
    <properties>
-    <property name="KeyID" value="VegetableKey"/>
+    <property name="KeyID" value="Vegetables"/>
     <property name="Message" value="I need some vegetables for my dish. Can you bring me some from the canteen?"/>
     <property name="Success Message" value="Thanks! P.S The lecture room password is: 1089"/>
    </properties>
@@ -237,7 +237,7 @@ Charles Dickens:5467</property>
   </object>
   <object id="351" name="VegetableKey" type="Item" x="1542.33" y="1007" width="83" height="70">
    <properties>
-    <property name="Item" value="VegetableKey"/>
+    <property name="Item" value="Vegetables"/>
     <property name="Message" value="You found some vegetables for the kitchen"/>
    </properties>
    <ellipse/>
