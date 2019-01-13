@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="451">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="459">
  <properties>
-  <property name="Initial Message">Welcome to the Comuting Floor! 
+  <property name="Initial Message">Welcome to the Computing Floor! 
 I think I need the toilet.....</property>
   <property name="Last Level" type="bool" value="false"/>
   <property name="Name" value="Computing"/>
@@ -108,6 +108,9 @@ I think I need the toilet.....</property>
   <object id="429" x="574.5" y="831.5" width="27" height="27"/>
   <object id="430" x="1730.5" y="515.5" width="27" height="27"/>
   <object id="431" x="1539.5" y="829.5" width="27" height="27"/>
+  <object id="451" x="0" y="506.667" width="314.667" height="8"/>
+  <object id="452" x="-0.000166667" y="861.333" width="314.667" height="8"/>
+  <object id="458" x="6.66667" y="537.333" width="45.3333" height="313.333"/>
  </objectgroup>
  <objectgroup id="28" name="Interaction Layer">
   <object id="326" name="Book1" type="Information" x="622.667" y="306.5" width="72" height="72.3333">
@@ -275,8 +278,8 @@ I think I need the toilet.....</property>
   </object>
   <object id="414" name="Photocopier" type="Item" x="351" y="1264.33" width="70" height="70">
    <properties>
-    <property name="Item" value="SecretKey"/>
-    <property name="Message" value="You found a key too the lecture room under the photocopier!"/>
+    <property name="Item" value="LectureKey"/>
+    <property name="Message" value="You found a key to the lecture room under the photocopier!"/>
    </properties>
    <ellipse/>
   </object>
@@ -344,9 +347,16 @@ I think I need the toilet.....</property>
    </properties>
    <ellipse/>
   </object>
+  <object id="454" name="Office" type="Lock" x="1598.33" y="495.667" width="70" height="70">
+   <properties>
+    <property name="KeyID" value="LectureKey"/>
+    <property name="Message" value="You need a key for this door"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup id="29" name="Spawn Layer">
-  <object id="325" name="Player Spawn" x="93.5" y="670.5" width="35" height="35">
+  <object id="325" name="Player Spawn" x="216.833" y="661.5" width="41.6667" height="41.6667">
    <ellipse/>
   </object>
  </objectgroup>
@@ -402,6 +412,9 @@ I think I need the toilet.....</property>
   <object id="448" name="End 1" x="1852.67" y="675.667" width="10" height="10">
    <ellipse/>
   </object>
+  <object id="455" name="Office" x="1685.67" y="505.667" width="10" height="10">
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup id="46" name="End Layer">
   <object id="186" name="Player End" x="1900.5" y="481.833" width="400" height="400">
@@ -410,7 +423,7 @@ I think I need the toilet.....</property>
  </objectgroup>
  <layer id="25" name="Walls" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmkEOgjAQRUsvoiczngBuIAvdKkt3ehTRa3gZIYbgx1AHOiZD818yCQlNKT88SFuck5Fnbrtr6tTUpal8IdWNWXibIopMszdk7WXtDsJ2Y1SZq+N66CkTyKNUzKNKII9CMQ/6gtAXhL589fU36AtCXxD6gtAXhL4g9AWhL8hSfVn58RoSajuszY++9v5dD98fz7m+pi+EEEIIIYQQu7Tz26OX1yd1oN1tZp8dU8Z0NTK/PQfmpVXknHUKmnnErAelmEfMelCKedAXhL4gKfhiZf3USh5W9hus5GFlv+HfeTyFY+P3ZXAt+gJovj8s+yJF8/2Rgi/a35e5/+O2+2pj5+6Bc9r/40qfjxcSyrr7
+   eJztmkEOwiAQRSkX0ZMZT9DewC50q12606NYvYaXsY1p6tAUpzA0QP5LJmkCmdKffggDSvEoC7U/dHHp4tZFmUgMY2Z+JouqkMxG2WpevxOz3xxNoVq/DCN1BnrUgno0GehRCeoBv1DgFwr8MskVDPiFAr9Q4BcK/EKBXyjwCwV+oaTql42eDxNbXzN2f3Id9Tdeenx2eb+kXwAAAAAAAADx0u9vz5ofv7SWfg/HnANLxnSPZH97texLG8896xIk9fCpB+Woh089KEc94BdKqPppqnqEqp+uqUcK9dM19YjlvCGW+SOW84bQeryZY8P6YrwLfiFIzh8x+4WL5PyRg1+k1xfX+7j9udpc29PSJn0fl/t/fACYwbkw
   </data>
  </layer>
  <layer id="24" name="Furniture" width="68" height="42">
