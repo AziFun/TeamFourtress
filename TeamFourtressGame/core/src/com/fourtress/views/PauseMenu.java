@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -27,6 +28,8 @@ public class PauseMenu implements Screen {
 	private TextButton returnToMenu;
 	private TextButton exit;
 	private GameScreen screen;
+	private Label titleLabel;
+	private Label.LabelStyle lblStyle;
 
 	
 	public PauseMenu(TeamFourtressGame tfg, GameScreen screen) {
@@ -34,16 +37,16 @@ public class PauseMenu implements Screen {
 		stage = new Stage(new ScreenViewport());
 		this.screen = screen;
 		assets = MyAssetManager.getInstance();
+		lblStyle = assets.getLabelStyle();		
 		style = assets.getTextButtonStyle();
 		restartGame = new TextButton("Restart Game", style);
 		continueGame = new TextButton("Continue Game", style);
 		returnToMenu = new TextButton("Back to Menu", style);
+		titleLabel = new Label("GAME PAUSED", lblStyle);
 		exit = new TextButton("Exit", style);
 		stage.act(Gdx.graphics.getDeltaTime());
 		addListeners();
-		
-		// Music setup
-		//SoundManager.playMusic("audio/music/CatMouse.mp3");
+	
 	}
 
 	@Override
@@ -52,9 +55,11 @@ public class PauseMenu implements Screen {
 		Table table = new Table();
 		table.setFillParent(true);
 		stage.addActor(table);
-		table.add(restartGame).fillX().uniformX().pad(10, 0, 0, 0);
+		table.add(titleLabel).padBottom(40);
 		table.row();
 		table.add(continueGame).fillX().uniformX().pad(10, 0, 0, 0);
+		table.row();
+		table.add(restartGame).fillX().uniformX().pad(10, 0, 0, 0);
 		table.row();
 		table.add(returnToMenu).fillX().uniformX().pad(10, 0, 0, 0);
 		table.row();
