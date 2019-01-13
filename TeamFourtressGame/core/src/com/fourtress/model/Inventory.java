@@ -94,6 +94,18 @@ public class Inventory implements ObservableValue<Map<Integer, Item>> {
 	private void reset() {
 		items = new HashMap<Integer, Item>();
 	}
+	
+
+	public void clearItems() {
+		if (listener != null) {
+			@SuppressWarnings("unchecked")
+			HashMap<Integer, Item> oldValue = (HashMap<Integer, Item>) items.clone();
+			items.clear();
+			listener.changed(this, oldValue, items);
+		} else {
+			items.clear();
+		}
+	}
 
 	// print method for testing purposes
 	public void print() {

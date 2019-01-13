@@ -77,7 +77,6 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
-	private boolean paused = false;
 	private boolean debug = false;
 
 	private GameState state;
@@ -138,11 +137,12 @@ public class GameScreen extends ScreenAdapter {
 		textArea.setColor(Color.BLACK);
 		skin.getFont("default-font").getData().scale(0.2f);
 		table.add(textArea).grow().pad(10);
+		
+		// Timer and Level Label Details
 		timerLabel = new Label("", skin);
 		timerLabel.setFontScale(2);
 		levelLabel = new Label(level.levelName, skin);
 		levelLabel.setFontScale(2);
-
 		table.add(timerLabel).top();
 		table.add(levelLabel).growX().top();
 		table.row();
@@ -150,19 +150,20 @@ public class GameScreen extends ScreenAdapter {
 		table.row();
 		table.add().grow();
 		table.row();
+		
+		// Inventory GUI Setup
 		inventoryDisplay = new Label("", skin);
-		model.inventory.addListener(new ChangeListener<Map<Integer, Item>>() {
-			@Override
-			public void changed(ObservableValue<? extends Map<Integer, Item>> observable, Map<Integer, Item> oldValue, Map<Integer, Item> newValue) {
-				inventoryDisplay.setText(formatInventory(newValue));
-			}
-		});
+		inventoryDisplay = new Label("", skin);
+		guiSetup();
 		table.add(inventoryDisplay).grow();
 		table.add().grow();
+		table.add(inventoryDisplay).grow();
+		table.add().grow();
+		
+		// Interaction Icon
 		actionIndicator = new Image(assets.getActionIndicator());
 		actionIndicator.setScaling(Scaling.fit);
 		table.add(actionIndicator).bottom().right().size(100);
-
 		stage.addActor(table);
 		textAreaBuffer = "";
 		write(level.getInitialMessage() + "\n");
@@ -173,11 +174,31 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	public void resetLevel() {
-		model.dispose();
-		loadAssets();
-		setup();
+    	model.inventory.clearItems();
+    	model.dispose();
+    	loadAssets();
+    	setup(); 
+    	guiSetup();
+    	textAreaReset();
 	}
-
+	
+    public void guiSetup() {   	
+    	model.inventory.addListener(new ChangeListener<Map<Integer, Item>>() {
+			@Override
+			public void changed(ObservableValue<? extends Map<Integer, Item>> observable, Map<Integer, Item> oldValue, Map<Integer, Item> newValue) {
+				inventoryDisplay.setText(formatInventory(newValue));
+			}
+		});
+    }
+    
+    public void textAreaReset() {
+    	textArea.selectAll();
+    	textArea.setText("");
+    	write("Welcome to TeamFourtress!" + "\n");
+    	write(level.getInitialMessage() + "\n");
+    	
+    }
+    
 	public void write(String string) {
 		textAreaBuffer += string;
 	}
