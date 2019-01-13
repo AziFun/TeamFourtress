@@ -600,8 +600,8 @@ Reminder: The library code is the date of the battle we are studying.</property>
   <object id="156" name="Office" x="1316.7" y="504.091" width="118.122" height="9.33333"/>
   <object id="157" name="Theatre 1" x="1028" y="863.969" width="94.6667" height="8.03034"/>
   <object id="158" name="Theatre 2" x="1128" y="864.122" width="82.6666" height="7.84842"/>
-  <object id="163" name="End 1" x="1856" y="514.273" width="7.87875" height="172.333"/>
-  <object id="164" name="End 2" x="1856.06" y="688.878" width="7.78785" height="171.788"/>
+  <object id="163" name="End 1" x="1856" y="514.273" width="7.87875" height="155.333"/>
+  <object id="164" name="End 2" x="1856.06" y="707.878" width="7.78785" height="152.788"/>
   <object id="168" name="Secret" x="1048" y="418.833" width="8.0606" height="81.2576"/>
  </objectgroup>
  <objectgroup id="30" name="Hinge Layer">
