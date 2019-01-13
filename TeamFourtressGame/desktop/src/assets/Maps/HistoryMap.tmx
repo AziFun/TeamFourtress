@@ -162,7 +162,7 @@ after he was killed in battle. -1066</property>
    <properties>
     <property name="Item" value="Jim Note"/>
     <property name="Message">This is where Jim sits. There is a note here... 
-The key is under the plant in the hall. Put it back once you are done.</property>
+The key is under the plant in the hall. Make sure you look after it.</property>
    </properties>
    <ellipse/>
   </object>
