@@ -77,7 +77,7 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
-	private boolean debug = false;
+	private boolean debug = true;
 
 	private GameState state;
 	private int currentSeconds;
@@ -133,7 +133,7 @@ public class GameScreen extends ScreenAdapter {
 		if (debug) {
 			table.debugAll();
 		}
-		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
+		textArea = new TextArea("Welcome to Team Fourtress!\n", skin);
 		textArea.setColor(Color.BLACK);
 		skin.getFont("default-font").getData().scale(0.2f);
 		table.add(textArea).grow().pad(10);
@@ -194,8 +194,6 @@ public class GameScreen extends ScreenAdapter {
     	textArea.selectAll();
     	textArea.setText("");
     	write("Welcome to TeamFourtress!" + "\n");
-    	write(level.getInitialMessage() + "\n");
-    	
     }
     
 	public void write(String string) {

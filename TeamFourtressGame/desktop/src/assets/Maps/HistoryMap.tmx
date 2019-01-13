@@ -214,19 +214,19 @@ The key is under the plant in the hall. Put it back once you are done.</property
    </properties>
    <ellipse/>
   </object>
-  <object id="46" type="Information" x="788.5" y="1021" width="45" height="45">
+  <object id="46" type="Information" x="787.833" y="1032.33" width="45" height="45">
    <properties>
     <property name="Message" value="This is where Kiera sits"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="47" type="Information" x="788.5" y="888" width="45" height="45">
+  <object id="47" type="Information" x="787.833" y="877.333" width="45" height="45">
    <properties>
     <property name="Message" value="This is where Callum sits"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="48" type="Information" x="787.5" y="953" width="45" height="45">
+  <object id="48" type="Information" x="784.167" y="954.333" width="45" height="45">
    <properties>
     <property name="Message">This is where Rob sits. There is a note here... 
 Rob, how can I get into the office to get my phone back?</property>
