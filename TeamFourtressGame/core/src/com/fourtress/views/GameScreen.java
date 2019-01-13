@@ -210,6 +210,8 @@ public class GameScreen extends ScreenAdapter {
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
+    	write(level.getInitialMessage() + "\n");
+
 
 	}
 
