@@ -89,19 +89,20 @@ public class GameControls implements Screen {
 		movementLabel = new Label("PLAYER MOVEMENT CONTROLS", skin);
 		interactionLabel = new Label("OBJECT INTERACTION CONTROLS", skin);
 		
+		assets.loadControls();
 		// Keyboard Icons/Label setup	
-     	texKeyW = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_W.png"));
-		texKeyA = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_A.png"));
-		texKeyS = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_S.png"));
-		texKeyD = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_D.png"));
-		texArrowUp = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Up.png"));
-		texArrowLeft = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Left.png"));
-		texArrowDown = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Down.png"));
-		texArrowRight = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Arrow_Right.png"));
-		texShift = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Shift.png"));
-		texKeyE = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_E.png"));
-		texEnter = new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_Enter.png"));
-		texKeyP =  new Texture(Gdx.files.internal("img/KeyBoardMouseIcons/Keyboard_White_P.png"));
+     	texKeyW = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_W.png");
+		texKeyA = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_A.png");
+		texKeyS = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_S.png");
+		texKeyD = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_D.png");
+		texArrowUp = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Up.png");
+		texArrowLeft = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Left.png");
+		texArrowDown = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Down.png");
+		texArrowRight =(Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Right.png");
+		texShift =(Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Shift.png");
+		texKeyE = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_E.png");
+		texEnter =(Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Enter.png");
+		texKeyP = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_P.png");
 	
 		keyW = new Image(texKeyW);
 		keyA = new Image(texKeyA);
@@ -230,6 +231,7 @@ public class GameControls implements Screen {
 	@Override
 	public void dispose() {
 		stage.dispose();
+		assets.disposeControls();
 	}
 	
 	private void addListeners() {

@@ -31,13 +31,13 @@ public class LevelFactory {
 		switch (levelNum) {
 		case 1:
 			levelItems = getLevel1Items();
-			return new Level(new TmxMapLoader().load("Maps/HistoryMap.tmx"), model, levelItems);
+			return new Level(new TmxMapLoader().load("assets/Maps/HistoryMap.tmx"), model, levelItems);
 		case 2:
 			levelItems = getLevel2Items();
-			return new Level(new TmxMapLoader().load("Maps/Computing.tmx"), model, levelItems);
+			return new Level(new TmxMapLoader().load("assets/Maps/Computing.tmx"), model, levelItems);
 		case 3:
 			levelItems = getLevel3Items();
-			return new Level(new TmxMapLoader().load("Maps/EnglishCanteenMap.tmx"), model, levelItems);
+			return new Level(new TmxMapLoader().load("assets/Maps/EnglishCanteenMap.tmx"), model, levelItems);
 		}
 		return null;
 	}

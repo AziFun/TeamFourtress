@@ -14,17 +14,28 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class MyAssetManager {
 
-	private final String glassyUiPath = "skins/glassy/skin/glassy-ui.json";
-	private final String fontPath = "skins/glassy/skin/font-big-export.fnt";
-	private final String visUiPath = "skins/visui/assets/uiskin.json";
-	private final String actionIndicatorPath = "img/KeyboardMouseIcons/Keyboard_White_Enter.png";
-	private final String playerSpritePath = "img/sprite/witek.png";
-	private final String musicPath = "src/assets/audio/music/musicbox.mp3";
-	private final String playerSpriteSetPath = "img/player/MainGuySpriteSheet.png";
-	private final String sfxTypewriter = "audio/sfx/typewriter-key-1.mp3";
-	private final String sfxTrombone = "audio/sfx/sadtrombone.mp3";
-	private final String sfxTick = "audio/sfx/clock-ticking-2.mp3";
-
+	private final String glassyUiPath = "assets/skins/glassy/skin/glassy-ui.json";
+	private final String fontPath = "assets/skins/glassy/skin/font-big-export.fnt";
+	private final String visUiPath = "assets/skins/visui/assets/uiskin.json";
+	private final String actionIndicatorPath = "assets/img/KeyboardMouseIcons/Keyboard_White_Enter.png";
+	private final String playerSpritePath = "assets/img/sprite/witek.png";
+	private final String musicPath = "assets/audio/musicbox.mp3";
+	private final String playerSpriteSetPath = "assets/img/player/MainGuySpriteSheet.png";
+	private final String sfxTypewriter = "assets/audio/sfx/typewriter-key-1.mp3";
+	private final String sfxTrombone = "assets/audio/sfx/sadtrombone.mp3";
+	private final String sfxTick = "assets/audio/sfx/clock-ticking-2.mp3";
+	private final String texKeyW = "assets/img/KeyboardMouseIcons/Keyboard_White_W.png";
+	private final String texKeyA = "assets/img/KeyboardMouseIcons/Keyboard_White_A.png";
+	private final String texKeyS = "assets/img/KeyboardMouseIcons/Keyboard_White_S.png";
+	private final String texKeyD = "assets/img/KeyboardMouseIcons/Keyboard_White_D.png";
+	private final String texArrowUp = "assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Up.png";
+	private final String texArrowLeft = "assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Left.png";
+	private final String texArrowDown = "assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Down.png";
+	private final String texArrowRight = "assets/img/KeyboardMouseIcons/Keyboard_White_Arrow_Right.png";
+	private final String texShift = "assets/img/KeyboardMouseIcons/Keyboard_White_Shift.png";
+	private final String texKeyE = "assets/img/KeyboardMouseIcons/Keyboard_White_E.png";
+	private final String texEnter = "assets/img/KeyboardMouseIcons/Keyboard_White_Enter.png";
+	private final String texKeyP = "assets/img/KeyboardMouseIcons/Keyboard_White_P.png";
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
 
@@ -84,7 +95,43 @@ public class MyAssetManager {
 	private void disposeLevel3() {
 		assMan.unload(musicPath);
 	}
+	
+	public void loadControls() {
+		assMan.load(texKeyW, Texture.class);
+		assMan.load(texKeyA, Texture.class);
+		assMan.load(texKeyS, Texture.class);
+		assMan.load(texKeyD, Texture.class);
+		assMan.load(texKeyE, Texture.class);
+		assMan.load(texKeyP, Texture.class);
+		assMan.load(texArrowDown, Texture.class);
+		assMan.load(texArrowUp, Texture.class);
+		assMan.load(texArrowLeft, Texture.class);
+		assMan.load(texArrowRight, Texture.class);
+		assMan.load(texEnter, Texture.class);
+		assMan.load(texShift, Texture.class);
+		
+		assMan.finishLoading();
+	}
+	
+	public void disposeControls() {
+		assMan.unload(texKeyW);
+		assMan.unload(texKeyA);
+		assMan.unload(texKeyS);
+		assMan.unload(texKeyD);
+		assMan.unload(texKeyE);
+		assMan.unload(texKeyP);
+		assMan.unload(texArrowDown);
+		assMan.unload(texArrowUp);
+		assMan.unload(texArrowLeft);
+		assMan.unload(texArrowRight);
+		assMan.unload(texEnter);
+		assMan.unload(texShift);
+	}          
 
+	public Object get(String filePath) {
+		return assMan.get(filePath);
+	}
+	
 	public void loadLevel(int levelNo) {
 		switch (levelNo) {
 		case 1:
