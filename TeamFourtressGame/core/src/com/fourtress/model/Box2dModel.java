@@ -59,9 +59,9 @@ public class Box2dModel {
 			world.destroyBody(jointToDestroy);
 			jointToDestroy = null;
 		}
-		
-		if(controller.p == true) {			
-			if(gameScreen.getState() == GameState.RUNNING) {
+
+		if (controller.p == true) {
+			if (gameScreen.getState() == GameState.RUNNING) {
 				// Game is currently running so pause the game
 				controller.setPause(false);
 				gameScreen.setState(GameState.PAUSED);
@@ -70,7 +70,7 @@ public class Box2dModel {
 
 		float playerV;
 		float playerI;
-		
+
 		if (controller.shift) {
 			playerV = maxV;
 			playerI = maxI;
@@ -297,10 +297,10 @@ public class Box2dModel {
 		if (actionText != null && !(currentInteractable instanceof CombinationLock)) {
 			// Text Area set for actions
 			gameScreen.write(actionText + "\n");
-			}
+		}
 	}
 
-	public void endInteraction() {
+	public void endInteraction(InteractableEntity iEntity) {
 		if (currentInteractable != null && currentInteractable instanceof StorageBox) {
 			boolean atLeastOneLocked = false;
 			for (StorageBoxSwitch zwich : multiLocks) {
@@ -322,8 +322,11 @@ public class Box2dModel {
 			gameScreen.write("\n");
 		}
 		inputCode = null;
-		currentInteractable = null;
-		actionText = null;
+		if (iEntity.equals(currentInteractable)) {
+			currentInteractable = null;
+			actionText = null;
+		}
+		
 	}
 
 	public boolean isActionAvailable() {
@@ -333,7 +336,7 @@ public class Box2dModel {
 	public boolean isStorageAvailable() {
 		return currentInteractable instanceof StorageBoxSwitch;
 	}
-	
+
 	public void dispose() {
 		world.dispose();
 	}

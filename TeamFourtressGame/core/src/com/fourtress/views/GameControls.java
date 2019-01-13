@@ -32,6 +32,7 @@ public class GameControls implements Screen {
 	private Label titleLabel;
 	private Label movementLabel;
 	private Label interactionLabel;
+	private Label inventoryLabel;
 	private TextButton backButton;
 	
 	// Keyboard Icons
@@ -45,6 +46,8 @@ public class GameControls implements Screen {
 	private Image arrowDown;
 	private Image arrowRight;
 	private Image keyE;
+	private Image key1;
+	private Image key9;
 	private Image shift;
 	private Image enter;
 	
@@ -56,6 +59,7 @@ public class GameControls implements Screen {
 	private Label keyELabel;
 	private Label keyPLabel;
 	private Label shiftLabel;
+	private Label numLabel;
 	
 	//Keyboard Textures
 	private Texture texKeyW;
@@ -63,6 +67,8 @@ public class GameControls implements Screen {
 	private Texture texKeyS;
 	private Texture texKeyD;
 	private Texture texKeyP;
+	private Texture texKey1;
+	private Texture texKey9;
 	private Texture texArrowUp;
 	private Texture texArrowLeft;
 	private Texture texArrowDown;
@@ -88,6 +94,7 @@ public class GameControls implements Screen {
 		//titleLabel.setFontScale(0.5f);
 		movementLabel = new Label("PLAYER MOVEMENT CONTROLS", skin);
 		interactionLabel = new Label("OBJECT INTERACTION CONTROLS", skin);
+		inventoryLabel = new Label("INVENTORY CONTROLS", skin);
 		
 		assets.loadControls();
 		// Keyboard Icons/Label setup	
@@ -103,6 +110,8 @@ public class GameControls implements Screen {
 		texKeyE = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_E.png");
 		texEnter =(Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_Enter.png");
 		texKeyP = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_P.png");
+		texKey1 = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_1.png");
+		texKey9 = (Texture) assets.get("assets/img/KeyboardMouseIcons/Keyboard_White_9.png");
 	
 		keyW = new Image(texKeyW);
 		keyA = new Image(texKeyA);
@@ -114,7 +123,9 @@ public class GameControls implements Screen {
 		arrowDown = new Image(texArrowDown);
 		arrowRight = new Image(texArrowRight);
 		shift = new Image(texShift);
-		keyE = new Image(texKeyE); 
+		keyE = new Image(texKeyE);
+		key1 = new Image(texKey1);
+		key9 = new Image(texKey9);
 		enter = new Image(texEnter); 
 		
 		keyWLabel = new Label("Up", skin);
@@ -124,6 +135,7 @@ public class GameControls implements Screen {
 		keyELabel = new Label("Use", skin);
 		shiftLabel = new Label("Run", skin);
 		keyPLabel = new Label("Pause", skin);
+		numLabel = new Label("Use item in relevant slot", skin);
 	}
 
 	@Override
@@ -177,7 +189,14 @@ public class GameControls implements Screen {
 		selectionContainer.add(keyELabel);
 		selectionContainer.add(keyE).pad(0,0,0,20);
 		selectionContainer.add(enter);
-		selectionContainer.row();   
+		selectionContainer.row();
+		// Inventory keys
+		selectionContainer.add(inventoryLabel).padTop(50).padBottom(20).colspan(4);
+		selectionContainer.row();
+		selectionContainer.add(numLabel);
+		selectionContainer.add(key1);
+		selectionContainer.add(new Label("-", skin));
+		selectionContainer.add(key9);
 		selectionContainer.pack();
         selectionContainer.setTransform(false);
         

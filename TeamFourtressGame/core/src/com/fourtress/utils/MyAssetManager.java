@@ -36,6 +36,8 @@ public class MyAssetManager {
 	private final String texKeyE = "assets/img/KeyboardMouseIcons/Keyboard_White_E.png";
 	private final String texEnter = "assets/img/KeyboardMouseIcons/Keyboard_White_Enter.png";
 	private final String texKeyP = "assets/img/KeyboardMouseIcons/Keyboard_White_P.png";
+	private final String texKey1 = "assets/img/KeyboardMouseIcons/Keyboard_White_1.png";
+	private final String texKey9 = "assets/img/KeyboardMouseIcons/Keyboard_White_9.png";
 	private final String sfxDoor = "assets/audio/sfx/creaky_door_4.mp3";
 	private TextButtonStyle style;
 	private Label.LabelStyle lblStyle;
@@ -110,6 +112,8 @@ public class MyAssetManager {
 		assMan.load(texArrowRight, Texture.class);
 		assMan.load(texEnter, Texture.class);
 		assMan.load(texShift, Texture.class);
+		assMan.load(texKey1, Texture.class);
+		assMan.load(texKey9, Texture.class);
 		
 		assMan.finishLoading();
 	}
@@ -127,6 +131,8 @@ public class MyAssetManager {
 		assMan.unload(texArrowRight);
 		assMan.unload(texEnter);
 		assMan.unload(texShift);
+		assMan.unload(texKey1);
+		assMan.unload(texKey9);
 	}          
 
 	public Object get(String filePath) {
