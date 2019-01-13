@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="201">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="202">
  <properties>
   <property name="Initial Message" value="Hint.. Speak to the teacher in the lecture room ;)"/>
   <property name="Last Level" type="bool" value="false"/>
@@ -605,7 +605,7 @@ Reminder: The library code is the date of the battle we are studying.</property>
   <object id="168" name="Secret" x="1048" y="418.833" width="8.0606" height="81.2576"/>
  </objectgroup>
  <objectgroup id="30" name="Hinge Layer">
-  <object id="169" name="Secret" x="1046.75" y="494.583" width="10" height="10">
+  <object id="169" name="Secret" x="1047.05" y="490.105" width="10" height="10">
    <ellipse/>
   </object>
   <object id="171" name="Office" x="1303.67" y="503.644" width="10" height="10">
@@ -624,6 +624,9 @@ Reminder: The library code is the date of the battle we are studying.</property>
    <ellipse/>
   </object>
   <object id="181" name="End 2" x="1855.05" y="856.909" width="10" height="10">
+   <ellipse/>
+  </object>
+  <object id="201" name="Secret" x="1047.05" y="490.105" width="10" height="10">
    <ellipse/>
   </object>
  </objectgroup>
