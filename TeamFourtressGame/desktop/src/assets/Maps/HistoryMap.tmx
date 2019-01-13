@@ -103,7 +103,7 @@
   </object>
   <object id="24" name="Chest" type="Item" x="1152" y="34" width="70" height="70">
    <properties>
-    <property name="Item" value="EndKey"/>
+    <property name="Item" value="HistoryEndKey"/>
     <property name="Message" value="You found the key for the floor"/>
    </properties>
    <ellipse/>
@@ -489,7 +489,7 @@ Reminder: The library code is the date of the battle we are studying.</property>
   </object>
   <object id="185" name="End" type="Lock" x="1797" y="649.667" width="70" height="70">
    <properties>
-    <property name="KeyID" value="EndKey"/>
+    <property name="KeyID" value="HistoryEndKey"/>
     <property name="Message" value="You need a key for this door"/>
    </properties>
    <ellipse/>
