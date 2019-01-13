@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class GameTimer {
 		
 	private static final int TICK_VALUE = 1; 
-	private int maxSeconds = 600 + 1; // timer countdown start point (default 10 mins (600))
+	private int maxSeconds = 900 + 1; // timer countdown start point (default 10 mins (600))
 	private int seconds;
 	private boolean stopped;
 	private boolean timeUp;
