@@ -69,7 +69,7 @@ public class GameScreen extends ScreenAdapter {
 	public Image actionIndicator;
 	public GameTimer timer;
 	private float elapsed;
-	private int levelNo = 1;
+	public int levelNo = 1;
 	private boolean nextLevelReady = false;
 	private Animation<TextureRegion> playerUpAnimation;
 	private Animation<TextureRegion> playerDownAnimation;
