@@ -331,14 +331,14 @@
   </object>
   <object id="440" name="Chest" type="Item" x="794.333" y="1245.33" width="70" height="70">
    <properties>
-    <property name="Item" value="EndKey"/>
+    <property name="Item" value="ComputingEndKey"/>
     <property name="Message" value="You found a key for the exit "/>
    </properties>
    <ellipse/>
   </object>
   <object id="450" name="End" type="Lock" x="1817" y="557.667" width="29.6667" height="243.333">
    <properties>
-    <property name="KeyID" value="EndKey"/>
+    <property name="KeyID" value="ComputingEndKey"/>
     <property name="Message" value="You need a key for this door"/>
    </properties>
    <ellipse/>

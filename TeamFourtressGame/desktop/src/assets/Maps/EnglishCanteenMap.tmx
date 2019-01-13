@@ -40,7 +40,7 @@
   </object>
   <object id="242" name="Chest" type="Item" x="1149" y="39" width="70" height="70">
    <properties>
-    <property name="Item" value="EndKey"/>
+    <property name="Item" value="EnglishEndKey"/>
     <property name="Message" value="You found a key for the exit to the computing floor!"/>
    </properties>
    <ellipse/>
@@ -256,7 +256,7 @@ Charles Dickens:5467</property>
   </object>
   <object id="356" name="End" type="Lock" x="1777" y="592" width="70" height="160">
    <properties>
-    <property name="KeyID" value="EndKey"/>
+    <property name="KeyID" value="EnglishEndKey"/>
     <property name="Message" value="You need a key for this door"/>
    </properties>
    <ellipse/>

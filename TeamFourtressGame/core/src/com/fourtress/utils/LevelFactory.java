@@ -64,14 +64,14 @@ public class LevelFactory {
 		items.put("Books", pileOfBooks);
 		items.put("LibraryKey", new Key("LibraryKey", "Key", null, "red"));
 		items.put("OfficeKey", new Key("OfficeKey", "Key", null, "blue"));
-		items.put("EndKey", new Key("EndKey", "Key", null, "green"));
+		items.put("HistoryEndKey", new Key("HistoryEndKey", "Key", null, "green"));
 		return items;
 	}
 	
 	private HashMap<String, Item> getLevel2Items() {
 		HashMap<String, Item> items = new HashMap<String, Item>();
 		items.put("ServerClosetKey", new Key("ServerClosetKey", "Key", null, "red"));
-		items.put("EndKey", new Key("EndKey", "Key", null, "green"));
+		items.put("ComputingEndKey", new Key("ComputingEndKey", "Key", null, "green"));
 		return items;
 	}
 	
@@ -80,7 +80,7 @@ public class LevelFactory {
 		items.put("LibraryKey", new Key("LibraryKey", "Key", null, "red"));
 		items.put("VegetableKey", new Key("VegetableKey", "Key", null, "blue"));
 		items.put("SecretKey", new Key("SecretKey", "Key", null, "green"));
-		items.put("EndKey", new Key("EndKey", "Key", null, "green"));
+		items.put("EnglishEndKey", new Key("EnglishEndKey", "Key", null, "green"));
 
 		return items;
 	}
