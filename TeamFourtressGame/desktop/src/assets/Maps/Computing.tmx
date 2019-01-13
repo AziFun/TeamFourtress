@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="459">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="451">
  <properties>
-  <property name="Initial Message">Welcome to the Computing Floor! 
-
+  <property name="Initial Message">Welcome to the Comuting Floor! 
 I think I need the toilet.....</property>
   <property name="Last Level" type="bool" value="false"/>
   <property name="Name" value="Computing"/>
@@ -109,12 +108,6 @@ I think I need the toilet.....</property>
   <object id="429" x="574.5" y="831.5" width="27" height="27"/>
   <object id="430" x="1730.5" y="515.5" width="27" height="27"/>
   <object id="431" x="1539.5" y="829.5" width="27" height="27"/>
-  <object id="451" x="1" y="505" width="310" height="8"/>
-  <object id="452" x="0" y="864" width="310" height="8"/>
-  <object id="454" x="2177.5" y="518.5" width="310" height="8" rotation="-180"/>
-  <object id="455" x="2176.5" y="877.5" width="310" height="8" rotation="-180"/>
-  <object id="456" x="2185.5" y="512.5" width="363" height="8" rotation="90"/>
-  <object id="457" x="2" y="516" width="52" height="348"/>
  </objectgroup>
  <objectgroup id="28" name="Interaction Layer">
   <object id="326" name="Book1" type="Information" x="622.667" y="306.5" width="72" height="72.3333">
@@ -353,7 +346,7 @@ I think I need the toilet.....</property>
   </object>
  </objectgroup>
  <objectgroup id="29" name="Spawn Layer">
-  <object id="325" name="Player Spawn" x="159.5" y="666.5" width="35" height="35">
+  <object id="325" name="Player Spawn" x="93.5" y="670.5" width="35" height="35">
    <ellipse/>
   </object>
  </objectgroup>
