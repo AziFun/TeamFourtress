@@ -77,7 +77,7 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
-	private boolean debug = true;
+	private boolean debug = false;
 
 	private GameState state;
 	private int currentSeconds;
