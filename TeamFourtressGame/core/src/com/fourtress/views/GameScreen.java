@@ -77,7 +77,7 @@ public class GameScreen extends ScreenAdapter {
 	private Animation<TextureRegion> playerRightAnimation;
 	private float animationTime = 0;
 	private boolean typeSoundReady;
-	private boolean debug = true;
+	private boolean debug = false;
 
 	private GameState state;
 	private int currentSeconds;
@@ -196,7 +196,6 @@ public class GameScreen extends ScreenAdapter {
     public void textAreaReset() {
     	textArea.selectAll();
     	textArea.setText("");
-    	write("Welcome to Escape the Fourtress!" + "\n");
     }
     
 	public void write(String string) {
@@ -399,8 +398,11 @@ public class GameScreen extends ScreenAdapter {
 		tearDown();
 		levelNo++;
 		setup();
+		textAreaReset();
 		levelLabel.setText(level.levelName);
 		nextLevelReady = false;
+		guiSetup();
+
 	}
 
 	public void tearDown() {
@@ -408,7 +410,7 @@ public class GameScreen extends ScreenAdapter {
 		level.dispose();
 		mapRenderer.dispose();
 		assets.disposeLevel(levelNo);
-		inventoryDisplay = null;
+		inventoryDisplay.setText("");
 	}
 
 	@Override
