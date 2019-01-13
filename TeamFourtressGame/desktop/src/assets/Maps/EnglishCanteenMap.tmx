@@ -319,7 +319,7 @@ Charles Dickens:5467</property>
  </objectgroup>
  <layer id="25" name="Walls" width="68" height="42">
   <data encoding="base64" compression="zlib">
-   eJztmrENwjAQRe0sAj0zgZgg2YA0tJCSDlaJWINlMEWKCxgd5Ds5W/9Jv7Gik/OVb8u+OKej9m5/CDoHXYPqTDTMWfmaKhqPrCZZV5/HN5Hxf+m861G12gL8aIF+dAX40QD9YF4kzIuEeXmrlQzmRcK8SJgXCfMiYV4kzIuEeZHkmpdVFdeYb8+OtYuMb0H1ByHzQgghhBBCCLHL63x7qqapj5zPptbV6mbsfHsEn1d/BekH4j6oJD8Q90El+cG8SJgXSQl5sXZ/urQf1voNS/thrd9wSeTHQzk3a/tLKj+0INcPRF7uBa0fKftzc4FcP1L25+YCvb/k/j+u9vt4AldhrUI=
+   eJztmkEOwiAURIGL6N4zaTxBewO7catdutOrNF7Dy4iLLn6V5scOFMi8ZDak+aGTDgR+jdHRWHM8eV297l5NIRrnrHxNFa1FVpNs3e/xXWD8X3prBlStrgI/OqAffQV+tEA/mBcJ8yJhXr5qRYN5kTAvEuZFwrxImBdJyA80pecFTel5QYPOy8aFNWXu2akOgfE9qP4oZF4IIYQQQggh+fI5317cMg2Bc9vSulo9MjvfnhOdY0Mg/UDcB9XkB+I+qCY/mBcJ8yKpIS+53Z+u7Udu/Ya1/cit33CL5MdLObfc9pdYfmhBrh+IvDwrWj9i9udSgVw/YvbnUoHeX0r/H1f7fbwBZu+suw==
   </data>
  </layer>
  <layer id="24" name="Furniture" width="68" height="42">
