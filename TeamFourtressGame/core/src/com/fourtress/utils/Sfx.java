@@ -1,5 +1,5 @@
 package com.fourtress.utils;
 
 public enum Sfx {
-	Trombone, Typewriter, Tick;
+	Trombone, Typewriter, Tick, DoorCreak;
 }
