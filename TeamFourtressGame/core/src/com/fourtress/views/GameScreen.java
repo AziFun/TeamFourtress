@@ -133,7 +133,8 @@ public class GameScreen extends ScreenAdapter {
 		if (debug) {
 			table.debugAll();
 		}
-		textArea = new TextArea("Welcome to Team Fourtress!\n", skin);
+
+		textArea = new TextArea("Welcome to Escape the Fourtress!\n", skin);
 		textArea.setColor(Color.BLACK);
 		skin.getFont("default-font").getData().scale(0.2f);
 		table.add(textArea).grow().pad(10);
@@ -193,7 +194,7 @@ public class GameScreen extends ScreenAdapter {
     public void textAreaReset() {
     	textArea.selectAll();
     	textArea.setText("");
-    	write("Welcome to TeamFourtress!" + "\n");
+    	write("Welcome to Escape the Fourtress!" + "\n");
     }
     
 	public void write(String string) {

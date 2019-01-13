@@ -41,7 +41,7 @@ public class MenuScreen implements Screen {
 		style = assets.getTextButtonStyle();		
 		lblStyle = assets.getLabelStyle();
 		
-		titleLabel = new Label("FOURTRESS ESCAPE!", lblStyle);
+		titleLabel = new Label("ESCAPE THE FOURTRESS!", lblStyle);
 		newGame = new TextButton("New Game", style);
 		preferences = new TextButton("Preferences", style);
 		gameControls = new TextButton("Game Controls", style);
