@@ -177,9 +177,9 @@ public class GameScreen extends ScreenAdapter {
     	model.inventory.clearItems();
     	model.dispose();
     	loadAssets();
+    	textAreaReset();
     	setup(); 
     	guiSetup();
-    	textAreaReset();
 		levelLabel.setText(level.levelName);
 
 	}
