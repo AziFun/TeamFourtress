@@ -44,7 +44,6 @@ import com.fourtress.utils.LevelFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-
 public class GameScreen extends ScreenAdapter {
 
 	private Box2dModel model;
@@ -80,7 +79,7 @@ public class GameScreen extends ScreenAdapter {
 	private boolean typeSoundReady;
 	private boolean paused = false;
 	private boolean debug = false;
-		
+
 	private GameState state;
 	private int currentSeconds;
 	private float w;
@@ -91,30 +90,31 @@ public class GameScreen extends ScreenAdapter {
 		this.parent = parent;
 		w = 60;
 		h = 34;
-		
+
 		assets = MyAssetManager.getInstance();
 		loadAssets();
-		
+
 		// Camera setup
 		gameCam = new OrthographicCamera(w, h);
 		uiCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), uiCam));
 		gameCam.zoom = 0.7f;
 		gameCam.update();
-    
+
 		// Controller setup
 		controller = new KeyboardController();
 		model = new Box2dModel(controller, this);
 
 		// Debug for when required
 		if (debug) {
-		debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);}
+			debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
+		}
 
 		// Sprite setup
 		sb = new SpriteBatch();
-		sb.setProjectionMatrix(uiCam.combined);
+		sb.setProjectionMatrix(uiCam.projection);
 		skin = assets.getGameSkin();
-		
+
 		// Music setup
 		SoundManager.playMusic(assets);
 		typeSoundReady = true;
@@ -125,15 +125,14 @@ public class GameScreen extends ScreenAdapter {
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
 		shapeRenderer = new ShapeRenderer();
 
-		
 		// Text Area Setup
 		Table table = new Table();
 		table.setFillParent(true);
 		table.left().top();
 		// Table debug for when required
-		
+
 		if (debug) {
-		table.debugAll();
+			table.debugAll();
 		}
 		textArea = new TextArea("Welcome to TeamFourtress!\n", skin);
 		textArea.setColor(Color.BLACK);
@@ -144,10 +143,8 @@ public class GameScreen extends ScreenAdapter {
 		levelLabel = new Label(level.levelName, skin);
 		levelLabel.setFontScale(2);
 
-
 		table.add(timerLabel).top();
-		table.add(levelLabel).top().expandX();
-		table.add().grow();
+		table.add(levelLabel).growX().top();
 		table.row();
 		table.add().grow();
 		table.row();
@@ -166,22 +163,21 @@ public class GameScreen extends ScreenAdapter {
 		actionIndicator.setScaling(Scaling.fit);
 		table.add(actionIndicator).bottom().right().size(100);
 
-	
 		stage.addActor(table);
 		textAreaBuffer = "";
 		write(level.getInitialMessage() + "\n");
-        
-        // Initial Game State 
-        state = GameState.READY; 
+
+		// Initial Game State
+		state = GameState.READY;
 
 	}
-		 
-    public void resetLevel(){
-    	model.dispose();
-    	loadAssets();
-    	setup(); 	
-    }
-    
+
+	public void resetLevel() {
+		model.dispose();
+		loadAssets();
+		setup();
+	}
+
 	public void write(String string) {
 		textAreaBuffer += string;
 	}
@@ -195,9 +191,9 @@ public class GameScreen extends ScreenAdapter {
 		LevelFactory levelGen = LevelFactory.getInstance();
 		level = levelGen.makeLevel(levelNo, model);
 		mapRenderer = new OrthogonalTiledMapRenderer(level.getTiledMap(), 1 / BodyFactory.ppt);
-		
+
 	}
-	
+
 	private void loadAssets() {
 
 		switch (levelNo) {
@@ -239,15 +235,15 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(controller);
-		
+
 		// Music setup
-		SoundManager.playMusic(assets);	
-		
+		SoundManager.playMusic(assets);
+
 		// Timer setup
-		if(state == GameState.READY) {
+		if (state == GameState.READY) {
 			timer = new GameTimer();
 			state = GameState.RUNNING;
-		}	
+		}
 	}
 
 	@Override
@@ -255,101 +251,102 @@ public class GameScreen extends ScreenAdapter {
 		if (nextLevelReady) {
 			nextLevel();
 		}
-		switch(state){
-        case RUNNING:
-    		if (nextLevelReady) {
-    			nextLevel();
-    		}
-    		model.logicStep(delta);
-    		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-    		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    		gameCam.position.set(model.player.getPosition(), gameCam.position.z);
-    		gameCam.update();
-    		mapRenderer.setView(gameCam);
-    		mapRenderer.render();
-    		// Debug Renderer for when required
-    		if (debug) {
-    		debugRenderer.render(model.world, gameCam.combined);
-    		}
-    		TextureRegion currentFrame = getFrame(delta);
-    		sb.begin();
-    		sb.draw(currentFrame, (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
-    		sb.end();
+		switch (state) {
+		case RUNNING:
+			if (nextLevelReady) {
+				nextLevel();
+			}
+			model.logicStep(delta);
+			Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			gameCam.position.set(model.player.getPosition(), gameCam.position.z);
+			gameCam.update();
+			mapRenderer.setView(gameCam);
+			mapRenderer.render();
+			// Debug Renderer for when required
+			if (debug) {
+				debugRenderer.render(model.world, gameCam.combined);
+			}
+			// Player
+			TextureRegion currentFrame = getFrame(delta);
+			sb.begin();
+			sb.draw(currentFrame, -50, -40, 100, 100); // (uiCam.viewportWidth / 2) - 50, (uiCam.viewportHeight / 2) - 40, 100, 100);
+			sb.end();
 
-    		// Display the time remaining for the player to complete the level
-    		elapsed += delta;
+			// Display the time remaining for the player to complete the level
+			elapsed += delta;
 
-    		if (elapsed >= 0.99f) {
-    			timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
-    			if (timer.getFormattedMinutes() < 1 && timer.getSeconds() == 10) {
-    				SoundManager.playSFX(Sfx.Tick, assets);
-    			}
-    			elapsed = 0f;
+			if (elapsed >= 0.99f) {
+				timerLabel.setText(timer.getFormattedMinutes() + " : " + timer.getFormattedSeconds());
+				if (timer.getFormattedMinutes() < 1 && timer.getSeconds() == 10) {
+					SoundManager.playSFX(Sfx.Tick, assets);
+				}
+				elapsed = 0f;
 
-    			if (timer.getTimeUp() == true) {
-    				controller.gameOver();
-    				parent.changeScreen(ScreenType.GAMEOVER);
-    			}
-    		}
+				if (timer.getTimeUp() == true) {
+					controller.gameOver();
+					parent.changeScreen(ScreenType.GAMEOVER);
+				}
+			}
 
-    		shapeRenderer.setAutoShapeType(true);
-    		shapeRenderer.begin(ShapeType.Filled);
-    		shapeRenderer.setProjectionMatrix(gameCam.combined);
-    		shapeRenderer.setColor(Color.BROWN);
+			shapeRenderer.setAutoShapeType(true);
+			shapeRenderer.begin(ShapeType.Filled);
+			shapeRenderer.setProjectionMatrix(gameCam.combined);
+			shapeRenderer.setColor(Color.BROWN);
 
-    		for (Body door : model.physicsObjects) {
-    			DoorData doorData = (DoorData) door.getUserData();
-    			shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt, doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
-    					doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1, door.getAngle() * MathUtils.radiansToDegrees);
-    		}
+			for (Body door : model.physicsObjects) {
+				DoorData doorData = (DoorData) door.getUserData();
+				shapeRenderer.rect(doorData.doorBody.getRectangle().x / BodyFactory.ppt, doorData.doorBody.getRectangle().y / BodyFactory.ppt, doorData.hingeCentre.x / BodyFactory.ppt, doorData.hingeCentre.y / BodyFactory.ppt,
+						doorData.doorBody.getRectangle().width / BodyFactory.ppt, doorData.doorBody.getRectangle().height / BodyFactory.ppt, 1, 1, door.getAngle() * MathUtils.radiansToDegrees);
+			}
 
-    		shapeRenderer.end();
-    		if (model.isActionAvailable()) {
-    			actionIndicator.setVisible(true);
-    			if (model.isStorageAvailable()) {
-    				// do something to highlight
-    			} else {
-    				// stop doing the thing
-    			}
-    		} else {
-    			actionIndicator.setVisible(false);
-    		}
-    		if (textAreaBuffer.length() > 0) {
-    			textArea.appendText(textAreaBuffer.substring(0, 1));
-    			textAreaBuffer = textAreaBuffer.substring(1);
-    			if (typeSoundReady) {
-    			SoundManager.playSFX(Sfx.Typewriter, assets);
-    			typeSoundReady = false;
-    			} else {
-    				typeSoundReady = true;
-    			}
-    		}
-    		stage.draw();
-            Gdx.graphics.requestRendering();
-            break;
-        case PAUSED:
-            pause();
-            break;
-        case RESUME:
-        	resume();
-        	break;
-        case RESTART:
-        	// Reset Level Functionality
-        	this.state = GameState.READY;
-        	resetLevel();
-        	parent.changeScreen(ScreenType.GAME);
-        	break;
-        case ENDGAME:
-        	// Reset Level and return to Menu
-        	this.state = GameState.READY;
-        	resetLevel();
-        	parent.changeScreen(ScreenType.MENU);
-        	break;
-        default:
-        	state = GameState.RUNNING;
-		}	
+			shapeRenderer.end();
+			if (model.isActionAvailable()) {
+				actionIndicator.setVisible(true);
+				if (model.isStorageAvailable()) {
+					// do something to highlight
+				} else {
+					// stop doing the thing
+				}
+			} else {
+				actionIndicator.setVisible(false);
+			}
+			if (textAreaBuffer.length() > 0) {
+				textArea.appendText(textAreaBuffer.substring(0, 1));
+				textAreaBuffer = textAreaBuffer.substring(1);
+				if (typeSoundReady) {
+					SoundManager.playSFX(Sfx.Typewriter, assets);
+					typeSoundReady = false;
+				} else {
+					typeSoundReady = true;
+				}
+			}
+			stage.draw();
+			Gdx.graphics.requestRendering();
+			break;
+		case PAUSED:
+			pause();
+			break;
+		case RESUME:
+			resume();
+			break;
+		case RESTART:
+			// Reset Level Functionality
+			this.state = GameState.READY;
+			resetLevel();
+			parent.changeScreen(ScreenType.GAME);
+			break;
+		case ENDGAME:
+			// Reset Level and return to Menu
+			this.state = GameState.READY;
+			resetLevel();
+			parent.changeScreen(ScreenType.MENU);
+			break;
+		default:
+			state = GameState.RUNNING;
+		}
 	}
-	
+
 	public TextureRegion getFrame(float delta) {
 		animationTime += delta;
 		if (controller.left) {
@@ -363,7 +360,7 @@ public class GameScreen extends ScreenAdapter {
 		}
 		return playerDownAnimation.getKeyFrame(0);
 	}
-	
+
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
@@ -390,7 +387,7 @@ public class GameScreen extends ScreenAdapter {
 		assets.disposeLevel(levelNo);
 		inventoryDisplay = null;
 	}
-	
+
 	@Override
 	public void pause() {
 		currentSeconds = timer.getIntSeconds();
@@ -400,16 +397,16 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	@Override
-	public void resume() {		
+	public void resume() {
 		super.resume();
 		timer.setIntSeconds(currentSeconds + 1);
 		timer.startTimer();
-		this.state = GameState.RUNNING;	
+		this.state = GameState.RUNNING;
 	}
 
 	@Override
 	public void hide() {
-    
+
 	}
 
 	@Override
@@ -436,13 +433,12 @@ public class GameScreen extends ScreenAdapter {
 		}
 		return formatted;
 	}
-	
+
 	public void setState(GameState state) {
 		this.state = state;
 	}
-	
+
 	public GameState getState() {
 		return state;
 	}
 }
-
