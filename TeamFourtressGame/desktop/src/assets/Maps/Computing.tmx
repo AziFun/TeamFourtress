@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="68" height="42" tilewidth="32" tileheight="32" infinite="0" nextlayerid="30" nextobjectid="451">
  <properties>
-  <property name="Initial Message" value="Test Message"/>
+  <property name="Initial Message">Welcome to the Comuting Floor! 
+
+I think I need the toilet.....</property>
   <property name="Last Level" type="bool" value="false"/>
   <property name="Name" value="Computing"/>
  </properties>
