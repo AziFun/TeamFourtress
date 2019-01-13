@@ -454,7 +454,7 @@ public class GameScreen extends ScreenAdapter {
 	private String formatInventory(Map<Integer, Item> inventory) {
 		String formatted = "";
 		for (int i = 1; i < 11; i++) {
-			formatted += i + ": " + (inventory.get(i) != null ? inventory.get(i).name : "") + "\n";
+			formatted += i + ": " + (inventory.get(i) != null ? inventory.get(i).type + "- " + inventory.get(i).name : "") + "\n";
 		}
 		return formatted;
 	}
